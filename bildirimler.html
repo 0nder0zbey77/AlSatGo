@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<title>AlSatGo - Bildirimlerim</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:radial-gradient(circle at top,#020617 0,#020617 45%,#000 100%);
+      color:#e5e7eb;min-height:100vh;
+    }
+    a{text-decoration:none;color:inherit;}
+    .container{max-width:1200px;margin:0 auto;padding:0 16px 40px;}
+    .header{
+      position:sticky;top:0;z-index:40;
+      background:rgba(3,7,18,0.96);
+      border-bottom:1px solid rgba(148,163,184,0.35);
+      backdrop-filter:blur(18px);
+      box-shadow:0 18px 40px rgba(0,0,0,0.65);
+    }
+    .header-inner{
+      max-width:1200px;margin:0 auto;
+      padding:10px 16px;
+      display:flex;gap:12px;align-items:center;
+    }
+    
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.32), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.28), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 35%, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 18px 40px rgba(0, 0, 0, 0.9);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-mark {
+      position: relative;
+      width: 26px;
+      height: 26px;
+      border-radius: 11px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.8), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.85);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 10px 22px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-mark::before,
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 5px;
+      border: 1px solid rgba(250, 204, 21, 0.9);
+    }
+    .logo-mark::before {
+      top: 4px;
+      left: 3px;
+      border-color: rgba(250, 204, 21, 0.95);
+      box-shadow: 0 0 12px rgba(250, 204, 21, 0.8);
+    }
+    .logo-mark::after {
+      bottom: 4px;
+      right: 3px;
+      border-color: rgba(56, 189, 248, 0.9);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+      transform: translate(1px, 1px);
+    }
+    .logo-text {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-text-main {
+      color: #e5e7eb;
+    }
+    .logo-text-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    .logo:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 0 0 1px rgba(250, 204, 21, 0.8),
+        0 22px 48px rgba(0, 0, 0, 0.95);
+      filter: brightness(1.05);
+    }
+    .search-wrapper{flex:1;}
+    .search-input{
+      width:100%;padding:8px 14px;border-radius:999px;
+      border:1px solid rgba(148,163,184,0.45);
+      background:rgba(15,23,42,0.85);
+      color:#e5e7eb;font-size:13px;
+    }
+    .search-input::placeholder{color:#9ca3af;}
+    .header-actions{display:flex;gap:8px;align-items:center;}
+    .header-link{
+      font-size:13px;padding:6px 10px;border-radius:999px;transition:.15s;
+    }
+    .header-link:hover{background:rgba(148,163,184,0.18);}
+    .header-btn{
+      font-size:13px;padding:8px 14px;border-radius:999px;border:none;
+      background:linear-gradient(135deg,#facc15,#eab308);
+      color:#111827;font-weight:600;
+      box-shadow:0 10px 30px rgba(250,204,21,0.55);
+      cursor:pointer;
+    }
+    .breadcrumb{
+      font-size:12px;color:#9ca3af;
+      padding:14px 0 10px;
+    }
+    .breadcrumb span{color:#e5e7eb;}
+
+    .card{
+      border-radius:20px;
+      background:rgba(15,23,42,0.96);
+      border:1px solid rgba(148,163,184,0.45);
+      box-shadow:0 18px 50px rgba(15,23,42,0.98);
+      padding:14px 14px 12px;
+      font-size:13px;
+    }
+    .card-header{
+      display:flex;justify-content:space-between;align-items:center;
+      margin-bottom:10px;
+    }
+    .card-title{font-size:15px;font-weight:600;}
+    .card-tag{
+      font-size:11px;padding:3px 8px;border-radius:999px;
+      background:rgba(15,23,42,0.9);
+      border:1px solid rgba(148,163,184,0.6);
+      color:#9ca3af;
+    }
+    .actions-row{
+      display:flex;gap:8px;flex-wrap:wrap;
+      align-items:center;margin-bottom:10px;
+    }
+    .btn-xs{
+      padding:5px 10px;border-radius:999px;font-size:11px;
+      border:1px solid rgba(148,163,184,0.7);
+      background:rgba(15,23,42,0.95);
+      color:#e5e7eb;cursor:pointer;
+    }
+    .btn-xs.primary{
+      border-color:#facc15;
+      background:rgba(250,204,21,0.08);
+      color:#facc15;
+    }
+
+    .notif-list{
+      display:flex;flex-direction:column;gap:8px;
+      font-size:12px;
+    }
+    .notif{
+      border-radius:14px;
+      padding:9px 10px;
+      background:rgba(15,23,42,0.96);
+      border:1px solid rgba(51,65,85,0.9);
+      display:flex;gap:10px;
+      position:relative;
+    }
+    .notif.unread{
+      border-color:rgba(250,204,21,0.8);
+      box-shadow:0 0 0 1px rgba(250,204,21,0.4);
+    }
+    .icon{
+      width:26px;height:26px;border-radius:999px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:14px;
+      background:rgba(15,23,42,0.96);
+      border:1px solid rgba(148,163,184,0.7);
+      flex-shrink:0;
+    }
+    .icon.msg{background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.7);}
+    .icon.like{background:rgba(250,204,21,0.12);border-color:rgba(250,204,21,0.7);}
+    .icon.order{background:rgba(34,197,94,0.12);border-color:rgba(22,163,74,0.7);}
+
+    .notif-main{flex:1;}
+    .notif-title{font-weight:600;margin-bottom:2px;}
+    .notif-text{color:#cbd5e1;margin-bottom:3px;}
+    .notif-meta{font-size:11px;color:#9ca3af;}
+
+    .dot{
+      position:absolute;top:8px;right:8px;
+      width:8px;height:8px;border-radius:999px;
+      background:#facc15;
+    }
+
+    .footer-mini{
+      margin-top:24px;padding-top:12px;
+      border-top:1px solid rgba(15,23,42,0.9);
+      font-size:11px;color:#6b7280;text-align:center;
+    }
+    @media(max-width:640px){
+      .header-inner{flex-wrap:wrap;}
+      .search-wrapper{order:3;width:100%;}
+    }
+  
+    .toast{
+      position:fixed;
+      right:16px;
+      top:16px;
+      z-index:100;
+      pointer-events:none;
+      opacity:0;
+      transform:translateY(-8px);
+      transition:opacity .2s ease, transform .2s ease;
+    }
+    .toast-inner{
+      min-width:220px;
+      max-width:320px;
+      border-radius:999px;
+      padding:10px 14px;
+      background:rgba(15,23,42,0.98);
+      border:1px solid rgba(148,163,184,0.6);
+      box-shadow:0 18px 40px rgba(0,0,0,0.7);
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .toast-dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+    }
+    .toast-message{
+      font-size:12px;
+      color:#e5e7eb;
+    }
+    .toast-show{
+      opacity:1;
+      transform:translateY(0);
+    }
+    .toast-success .toast-inner{
+      border-color:rgba(34,197,94,0.85);
+    }
+    .toast-success .toast-dot{
+      background:#22c55e;
+    }
+    .toast-error .toast-inner{
+      border-color:rgba(248,113,113,0.9);
+    }
+    .toast-error .toast-dot{
+      background:#f97373;
+    }
+    .toast-info .toast-inner{
+      border-color:rgba(59,130,246,0.85);
+    }
+    .toast-info .toast-dot{
+      background:#3b82f6;
+    }
+    .btn-filter-active{
+      border-color:#facc15;
+      color:#facc15;
+      background:rgba(250,204,21,0.08);
+    }
+    .notif-link{
+      text-decoration:underline;
+      color:#e5e7eb;
+    }
+    .notif-link:hover{
+      color:#facc15;
+    }
+    .pseudo-link{
+      text-decoration:underline;
+      cursor:pointer;
+    }
+    .pseudo-link:hover{
+      color:#facc15;
+    }
+
+/* Logo from index */
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-inner">
+<a class="logo" href="index.html">
+<span class="logo-icon"></span>
+<span class="logo-word">
+<span class="logo-word-main">AlSat</span>
+<span class="logo-word-go">Go</span>
+</span>
+</a>
+<div class="search-wrapper">
+<input class="search-input" placeholder="Bildirimlerde arama yapın (tasarım)"/>
+</div>
+<div class="header-actions">
+<a class="header-link" href="login.html">Giriş Yap</a>
+<a href="register.html"><button class="header-btn">Üye Ol</button></a>
+</div>
+</div>
+</header>
+<main class="container">
+<div class="breadcrumb">
+<a href="index.html">Ana Sayfa</a> › <span>Bildirimlerim</span>
+</div>
+<section class="card">
+<div class="card-header">
+<div class="card-title">Son Bildirimler</div>
+<div class="card-tag">Okuma örneği</div>
+</div>
+<div class="actions-row">
+<button class="btn-xs primary" data-action="mark-all-read">Tümünü okundu olarak işaretle</button>
+<button class="btn-xs" data-action="filter-message">Sadece mesaj bildirimlerini göster</button>
+<button class="btn-xs" data-action="filter-system">Sadece sistem bildirimlerini göster</button>
+</div>
+<div class="notif-list">
+<div class="notif unread" data-type="message">
+<div class="icon msg">💬</div>
+<div class="notif-main">
+<div class="notif-title">İlanınıza yeni mesaj var</div>
+<div class="notif-text">
+            “<a class="notif-link" href="urun-detay.html">iPhone 14 Pro 256 GB</a>” ilanınız için bir alıcı mesaj gönderdi.
+          </div>
+<div class="notif-meta">2 dk önce • Mesajlar sayfasından yanıtlayın.</div>
+</div>
+<div class="dot"></div>
+</div>
+<div class="notif unread" data-type="message">
+<div class="icon like">⭐</div>
+<div class="notif-main">
+<div class="notif-title">İlanınız favorilere eklendi</div>
+<div class="notif-text">
+            “<a class="notif-link" href="urun-detay.html">PlayStation 5 + 2 Kol</a>” ilanınız 3 farklı kullanıcı tarafından favorilere eklendi.
+          </div>
+<div class="notif-meta">15 dk önce • Öne çıkararak daha hızlı satabilirsiniz.</div>
+</div>
+<div class="dot"></div>
+</div>
+<div class="notif" data-type="system">
+<div class="icon order">📦</div>
+<div class="notif-main">
+<div class="notif-title">Satış işlemi tamamlandı</div>
+<div class="notif-text">
+            “<a class="notif-link" href="urun-detay.html">Elektrikli Scooter</a>” ilanınız için ödeme alındı. Teslimat bilgileri siparişlerim sayfasına eklendi.
+          </div>
+<div class="notif-meta">Dün • <span class="pseudo-link" data-action="orders-demo">Siparişlerim sayfasından detayları görüntüleyin.</span></div>
+</div>
+</div>
+<div class="notif" data-type="system">
+<div class="icon">ℹ</div>
+<div class="notif-main">
+<div class="notif-title">Hesap güvenliğiniz için öneri</div>
+<div class="notif-text">
+            Uzun süredir şifrenizi değiştirmediniz. Daha güçlü bir şifre belirlemenizi öneririz.
+          </div>
+<div class="notif-meta">3 gün önce • <a class="notif-link" href="guvenlik.html">Güvenlik ayarları sayfasından</a> güncelleyebilirsiniz.</div>
+</div>
+</div>
+</div>
+</section>
+<div class="footer-mini">
+    Bu sayfa yalnızca <strong>tasarım amaçlı</strong> hazırlanmıştır. Gerçek bildirimler backend entegrasyonu ile gösterilecektir.
+  </div>
+</main>
+<div class="toast toast-info" id="globalToast">
+<div class="toast-inner">
+<div class="toast-dot"></div>
+<div class="toast-message"></div>
+</div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var toastEl = document.getElementById('globalToast');
+    var toastMessageEl = toastEl ? toastEl.querySelector('.toast-message') : null;
+
+    function showToast(message, type) {
+      if (!toastEl || !toastMessageEl) return;
+      type = type || 'info';
+      toastEl.classList.remove('toast-success', 'toast-error', 'toast-info');
+      toastEl.classList.add('toast-' + type);
+      toastMessageEl.textContent = message;
+      toastEl.classList.add('toast-show');
+      if (toastEl._hideTimeout) {
+        clearTimeout(toastEl._hideTimeout);
+      }
+      toastEl._hideTimeout = setTimeout(function () {
+        toastEl.classList.remove('toast-show');
+      }, 2800);
+    }
+
+    function markCardRead(card) {
+      if (!card) return;
+      card.classList.remove('unread');
+      var dot = card.querySelector('.dot');
+      if (dot) {
+        dot.style.display = 'none';
+      }
+    }
+
+    var notifCards = document.querySelectorAll('.notif');
+    notifCards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        markCardRead(card);
+      });
+    });
+
+    var markAllBtn = document.querySelector('[data-action="mark-all-read"]');
+    if (markAllBtn) {
+      markAllBtn.addEventListener('click', function () {
+        document.querySelectorAll('.notif.unread').forEach(function (card) {
+          markCardRead(card);
+        });
+        showToast('Tüm bildirimler okundu olarak işaretlendi (demo).', 'success');
+      });
+    }
+
+    var filterMessageBtn = document.querySelector('[data-action="filter-message"]');
+    var filterSystemBtn = document.querySelector('[data-action="filter-system"]');
+    var currentFilter = null;
+
+    function applyFilter(filter) {
+      currentFilter = filter;
+      var cards = document.querySelectorAll('.notif');
+      cards.forEach(function (card) {
+        var type = card.getAttribute('data-type') || '';
+        if (!filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = (type === filter) ? '' : 'none';
+        }
+      });
+
+      if (!filter) {
+        if (filterMessageBtn) filterMessageBtn.classList.remove('btn-filter-active');
+        if (filterSystemBtn) filterSystemBtn.classList.remove('btn-filter-active');
+        showToast('Tüm bildirimler gösteriliyor (demo).', 'info');
+      } else if (filter === 'message') {
+        if (filterMessageBtn) filterMessageBtn.classList.add('btn-filter-active');
+        if (filterSystemBtn) filterSystemBtn.classList.remove('btn-filter-active');
+        showToast('Mesaj bildirimleri filtrelendi (demo).', 'info');
+      } else if (filter === 'system') {
+        if (filterSystemBtn) filterSystemBtn.classList.add('btn-filter-active');
+        if (filterMessageBtn) filterMessageBtn.classList.remove('btn-filter-active');
+        showToast('Sistem bildirimleri filtrelendi (demo).', 'info');
+      }
+    }
+
+    if (filterMessageBtn) {
+      filterMessageBtn.addEventListener('click', function () {
+        if (currentFilter === 'message') {
+          applyFilter(null);
+        } else {
+          applyFilter('message');
+        }
+      });
+    }
+
+    if (filterSystemBtn) {
+      filterSystemBtn.addEventListener('click', function () {
+        if (currentFilter === 'system') {
+          applyFilter(null);
+        } else {
+          applyFilter('system');
+        }
+      });
+    }
+
+    var searchInput = document.querySelector('.search-input');
+    if (searchInput) {
+      searchInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          var termRaw = searchInput.value || '';
+          var term = termRaw.trim().toLowerCase();
+
+          if (currentFilter) {
+            currentFilter = null;
+            if (filterMessageBtn) filterMessageBtn.classList.remove('btn-filter-active');
+            if (filterSystemBtn) filterSystemBtn.classList.remove('btn-filter-active');
+            var cardsReset = document.querySelectorAll('.notif');
+            cardsReset.forEach(function (card) {
+              card.style.display = '';
+            });
+          }
+
+          var cards = document.querySelectorAll('.notif');
+          if (!term) {
+            cards.forEach(function (card) {
+              card.style.display = '';
+            });
+            showToast('Tüm bildirimler gösteriliyor (demo).', 'info');
+            return;
+          }
+
+          var visibleCount = 0;
+          cards.forEach(function (card) {
+            var text = card.innerText.toLowerCase();
+            var match = text.indexOf(term) !== -1;
+            card.style.display = match ? '' : 'none';
+            if (match) visibleCount++;
+          });
+
+          if (visibleCount) {
+            showToast('"' + termRaw.trim() + '" için bildirimler filtrelendi (demo).', 'info');
+          } else {
+            showToast('"' + termRaw.trim() + '" için bildirim bulunamadı (demo).', 'error');
+          }
+        }
+      });
+    }
+
+    var ordersLinks = document.querySelectorAll('[data-action="orders-demo"]');
+    ordersLinks.forEach(function (el) {
+      el.addEventListener('click', function (event) {
+        event.preventDefault();
+        showToast('Siparişlerim sayfası bu demo\'da henüz aktif değil.', 'error');
+      });
+    });
+
+    window.showToast = showToast;
+  });
+</script>
+</body>
+</html>

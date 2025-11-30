@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AlSatGo - Güvenli İlan Uyarısı</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      min-height: 100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.24), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(250,204,21,.26), transparent 60%),
+        #020617;
+      color:#e5e7eb;
+      padding: 16px;
+    }
+    .shell {
+      width:100%;
+      max-width: 620px;
+    }
+    .card {
+      border-radius: 26px;
+      padding: 26px 24px 22px;
+      background: rgba(15,23,42,.96);
+      border: 1px solid rgba(148,163,184,.65);
+      box-shadow: 0 26px 70px rgba(15,23,42,1);
+      backdrop-filter: blur(20px);
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before {
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:999px;
+      background: radial-gradient(circle, rgba(250,204,21,.7), transparent 65%);
+      top:-80px;
+      right:-60px;
+      opacity:.18;
+      pointer-events:none;
+    }
+    .badge {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 10px;
+      border-radius:999px;
+      background: rgba(250,204,21,.14);
+      border:1px solid rgba(250,204,21,.5);
+      font-size:11px;
+      color:#fef3c7;
+      margin-bottom:12px;
+    }
+    .badge span.dot {
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:#facc15;
+      box-shadow:0 0 0 4px rgba(250,204,21,.3);
+    }
+    h1 {
+      font-size:22px;
+      margin-bottom:8px;
+    }
+    .lead {
+      font-size:13px;
+      color:#cbd5f5;
+      margin-bottom:16px;
+    }
+    ul {
+      list-style:none;
+      font-size:13px;
+      color:#e5e7eb;
+      margin: 0 0 14px;
+      padding:0;
+    }
+    ul li {
+      display:flex;
+      gap:8px;
+      margin-bottom:6px;
+    }
+    ul li span.bullet {
+      font-size:14px;
+      margin-top:1px;
+    }
+    .note {
+      font-size:11px;
+      color:#9ca3af;
+      margin-bottom:16px;
+    }
+    .actions {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:6px;
+    }
+    .btn-primary, .btn-ghost {
+      border-radius:999px;
+      padding:9px 16px;
+      font-size:13px;
+      cursor:pointer;
+      border:none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg,#facc15,#d97706);
+      color:#111827;
+      font-weight:600;
+      box-shadow: 0 10px 28px rgba(234,179,8,.7);
+    }
+    .btn-primary:hover { filter:brightness(1.05); transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color:#e5e7eb;
+      border:1px solid rgba(148,163,184,.7);
+    }
+    .btn-ghost:hover {
+      border-color:#facc15;
+    }
+    .footer-info {
+      margin-top:14px;
+      font-size:11px;
+      color:#9ca3af;
+    }
+    .footer-info strong {
+      color:#e5e7eb;
+    }
+  
+    .card-logo {
+      margin-bottom:8px;
+      display:flex;
+      justify-content:flex-start;
+    }
+    .logo-pill {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.7);
+      background:
+        radial-gradient(circle at 0 0, rgba(148,163,184,.32), transparent 60%),
+        rgba(15,23,42,.95);
+      color:#e5e7eb;
+      font-size:13px;
+      cursor:pointer;
+      box-shadow:0 12px 30px rgba(15,23,42,1);
+    }
+    .logo-pill:hover {
+      border-color:rgba(250,204,21,.85);
+      box-shadow:0 16px 40px rgba(15,23,42,1);
+    }
+    .logo-icon {
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      background:radial-gradient(circle at 30% 0,rgba(248,250,252,.9),rgba(59,130,246,.9));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:13px;
+      box-shadow:0 6px 16px rgba(15,23,42,1);
+    }
+    .logo-text {
+      display:flex;
+      align-items:center;
+      gap:3px;
+      font-weight:600;
+    }
+    .logo-main {
+      letter-spacing:0.02em;
+    }
+    .logo-go {
+      background:linear-gradient(135deg,#facc15,#f97316);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    /* Toast sistemi */
+    #toast-root{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      z-index:60;
+    }
+    .toast{
+      min-width:220px;
+      max-width:320px;
+      padding:10px 14px;
+      border-radius:12px;
+      background:rgba(15,23,42,.96);
+      border:1px solid rgba(148,163,184,.6);
+      font-size:13px;
+      color:#e5e7eb;
+      box-shadow:0 18px 40px rgba(0,0,0,.9);
+      animation:toast-in .18s ease-out;
+    }
+    .toast-info{border-color:rgba(59,130,246,.7);}
+    .toast-success{border-color:rgba(34,197,94,.7);}
+    .toast-warning{border-color:rgba(250,204,21,.8);}
+    .toast-error{border-color:rgba(248,113,113,.9);}
+
+    .toast-leave{
+      animation:toast-out .18s ease-in forwards;
+    }
+
+    @keyframes toast-in{
+      from{opacity:0;transform:translateY(8px) scale(.97);}
+      to{opacity:1;transform:translateY(0) scale(1);}
+    }
+    @keyframes toast-out{
+      from{opacity:1;transform:translateY(0) scale(1);}
+      to{opacity:0;transform:translateY(6px) scale(.96);}
+    }
+
+/* Logo from index */
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="card">
+<div class="card-logo"><a class="logo" href="index.html">
+<span class="logo-icon"></span>
+<span class="logo-word">
+<span class="logo-word-main">AlSat</span>
+<span class="logo-word-go">Go</span>
+</span>
+</a></div>
+<div class="badge">
+<span class="dot"></span>
+<span>Güvenli İlan Yayınlama</span>
+</div>
+<h1>İlan vermeden önce kimliğini doğrulamalısın</h1>
+<p class="lead">
+        Dolandırıcılığı önlemek, sahte hesapları engellemek ve ödemeleri güvenli şekilde yönlendirebilmek için
+        ilan paylaşan kullanıcılarımızdan kimlik doğrulaması istiyoruz.
+      </p>
+<ul>
+<li><span class="bullet">🛡</span><span>Hem alıcı hem satıcı gerçek kişi / işletme olarak doğrulanır.</span></li>
+<li><span class="bullet">💳</span><span>Ödemeler yalnızca adınıza kayıtlı IBAN hesabına yönlendirilir.</span></li>
+<li><span class="bullet">🚫</span><span>Sahte hesaplar ve kötü niyetli kullanımlar hızlıca engellenir.</span></li>
+</ul>
+<p class="note">
+        Kimlik doğrulaması <strong>yalnızca</strong> güvenlik ve mevzuata uygunluk amacıyla yapılır. Bilgilerin üçüncü kişilerle
+        paylaşılmaz ve AlSatGo gizlilik politikası kapsamında saklanır.
+      </p>
+<div class="actions">
+<button class="btn-primary">Kimlik doğrulamaya başla</button>
+<button class="btn-ghost">Şimdilik vazgeç</button>
+</div>
+<div class="footer-info">
+        Kimliğini bir kez doğruladıktan sonra <strong>ilan verebilir, mesaj gönderebilir</strong> ve
+        <strong>ödemelerini güvenle alıp gönderebilirsin.</strong>
+</div>
+</div>
+</div>
+<script>
+const toastRoot = document.getElementById("toast-root");
+
+function showToast(message, type = "info") {
+  if (!toastRoot) return;
+  const el = document.createElement("div");
+  el.className = "toast toast-" + type;
+  el.textContent = message;
+  toastRoot.appendChild(el);
+  setTimeout(() => {
+    el.classList.add("toast-leave");
+    el.addEventListener("animationend", () => el.remove());
+  }, 2600);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const primaryBtn = document.querySelector(".btn-primary");
+  const secondaryBtn = document.querySelector(".btn-ghost");
+
+  if (primaryBtn) {
+    primaryBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      showToast("Kimlik doğrulama adımına yönlendiriliyorsun (demo).", "info");
+      setTimeout(() => {
+        window.location.href = "kimlik-dogrulama.html";
+      }, 800);
+    });
+  }
+
+  if (secondaryBtn) {
+    secondaryBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      showToast("İlan vermeden ana sayfaya dönüyorsun, kimlik doğrulamayı daha sonra tamamlayabilirsin (demo).", "info");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 800);
+    });
+  }
+});
+</script>
+<div id="toast-root"></div></body>
+</html>

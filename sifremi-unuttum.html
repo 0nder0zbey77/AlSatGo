@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<title>Şifre Sıfırlama - AlSatGo</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Inter",sans-serif;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at top left,rgba(56,189,248,.22),transparent 55%),
+        radial-gradient(circle at bottom right,rgba(250,204,21,.18),transparent 60%),
+        #020617;
+      color:#e5e7eb;
+    }
+    a{text-decoration:none;color:inherit;}
+    .shell{
+      width:100%;
+      max-width:460px;
+      padding:28px 18px 24px;
+    }
+    .card{
+      border-radius:24px;
+      padding:22px 20px 20px;
+      background:rgba(15,23,42,.96);
+      border:1px solid rgba(148,163,184,.5);
+      box-shadow:0 22px 55px rgba(15,23,42,.98);
+      backdrop-filter:blur(18px);
+    }
+    .logo{
+      margin-bottom:8px;
+      text-align:center;
+    }
+    .logo span{color:#facc15;}
+    .logo-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 22px;
+      border-radius:999px;
+      border:1px solid rgba(250,204,21,.7);
+      background:
+        radial-gradient(circle at 0 0,rgba(148,163,184,.38),transparent 60%),
+        rgba(15,23,42,.98);
+      color:#e5e7eb;
+      font-size:14px;
+      cursor:pointer;
+      box-shadow:
+        0 18px 42px rgba(15,23,42,1),
+        0 0 28px rgba(250,204,21,.22);
+      transition:.35s ease;
+    }
+    .logo-pill:hover{
+      border-color:rgba(250,204,21,.95);
+      box-shadow:
+        0 22px 54px rgba(15,23,42,1),
+        0 0 40px rgba(250,204,21,.3);
+      transform:translateY(-1px) scale(1.01);
+    }
+    .logo-icon{
+      width:24px;
+      height:24px;
+      border-radius:999px;
+      background:radial-gradient(circle at 30% 0,rgba(248,250,252,.96),rgba(59,130,246,.96));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+      box-shadow:0 8px 20px rgba(15,23,42,1);
+    }
+    .logo-text{
+      display:flex;
+      align-items:center;
+      gap:4px;
+      font-weight:700;
+      letter-spacing:.04em;
+    }
+    .logo-main{}
+    .logo-go{
+      background:linear-gradient(135deg,#facc15,#f97316);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .logo-tagline{
+      font-size:12px;
+      color:#9ca3af;
+      text-align:center;
+      margin-bottom:10px;
+    }
+    .back{
+      font-size:12px;
+      color:#9ca3af;
+      margin-bottom:10px;
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+    }
+    .back:hover{color:#e5e7eb;}
+    h1{
+      font-size:22px;
+      margin-bottom:6px;
+      text-align:center;
+    }
+    .sub{
+      font-size:13px;
+      color:#9ca3af;
+      text-align:center;
+      margin-bottom:18px;
+    }
+    form{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    label{
+      font-size:12px;
+      color:#cbd5f5;
+      display:block;
+      margin-bottom:4px;
+    }
+    .field{
+      border-radius:14px;
+      border:1px solid rgba(148,163,184,.6);
+      background:rgba(15,23,42,.9);
+      display:flex;
+      align-items:center;
+      padding:8px 10px;
+      gap:8px;
+    }
+    .field span.icon{
+      font-size:15px;
+      opacity:.85;
+    }
+    .field input{
+      border:none;
+      outline:none;
+      background:transparent;
+      color:#e5e7eb;
+      font-size:13px;
+      flex:1;
+    }
+    .field input::placeholder{color:#64748b;}
+    .hint{
+      font-size:11px;
+      color:#9ca3af;
+      margin-top:2px;
+    }
+    .status{
+      margin-top:8px;
+      font-size:12px;
+      color:#facc15;
+      min-height:16px;
+      text-align:center;
+      opacity:0;
+      transition:opacity .18s ease;
+    }
+    .status.visible{opacity:1;}
+    .status.error{color:#f87171;}
+    .btn-primary{
+      margin-top:8px;
+      width:100%;
+      border-radius:999px;
+      border:none;
+      padding:10px 16px;
+      font-size:14px;
+      font-weight:600;
+      cursor:pointer;
+      background:linear-gradient(135deg,#facc15,#d97706);
+      color:#111827;
+      box-shadow:0 10px 30px rgba(234,179,8,.7);
+      transition:.2s;
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.05);
+    }
+    .foot{
+      margin-top:14px;
+      font-size:11px;
+      color:#6b7280;
+      text-align:center;
+    }
+    .foot strong{color:#e5e7eb;font-weight:500;}
+    @media(max-width:480px){
+      .card{padding:20px 16px 18px;}
+    }
+
+/* Toast styles */
+#toast-root{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      z-index:60;
+    }
+    .toast{
+      min-width:220px;
+      max-width:320px;
+      padding:10px 14px;
+      border-radius:12px;
+      background:rgba(15,23,42,.96);
+      border:1px solid rgba(148,163,184,.6);
+      font-size:13px;
+      color:#e5e7eb;
+      box-shadow:0 18px 40px rgba(0,0,0,.9);
+      animation:toast-in .18s ease-out;
+    }
+    .toast-info{border-color:rgba(59,130,246,.7);}
+    .toast-success{border-color:rgba(34,197,94,.7);}
+    .toast-warning{border-color:rgba(250,204,21,.8);}
+    .toast-error{border-color:rgba(248,113,113,.9);}
+    .toast-leave{
+      animation:toast-out .18s ease-in forwards;
+    }
+    
+    @keyframes logo-pulse{
+      0%{
+        transform:translateY(0) scale(1);
+        box-shadow:
+          0 18px 45px rgba(15,23,42,1),
+          0 0 32px rgba(250,204,21,.2);
+      }
+      50%{
+        transform:translateY(-1px) scale(1.02);
+        box-shadow:
+          0 24px 60px rgba(15,23,42,1),
+          0 0 44px rgba(250,204,21,.32);
+      }
+      100%{
+        transform:translateY(0) scale(1);
+        box-shadow:
+          0 18px 45px rgba(15,23,42,1),
+          0 0 32px rgba(250,204,21,.2);
+      }
+    }
+
+    @keyframes toast-in{
+      from{opacity:0;transform:translateY(8px) scale(.97);}
+      to{opacity:1;transform:translateY(0) scale(1);}
+    }
+    @keyframes toast-out{
+      from{opacity:1;transform:translateY(0) scale(1);}
+      to{opacity:0;transform:translateY(6px) scale(.96);}
+    }
+
+/* Logo from index */
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+
+/* Logo from index */
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+
+    /* Assistant floating button & panel */
+    .assistant-wrapper {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    .assistant-fab {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 14px;
+      background: radial-gradient(circle at 0 0, rgba(251,191,36,0.3), transparent 55%),
+                  linear-gradient(135deg, #facc15, #fb923c);
+      color: #0b1120;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+    .assistant-fab:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+      filter: brightness(1.05);
+    }
+    .assistant-panel {
+      width: 280px;
+      max-width: 90vw;
+      border-radius: 18px;
+      background: radial-gradient(circle at 0 0, rgba(148,163,184,0.18), transparent 55%),
+                  rgba(15,23,42,0.96);
+      border: 1px solid rgba(148,163,184,0.45);
+      box-shadow: 0 22px 55px rgba(15,23,42,0.9);
+      padding: 14px 14px 10px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .assistant-panel.open {
+      display: flex;
+    }
+    .assistant-panel-header {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 4px;
+    }
+    .assistant-panel-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+    .assistant-panel-desc {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+    .assistant-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .assistant-action-btn {
+      width: 100%;
+      text-align: left;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.45);
+      background: radial-gradient(circle at 0 0, rgba(30,64,175,0.3), transparent 60%),
+                  rgba(15,23,42,0.95);
+      color: #e5e7eb;
+      font-size: 12px;
+      padding: 7px 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      transition: border-color 0.16s ease, background 0.16s ease, transform 0.12s ease;
+    }
+    .assistant-action-btn::after {
+      content: "↗";
+      font-size: 11px;
+      opacity: 0.7;
+    }
+    .assistant-action-btn:hover {
+      border-color: rgba(250,204,21,0.9);
+      background: radial-gradient(circle at 0 0, rgba(250,204,21,0.35), transparent 60%),
+                  rgba(15,23,42,0.98);
+      transform: translateY(-1px);
+    }
+
+</style>
+</head>
+<body>
+<div class="shell">
+<a class="back" href="login.html">← Geri dön</a>
+<div class="card">
+<div class="logo">
+<a class="logo" href="index.html">
+<span class="logo-icon"></span>
+<span class="logo-word">
+<span class="logo-word-main">AlSat</span>
+<span class="logo-word-go">Go</span>
+</span>
+</a>
+</div>
+<p class="logo-tagline">Komisyonsuz ve güvenli ikinci el pazarı</p>
+<h1>Şifreni mi unuttun?</h1>
+<p class="sub">
+        E-postanı yaz, hesabına özel bir şifre sıfırlama bağlantısı gönderelim (demo).
+      </p>
+<form id="reset-form">
+<div>
+<label for="email">E‑posta adresiniz</label>
+<div class="field">
+<span class="icon">📧</span>
+<input id="email" placeholder="ornek@eposta.com" required="" type="email"/>
+</div>
+<div class="hint">Hesabınız hangi e-posta ile kayıtlıysa onu yazın.</div>
+</div>
+<button class="btn-primary" type="submit">Kodu Gönder</button>
+</form>
+<div class="status" id="status"></div>
+<div class="foot">
+        E-postanı bulamıyorsan <strong>destek ekibimizle</strong> iletişime geçebilirsin.
+      </div>
+</div>
+</div>
+<div class="assistant-wrapper"><button class="assistant-fab" id="assistantToggle">🤖 Asistan</button><div class="assistant-panel" id="assistantPanel"><div class="assistant-panel-header"><div class="assistant-panel-title">Şifre Asistanı</div><div class="assistant-panel-desc">Hızlıca gitmek istediğin ekranı seçebilirsin (demo).</div></div><div class="assistant-actions"><button class="assistant-action-btn" data-action="login">Giriş ekranına dönmek istiyorum</button><button class="assistant-action-btn" data-action="register">Yeni hesap oluşturmak istiyorum</button><button class="assistant-action-btn" data-action="kimlik">Kimlik doğrulama adımlarını görmek istiyorum</button><button class="assistant-action-btn" data-action="destek">Destek ekibiyle iletişim kurmak istiyorum</button></div></div></div><div id="toast-root"></div><script>
+const toastRoot = document.getElementById("toast-root");
+
+function showToast(message, type = "info") {
+  if (!toastRoot) return;
+  const el = document.createElement("div");
+  el.className = "toast toast-" + type;
+  el.textContent = message;
+  toastRoot.appendChild(el);
+  setTimeout(() => {
+    el.classList.add("toast-leave");
+    el.addEventListener("animationend", () => el.remove());
+  }, 2600);
+}
+
+
+
+    // Şifre Asistanı davranışları
+    const assistantToggle = document.getElementById("assistantToggle");
+    const assistantPanel = document.getElementById("assistantPanel");
+    if (assistantToggle && assistantPanel) {
+      assistantToggle.addEventListener("click", () => {
+        assistantPanel.classList.toggle("open");
+      });
+
+      const actionButtons = assistantPanel.querySelectorAll(".assistant-action-btn");
+      actionButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const action = btn.getAttribute("data-action");
+          if (!action) return;
+
+          if (action === "login") {
+            showToast("Giriş ekranına dönüyorsun (demo).", "info");
+            setTimeout(() => { window.location.href = "login.html"; }, 700);
+          } else if (action === "register") {
+            showToast("Yeni hesap oluşturma ekranına gidiyorsun (demo).", "info");
+            setTimeout(() => { window.location.href = "register.html"; }, 700);
+          } else if (action === "kimlik") {
+            showToast("Kimlik doğrulama adımlarını görebileceğin bilgilendirme ekranına gidiyorsun (demo).", "info");
+            setTimeout(() => { window.location.href = "kimlik-uyari.html"; }, 750);
+          } else if (action === "destek") {
+            showToast("Canlı sistemde buradan destek ekibine yönlendirme yapılacak (demo).", "info");
+          }
+        });
+      });
+    }
+
+
+    const form = document.getElementById("reset-form");
+    const statusEl = document.getElementById("status");
+    const submitBtn = form ? form.querySelector(".btn-primary") : null;
+
+    if (form && statusEl) {
+      form.addEventListener("submit", function(e){
+        e.preventDefault();
+        const email = form.querySelector("input[type='email']").value.trim();
+
+        statusEl.classList.remove("error");
+        if (!email) {
+          statusEl.textContent = "E-posta adresini yazmadan devam edemezsin (demo).";
+          statusEl.classList.add("visible","error");
+          if (typeof showToast === "function") {
+            showToast("E-posta adresini yazmadan devam edemezsin (demo).", "warning");
+          }
+          return;
+        }
+
+        statusEl.textContent = "📩 Eğer bu e-posta ile kayıtlı bir hesabın varsa, birkaç dakika içinde gelen kutunda olacağız. Maili göremezsen spam klasörünü de kontrol edebilirsin (demo).";
+        statusEl.classList.add("visible");
+
+        if (typeof showToast === "function") {
+          showToast("Eğer bu e-posta ile kayıtlı bir hesabın varsa, birkaç dakika içinde gelen kutuna şifre sıfırlama bağlantısı göndereceğiz (demo).", "success");
+        }
+
+        if (submitBtn) {
+          const originalText = submitBtn.textContent;
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Gönderiliyor…";
+          setTimeout(function(){
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }, 1400);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

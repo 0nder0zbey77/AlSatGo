@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mağaza Profili - AlSatGo</title>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+      background:radial-gradient(circle at top,#020617 0,#020617 45%,#000 100%);
+      color:#e5e7eb;
+    }
+    a{text-decoration:none;color:inherit;}
+    .container{max-width:1200px;margin:0 auto;padding:0 16px 40px;}
+
+    .header{
+      position:sticky;top:0;z-index:40;
+      background:rgba(2,6,23,0.97);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(148,163,184,0.25);
+      box-shadow:0 8px 30px rgba(0,0,0,0.8);
+    }
+    .header-inner{
+      max-width:1200px;margin:0 auto;
+      padding:10px 16px;
+      display:flex;align-items:center;gap:14px;
+    }
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    .logo:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 0 0 1px rgba(250, 204, 21, 0.85),
+        0 22px 48px rgba(0, 0, 0, 0.98);
+      filter: brightness(1.06);
+    }
+
+    
+    .header-search{flex:1;}
+    .header-search input{
+      width:100%;padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(148,163,184,0.5);
+      background:rgba(15,23,42,0.85);color:#e5e7eb;
+      font-size:13px;outline:none;
+    }
+    .header-search input:focus{border-color:#facc15;}
+    .header-actions{display:flex;align-items:center;gap:8px;}
+    .header-link{font-size:13px;padding:6px 10px;border-radius:999px;cursor:pointer;transition:.18s;}
+    .header-link:hover{background:rgba(148,163,184,0.18);}
+    .header-btn{
+      font-size:13px;padding:8px 14px;border-radius:999px;border:none;cursor:pointer;
+      background:linear-gradient(135deg,#facc15,#eab308);color:#111827;
+      font-weight:600;box-shadow:0 6px 22px rgba(250,204,21,0.55);transition:.2s;
+    }
+    .header-btn:hover{transform:translateY(-2px);filter:brightness(1.05);}
+
+    .page{padding-top:20px;}
+    .breadcrumbs{font-size:12px;color:#9ca3af;margin-bottom:12px;}
+    .breadcrumbs a{color:#e5e7eb;opacity:.85;}
+    .breadcrumbs span.current{color:#facc15;}
+
+    .store-hero{
+      border-radius:24px;
+      background:linear-gradient(135deg,#020617,#020617);
+      border:1px solid rgba(148,163,184,0.45);
+      box-shadow:0 20px 55px rgba(0,0,0,0.9);
+      position:relative;
+      overflow:hidden;
+      margin-bottom:16px;
+      padding:0;
+    }
+    .store-cover{
+      position:relative;
+      height:200px;
+      background:
+        radial-gradient(circle at top left,rgba(56,189,248,0.45),transparent 55%),
+        radial-gradient(circle at bottom right,rgba(250,204,21,0.42),transparent 60%),
+        linear-gradient(135deg,#020617,#020617);
+      background-size:cover;
+      background-position:center;
+    }
+    .store-main{
+      position:relative;
+      display:flex;
+      align-items:flex-end;
+      gap:16px;
+      padding:0 18px 18px;
+      margin-top:-40px;
+    }
+    .store-logo{
+      width:80px;height:80px;border-radius:18px;
+      background:linear-gradient(135deg,#020617,#020617);
+      border:2px solid rgba(250,204,21,0.9);
+      display:flex;align-items:center;justify-content:center;
+      font-size:30px;font-weight:700;
+      box-shadow:0 14px 34px rgba(0,0,0,0.95);
+      flex-shrink:0;
+    }
+    .store-info{flex:1;}
+    .store-name-row{
+      display:flex;align-items:center;gap:8px;margin-bottom:4px;
+    }
+    .store-name{font-size:20px;font-weight:700;}
+    .badge-pro{
+      padding:2px 8px;border-radius:999px;
+      border:1px solid rgba(250,204,21,0.9);
+      background:rgba(250,204,21,0.12);
+      font-size:11px;color:#facc15;
+    }
+    .badge-verified{
+      padding:2px 8px;border-radius:999px;
+      border:1px solid rgba(52,211,153,0.8);
+      background:rgba(16,185,129,0.16);
+      font-size:11px;color:#a7f3d0;
+    }
+    .store-meta{
+      font-size:12px;color:#cbd5f5;margin-bottom:8px;
+    }
+    .store-meta span+span::before{
+      content:"•";margin:0 6px;color:#4b5563;
+    }
+    .store-actions{
+      display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;
+    }
+    .btn{
+      border-radius:999px;padding:8px 14px;font-size:13px;
+      border:none;cursor:pointer;display:inline-flex;
+      align-items:center;gap:6px;transition:.2s;white-space:nowrap;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#facc15,#eab308);color:#111827;
+      font-weight:600;box-shadow:0 10px 26px rgba(250,204,21,0.7);
+    }
+    .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.05);}
+    .btn-secondary{
+      background:rgba(15,23,42,0.9);
+      border:1px solid rgba(148,163,184,0.6);
+      color:#e5e7eb;
+    }
+    .btn-secondary:hover{border-color:#facc15;transform:translateY(-1px);}
+
+    .store-stats{
+      margin-top:10px;
+      display:flex;flex-wrap:wrap;gap:12px;
+      font-size:12px;color:#cbd5f5;
+    }
+    .stat-pill{
+      padding:6px 10px;border-radius:999px;
+      background:rgba(15,23,42,0.9);
+      border:1px solid rgba(148,163,184,0.5);
+    }
+
+    .store-bio{
+      margin-top:10px;
+      font-size:13px;
+      color:#e5e7eb;
+      max-width:620px;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0,3.3fr) minmax(260px,2.7fr);
+      gap:16px;
+    }
+
+    .tabs{
+      display:flex;
+      border-bottom:1px solid rgba(31,41,55,0.95);
+      font-size:13px;
+      gap:10px;
+    }
+    .tab{
+      padding:8px 12px;
+      cursor:pointer;
+      color:#9ca3af;
+      border-bottom:2px solid transparent;
+      transition:.18s;
+    }
+    .tab.active{
+      color:#facc15;
+      border-color:#facc15;
+    }
+
+    .items-grid{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+      gap:14px;
+    }
+    .item-card{
+      border-radius:16px;
+      background:rgba(15,23,42,0.96);
+      border:1px solid rgba(148,163,184,0.45);
+      box-shadow:0 16px 36px rgba(0,0,0,0.9);
+      overflow:hidden;
+      font-size:12px;
+      cursor:pointer;
+      transition:.2s;
+    }
+    .item-card:hover{
+      transform:translateY(-3px);
+      border-color:#facc15;
+    }
+    .item-img{height:110px;background:linear-gradient(135deg,#020617,#111827);}
+    .item-body{padding:8px 10px 10px;}
+    .item-title{font-size:13px;font-weight:600;margin-bottom:3px;}
+    .item-meta{color:#9ca3af;margin-bottom:4px;}
+    .item-price{font-weight:700;color:#facc15;}
+
+    .sidebar{
+      display:flex;flex-direction:column;gap:14px;
+    }
+    .card{
+      border-radius:20px;
+      background:rgba(15,23,42,0.96);
+      border:1px solid rgba(148,163,184,0.45);
+      box-shadow:0 16px 36px rgba(0,0,0,0.9);
+      padding:14px;
+      backdrop-filter:blur(16px);
+      font-size:12px;
+    }
+    .card-title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+    .card-title{font-size:14px;font-weight:600;}
+    .rating-stars{color:#facc15;font-size:13px;}
+    .trust-bar{
+      margin-top:6px;
+      width:100%;
+      height:6px;
+      border-radius:999px;
+      background:rgba(31,41,55,1);
+      overflow:hidden;
+    }
+    .trust-fill{
+      width:96%;
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,#22c55e,#facc15);
+    }
+    .trust-text{margin-top:4px;color:#cbd5f5;font-size:11px;}
+
+    .filter-chips{
+      display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;
+    }
+    .chip{
+      padding:5px 10px;border-radius:999px;
+      background:rgba(15,23,42,0.9);
+      border:1px solid rgba(148,163,184,0.55);
+      font-size:11px;cursor:pointer;
+    }
+    .chip.active{
+      border-color:#facc15;
+      background:rgba(250,204,21,0.08);
+      color:#facc15;
+    }
+
+    .reviews-list{margin-top:8px;}
+    .review-item{margin-bottom:8px;}
+    .review-header{display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;}
+    .review-text{font-size:12px;color:#e5e7eb;}
+
+    .contact-list{margin-top:6px;font-size:12px;color:#cbd5f5;}
+    .contact-list div{margin-bottom:4px;}
+
+
+    .card:hover{
+      transform:translateY(-2px);
+      border-color:#facc15;
+      box-shadow:0 18px 40px rgba(0,0,0,0.95);
+    }
+    .item-card{
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .item-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 18px 40px rgba(0,0,0,0.9);
+      border-color:rgba(250,204,21,0.65);
+    }
+    .tabs button{
+      transition:color .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .tabs button:hover{
+      color:#e5e7eb;
+      border-color:rgba(250,204,21,0.8);
+      background:rgba(250,204,21,0.06);
+    }
+
+    .footer{
+      border-top:1px solid rgba(148,163,184,0.28);
+      background:#020617;
+      padding:16px 0 26px;
+      margin-top:30px;
+      font-size:11px;
+      color:#6b7280;
+      text-align:center;
+    }
+
+    @media(max-width:900px){
+      .layout{grid-template-columns:minmax(0,1fr);}
+    }
+    @media(max-width:640px){
+      .header-inner{flex-wrap:wrap;}
+      .header-search{order:3;width:100%;margin-top:6px;}
+      .store-main{flex-direction:column;align-items:flex-start;}
+    }
+  
+    .toast{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      padding:10px 14px;
+      border-radius:12px;
+      background:rgba(15,23,42,0.97);
+      border:1px solid rgba(148,163,184,0.7);
+      box-shadow:0 18px 40px rgba(0,0,0,0.95);
+      font-size:13px;
+      color:#e5e7eb;
+      margin-top:8px;
+      animation:toast-in .2s ease-out;
+      z-index:9999;
+    }
+    .toast + .toast{
+      bottom:auto;
+      margin-top:8px;
+    }
+    .toast-success{border-color:rgba(34,197,94,0.8);}
+    .toast-warning{border-color:rgba(249,115,22,0.85);}
+    .toast-error{border-color:rgba(248,113,113,0.9);}
+    .toast-leave{
+      animation:toast-out .18s ease-in forwards;
+    }
+    @keyframes toast-in{
+      from{opacity:0;transform:translateY(6px) scale(.98);}
+      to{opacity:1;transform:translateY(0) scale(1);}
+    }
+    @keyframes toast-out{
+      from{opacity:1;transform:translateY(0) scale(1);}
+      to{opacity:0;transform:translateY(4px) scale(.98);}
+    }
+
+/* Active header link style */
+
+    .header-actions .header-link--active{
+      color:#facc15;
+    }
+
+
+/* Logo from index */
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+
+    /* Assistant floating button & panel */
+    .assistant-wrapper {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    .assistant-fab {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 14px;
+      background: radial-gradient(circle at 0 0, rgba(251,191,36,0.3), transparent 55%),
+                  linear-gradient(135deg, #facc15, #fb923c);
+      color: #0b1120;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+    .assistant-fab:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+      filter: brightness(1.05);
+    }
+    .assistant-panel {
+      width: 280px;
+      max-width: 90vw;
+      border-radius: 18px;
+      background: radial-gradient(circle at 0 0, rgba(148,163,184,0.18), transparent 55%),
+                  rgba(15,23,42,0.96);
+      border: 1px solid rgba(148,163,184,0.45);
+      box-shadow: 0 22px 55px rgba(15,23,42,0.9);
+      padding: 14px 14px 10px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .assistant-panel.open {
+      display: flex;
+    }
+    .assistant-panel-header {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 4px;
+    }
+    .assistant-panel-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+    .assistant-panel-desc {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+    .assistant-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .assistant-action-btn {
+      width: 100%;
+      text-align: left;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.45);
+      background: radial-gradient(circle at 0 0, rgba(30,64,175,0.3), transparent 60%),
+                  rgba(15,23,42,0.95);
+      color: #e5e7eb;
+      font-size: 12px;
+      padding: 7px 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      transition: border-color 0.16s ease, background 0.16s ease, transform 0.12s ease;
+    }
+    .assistant-action-btn::after {
+      content: "↗";
+      font-size: 11px;
+      opacity: 0.7;
+    }
+    .assistant-action-btn:hover {
+      border-color: rgba(250,204,21,0.9);
+      background: radial-gradient(circle at 0 0, rgba(250,204,21,0.35), transparent 60%),
+                  rgba(15,23,42,0.98);
+      transform: translateY(-1px);
+    }
+
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-inner">
+<a class="logo" href="index.html">
+<span class="logo-icon"></span>
+<span class="logo-word">
+<span class="logo-word-main">AlSat</span>
+<span class="logo-word-go">Go</span>
+</span>
+</a>
+<div class="header-search">
+<input placeholder="Mağaza veya ilan ara..." type="text"/>
+</div>
+<div class="header-actions"><a class="header-link" href="ilanlar.html">Tüm Ürünler</a><a class="header-link" href="ikinciel.html">2. El Pazarı</a><a class="header-link header-link--active" href="magazalar.html">Mağazalar</a><a class="header-link" href="hizmetler.html">Hizmetler</a><a class="header-link" href="profil.html">Profilim</a><a class="header-link" href="login.html">Giriş Yap</a><a href="register.html"><button class="header-btn">Üye Ol</button></a></div>
+</div>
+</header>
+<main class="container page">
+<div class="breadcrumbs">
+<a href="index.html">Ana Sayfa</a> › <span class="current">Mağaza Profili</span>
+</div>
+<section class="store-hero">
+<div class="store-cover"></div>
+<div class="store-main">
+<div class="store-logo">EG</div>
+<div class="store-info">
+<div class="store-name-row">
+<div class="store-name">EG Teknoloji Mağazası</div>
+<div class="badge-pro">🏆 Öne Çıkan Mağaza</div>
+<div class="badge-verified">✔ Kurumsal Satıcı</div>
+</div>
+<div class="store-meta">
+<span>Profesyonel elektronik satıcısı</span>
+<span>320+ aktif ilan</span>
+<span>İstanbul, Türkiye</span>
+</div>
+<div class="store-actions">
+<button class="btn btn-primary" onclick="showToast('Mesaj sistemi yakında aktif olacak.')">💬 Mağazaya Mesaj Gönder</button>
+<button class="btn btn-secondary" onclick="document.getElementById('storeProducts').scrollIntoView({behavior:'smooth'});">📄 Tüm İlanları</button>
+<button class="btn btn-secondary" id="followStoreBtn" onclick="toggleStoreFollow()">➕ Mağazayı Takip Et</button>
+</div>
+<div class="store-stats">
+<div class="stat-pill">⭐ 4.9 / 5 • 580 değerlendirme</div>
+<div class="stat-pill">🛒 1.850+ tamamlanmış sipariş</div>
+<div class="stat-pill">⚡ Hızlı kargo • Aynı gün</div>
+</div>
+<p class="store-bio">
+          EG Teknoloji, sıfır ve ikinci el elektronik ürünlerde uzmanlaşmış, kimlik ve vergi levhası doğrulamaları tamamlanmış bir kurumsal satıcıdır. 
+          Tüm ürünler detaylı kontrol ve testlerden geçirildikten sonra listelenir, kargolar sigortalı ve takipli olarak gönderilir.
+        </p>
+</div>
+</div>
+</section>
+<section class="layout" id="storeProducts">
+<div>
+<div class="tabs">
+<div class="tab active">Tüm Ürünler</div>
+<div class="tab" onclick="showToast('Kategori filtreleri yakında aktif olacak.')">Telefon &amp; Tablet</div>
+<div class="tab" onclick="showToast('Kategori filtreleri yakında aktif olacak.')">Bilgisayar</div>
+<div class="tab" onclick="showToast('Kategori filtreleri yakında aktif olacak.')">Oyun &amp; Konsol</div>
+</div>
+<div class="items-grid">
+<div class="item-card" onclick="window.location.href='urun-detay.html';">
+<div class="item-img"></div>
+<div class="item-body">
+<div class="item-title">iPhone 13 Pro 256 GB</div>
+<div class="item-meta">Stokta • Garantili</div>
+<div class="item-price">24.900 TL</div>
+</div>
+</div>
+<div class="item-card" onclick="window.location.href='urun-detay.html';">
+<div class="item-img"></div>
+<div class="item-body">
+<div class="item-title">MacBook Air M2 13"</div>
+<div class="item-meta">Stokta • Faturalı</div>
+<div class="item-price">32.750 TL</div>
+</div>
+</div>
+<div class="item-card" onclick="window.location.href='urun-detay.html';">
+<div class="item-img"></div>
+<div class="item-body">
+<div class="item-title">PlayStation 5 Slim + 2 Kol</div>
+<div class="item-meta">Son 24 saatte 42 görüntülenme</div>
+<div class="item-price">19.450 TL</div>
+</div>
+</div>
+<div class="item-card" onclick="window.location.href='urun-detay.html';">
+<div class="item-img"></div>
+<div class="item-body">
+<div class="item-title">LG 55" 4K Smart TV</div>
+<div class="item-meta">Kutu hasarlı • Ürün sorunsuz</div>
+<div class="item-price">14.300 TL</div>
+</div>
+</div>
+</div>
+</div>
+<aside class="sidebar">
+<div class="card">
+<div class="card-title-row">
+<div class="card-title">Mağaza Güven Skoru</div>
+<div class="rating-stars">★★★★★</div>
+</div>
+<div class="trust-bar">
+<div class="trust-fill"></div>
+</div>
+<div class="trust-text">
+          Bu mağazanın siparişlerinin %96'sı sorunsuz ve zamanında tamamlandı. İade ve değişim süreçlerinde yüksek memnuniyet oranına sahiptir.
+        </div>
+<div class="filter-chips">
+<div class="chip active">✔ Kimlik &amp; Vergi Doğrulandı</div>
+<div class="chip">⚡ Hızlı Kargo</div>
+<div class="chip">♻ İade Kabul Ediyor</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title-row">
+<div class="card-title">Mağaza Değerlendirmeleri</div>
+</div>
+<div class="reviews-list">
+<div class="review-item">
+<div class="review-header">
+<span>⭐ 5.0 • burcueren</span>
+<span>3 gün önce</span>
+</div>
+<div class="review-text">
+              Ürünler tam açıklamada belirtildiği gibi, kargo çok hızlı ve paketleme çok iyiydi.
+            </div>
+</div>
+<div class="review-item">
+<div class="review-header">
+<span>⭐ 4.8 • selimkaya</span>
+<span>1 hafta önce</span>
+</div>
+<div class="review-text">
+              Küçük bir gecikme yaşandı ama sürekli bilgilendirme yapıldı. Güvenilir mağaza.
+            </div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title-row">
+<div class="card-title">İletişim Bilgileri</div>
+</div>
+<div class="contact-list">
+<div>📍 İstanbul, Türkiye</div>
+<div>🕒 Çalışma Saatleri: 09:00 – 19:00</div>
+<div>📦 Kargo: Tüm Türkiye'ye, sigortalı</div>
+</div>
+</div>
+</aside>
+</section>
+</main>
+<footer class="footer">
+  © 2025 AlSatGo • Güvenli ve komisyonsuz alım satım platformu.
+</footer>
+<div class="assistant-wrapper"><button class="assistant-fab" id="assistantToggle">🤖 Asistan</button><div class="assistant-panel" id="assistantPanel"><div class="assistant-panel-header"><div class="assistant-panel-title">Mağaza Asistanı</div><div class="assistant-panel-desc">Bu mağaza ile ilgili hızlı yapmak istediğin işlemi seçebilirsin (demo).</div></div><div class="assistant-actions"><button class="assistant-action-btn" data-action="tum-ilanlar">Bu mağazanın tüm ilanlarını görmek istiyorum</button><button class="assistant-action-btn" data-action="mesaj">Bu mağazaya mesaj göndermek istiyorum</button><button class="assistant-action-btn" data-action="takip">Bu mağazayı takip etmek istiyorum</button><button class="assistant-action-btn" data-action="magaza-kati">Mağaza katına geri dönmek istiyorum</button></div></div></div><div id="toast-root"></div>
+<script>
+  const toastRoot = document.getElementById("toast-root");
+
+  function showToast(message, type = "info") {
+    if (!toastRoot) return;
+    const el = document.createElement("div");
+    el.className = "toast toast-" + type;
+    el.textContent = message;
+    toastRoot.appendChild(el);
+    setTimeout(() => {
+      el.classList.add("toast-leave");
+      el.addEventListener("animationend", () => el.remove());
+    }, 2600);
+  }
+
+  function toggleStoreFollow(){
+    const btn = document.getElementById('followStoreBtn');
+    if(!btn) return;
+    const following = btn.getAttribute('data-following') === '1';
+    if(following){
+      btn.setAttribute('data-following','0');
+      btn.textContent = '➕ Mağazayı Takip Et';
+      showToast('Mağaza, takip listenizden çıkarıldı (demo).', 'info');
+    } else {
+      btn.setAttribute('data-following','1');
+      btn.textContent = '✓ Takip Ediliyor';
+      showToast('Bu mağazayı favorilerine ekledin, yeni ilanlar öne çıkarılacak (demo).', 'success');
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const productsSection = document.getElementById("storeProducts");
+
+    // Header arama
+    const searchInput = document.querySelector(".header-search input");
+    if (searchInput && productsSection) {
+      searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          const value = searchInput.value.trim();
+          if (value) {
+            showToast("Mağaza içi arama şu an tasarım amaçlı, yakında gerçek filtreler eklenecek (demo).", "info");
+          } else {
+            showToast("Mağaza içi arama yakında etkinleştirilecek (demo).", "info");
+          }
+          productsSection.scrollIntoView({behavior:"smooth"});
+        }
+      });
+    }
+
+    // Tabs
+    const tabs = document.querySelectorAll(".tabs .tab");
+    if (tabs.length) {
+      tabs.forEach((tab, idx) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach(t => t.classList.remove("active"));
+          tab.classList.add("active");
+          if (idx === 0) return;
+          const label = tab.textContent.trim();
+          showToast(label + " filtrelemesi demo modunda, ürün listesi örnek olarak gösterilmektedir.", "info");
+        });
+      });
+    }
+
+    // Store stats pills
+    const statPills = document.querySelectorAll(".store-stats .stat-pill");
+    if (statPills.length) {
+      statPills.forEach((pill, idx) => {
+        pill.style.cursor = "pointer";
+        pill.addEventListener("click", () => {
+          if (idx === 0) {
+            showToast("Mağaza puanı son 12 ay içindeki siparişlerden hesaplanmıştır (demo).", "info");
+          } else if (idx === 1) {
+            showToast("Tamamlanmış sipariş sayıları demo amaçlı gösterilmektedir (demo).", "info");
+          } else if (idx === 2) {
+            showToast("Hızlı kargo etiketi, siparişlerin çoğunun ilk iş gününde kargoya verildiğini gösterir (demo).", "info");
+          }
+        });
+      });
+    }
+
+    // Güven skoru chipleri
+    const trustChips = document.querySelectorAll(".filter-chips .chip");
+    if (trustChips.length) {
+      trustChips.forEach((chip, idx) => {
+        chip.style.cursor = "pointer";
+        chip.addEventListener("click", () => {
+          if (idx === 0) {
+            showToast("Bu mağaza kimlik ve vergi levhası doğrulama süreçlerini tamamlamıştır (demo).", "info");
+          } else if (idx === 1) {
+            showToast("Hızlı kargo etiketi, kargolama hızının ortalamanın üzerinde olduğunu gösterir (demo).", "info");
+          } else if (idx === 2) {
+            showToast("İade politikası canlı sistemde detaylı şekilde gösterilecektir (demo).", "info");
+          }
+        });
+      });
+    }
+
+    // Değerlendirme kartı başlığı
+    const reviewTitles = document.querySelectorAll(".card-title");
+    reviewTitles.forEach((titleEl) => {
+      if (titleEl.textContent.trim().includes("Mağaza Değerlendirmeleri")) {
+        const row = titleEl.closest(".card-title-row");
+        if (row) {
+          row.style.cursor = "pointer";
+          row.addEventListener("click", () => {
+            showToast("Mağaza hakkındaki tüm yorumlar ve puanlar ayrı bir sayfada listelenecek (demo).", "info");
+          });
+        }
+      }
+    });
+
+    // İletişim kartı - kargo satırı
+    const contactKargo = document.querySelectorAll(".contact-list div")[2];
+    if (contactKargo) {
+      contactKargo.style.cursor = "pointer";
+      contactKargo.addEventListener("click", () => {
+        showToast("Kargo firması seçimi ve teslimat süresi canlı sistemde sipariş sırasında gösterilecek (demo).", "info");
+      });
+    }
+
+    // "Tüm İlanları" butonu
+    const storeActionsSecondary = document.querySelectorAll(".store-actions .btn.btn-secondary");
+    if (storeActionsSecondary.length > 0) {
+      const allProductsBtn = storeActionsSecondary[0];
+      allProductsBtn.addEventListener("click", () => {
+        showToast("Bu mağazanın vitrindeki tüm ilanlarını aşağıda görüyorsun (demo).", "info");
+      });
+    }
+
+
+    // Mağaza Asistanı davranışları
+    const assistantToggle = document.getElementById("assistantToggle");
+    const assistantPanel = document.getElementById("assistantPanel");
+    if (assistantToggle && assistantPanel) {
+      assistantToggle.addEventListener("click", () => {
+        assistantPanel.classList.toggle("open");
+      });
+
+      const actionButtons = assistantPanel.querySelectorAll(".assistant-action-btn");
+      actionButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const action = btn.getAttribute("data-action");
+          if (!action) return;
+
+          if (action === "tum-ilanlar") {
+            const productsSection = document.getElementById("storeProducts");
+            if (productsSection) {
+              showToast("Bu mağazanın vitrindeki tüm ilanlarını aşağıda görüyorsun (demo).", "info");
+              productsSection.scrollIntoView({ behavior: "smooth" });
+            } else {
+              showToast("Mağaza ilanları bölümü bu sayfada demo olarak gösteriliyor.", "info");
+            }
+          } else if (action === "mesaj") {
+            showToast("Mesaj sistemi yakında aktif olacak, burada mağaza ile sohbet başlatabileceksin (demo).", "info");
+          } else if (action === "takip") {
+            const followBtn = document.querySelector(".store-actions .btn-primary");
+            if (followBtn) {
+              toggleStoreFollow();
+            } else {
+              showToast("Takip et butonuna şu an ulaşılamıyor (demo).", "warning");
+            }
+          } else if (action === "magaza-kati") {
+            showToast("Mağaza katına geri dönüyorsun (demo).", "info");
+            setTimeout(() => {
+              window.location.href = "magazalar.html";
+            }, 700);
+          }
+        });
+      });
+    }
+
+
+    // Sayfa ilk açılış mesajı
+    showToast("Bu mağaza profili demo amaçlıdır, tüm işlemler gösterim amaçlıdır (demo).", "info");
+  });
+</script>
+</body>
+</html>

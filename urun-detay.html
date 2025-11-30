@@ -1,0 +1,4227 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlSatGo - Tüm Ürünler</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 45%, #000 100%);
+      color: #f9fafb;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* HEADER -------------------------------------------------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(3, 7, 18, 0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.32), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.28), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 55%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+      animation: logo-breath 5.6s ease-in-out infinite;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: flex-start;
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fbbf24, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+      background-size: 220% 220%;
+      animation: logo-shimmer 7.2s ease-in-out infinite;
+    }
+    .logo-tagline {
+      font-size: 10px;
+      letter-spacing: 0.19em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 184, 0.9);
+      white-space: nowrap;
+    }
+    .logo:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 0 0 1px rgba(250, 204, 21, 0.85),
+        0 22px 48px rgba(0, 0, 0, 0.98);
+      filter: brightness(1.06);
+    }
+
+    
+    @keyframes logo-breath {
+      0%, 100% {
+        box-shadow:
+          0 0 0 1px rgba(15, 23, 42, 0.95),
+          0 10px 24px rgba(0, 0, 0, 0.9);
+        filter: brightness(1);
+      }
+      50% {
+        box-shadow:
+          0 0 0 1px rgba(250, 204, 21, 0.7),
+          0 18px 40px rgba(0, 0, 0, 0.98);
+        filter: brightness(1.06);
+      }
+    }
+    @keyframes logo-shimmer {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+.search {
+      flex: 1;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      font-size: 14px;
+      outline: none;
+      transition: .2s;
+    }
+
+    .search input:focus {
+      border-color: #fbbf24;
+      box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.6);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .header-link {
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: .18s;
+      cursor: pointer;
+    }
+
+    .header-link:hover {
+      background: rgba(148, 163, 184, 0.15);
+    }
+
+    .btn-pill {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, #facc15, #d97706);
+      color: #111827;
+      box-shadow: 0 8px 24px rgba(234, 179, 8, .6);
+      transition: .18s transform, .18s filter;
+    }
+
+    .btn-pill:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    /* HERO ---------------------------------------------------- */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 56px 0 36px;
+    }
+
+    .hero-bg-orbit {
+      position: absolute;
+      inset: -120px -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(59, 130, 246, .3), transparent 60%),
+        radial-gradient(circle at 100% 10%, rgba(251, 191, 36, .35), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(16, 185, 129, .18), transparent 50%);
+      opacity: .9;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(12px);
+      font-size: 12px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .6);
+    }
+
+    .dot-live {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, .35);
+    }
+
+    .hero-title {
+      font-size: 40px;
+      line-height: 1.25;
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: .02em;
+    }
+
+    .hero-title span.gradient {
+      background: linear-gradient(120deg, #facc15, #22d3ee, #4ade80);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: glowText 8s ease-in-out infinite;
+    }
+
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: #e5e7eb;
+      opacity: 0.9;
+      margin-bottom: 26px;
+    }
+
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .hero-cta .secondary {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, .85);
+      color: #e5e7eb;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: .18s;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-cta .secondary:hover {
+      border-color: rgba(251, 191, 36, .9);
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-2px);
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #cbd5f5;
+    }
+
+    .hero-tag-pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, .6);
+      background: rgba(15, 23, 42, .9);
+      backdrop-filter: blur(10px);
+    }
+
+    
+    /* DEMO BANNER ---------------------------------------------- */
+    .demo-banner{
+      margin: 10px 0 4px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      background: rgba(15,23,42,0.94);
+      font-size: 11px;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 460px;
+    }
+    .demo-banner-label{
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #facc15;
+      padding-right: 6px;
+      border-right: 1px solid rgba(55,65,81,0.9);
+    }
+    .demo-banner-text{
+      opacity: 0.9;
+    }
+/* MARQUEE ------------------------------------------------- */
+    .strip {
+      margin: 18px 0 26px;
+      overflow: hidden;
+      border-top: 1px solid rgba(15, 23, 42, .9);
+      border-bottom: 1px solid rgba(15, 23, 42, .9);
+      background: radial-gradient(circle, rgba(15, 23, 42, .9), rgba(15, 23, 42, .98));
+    }
+
+    .strip-inner {
+      display: flex;
+      gap: 32px;
+      padding: 10px 0;
+      white-space: nowrap;
+      animation: scrollStrip 22s linear infinite;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .strip-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, .9);
+      border: 1px solid rgba(148, 163, 184, .4);
+    }
+
+    @keyframes scrollStrip {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* CATEGORY GRID ------------------------------------------ */
+    .section {
+      padding: 10px 0 30px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .section-link {
+      font-size: 13px;
+      color: #e5e7eb;
+      opacity: .8;
+      cursor: pointer;
+    }
+
+    .section-link:hover {
+      text-decoration: underline;
+      opacity: 1;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 14px;
+    }
+
+    .category-card {
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, .95);
+      border: 1px solid rgba(148, 163, 184, .4);
+      box-shadow: 0 10px 30px rgba(0,0,0,.55);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(251, 191, 36, .9);
+      box-shadow: 0 18px 45px rgba(0,0,0,.8);
+    }
+
+    .category-icon {
+      font-size: 20px;
+    }
+
+    .category-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .category-meta {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+        
+    /* AVM ENTRY / KAT SEÇİCİ ---------------------------------- */
+    .avm-entry {
+      padding: 18px 0 30px;
+    }
+
+    .avm-entry-inner {
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: radial-gradient(circle at top left, rgba(15,23,42,.96), rgba(15,23,42,.99));
+      box-shadow: 0 18px 40px rgba(0,0,0,.85);
+      padding: 18px 18px 20px;
+    }
+
+    .avm-entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 8px;
+    }
+
+    .avm-entry-kicker {
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+
+    .avm-entry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .avm-entry-card {
+      position: relative;
+      border-radius: 18px;
+      padding: 14px 14px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: linear-gradient(140deg, rgba(15,23,42,.98), rgba(15,23,42,.98));
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+
+    .avm-entry-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.95);
+      border-color: rgba(148, 163, 184, 0.8);
+    }
+
+    .avm-entry-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .avm-entry-card p {
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+
+    .avm-entry-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+
+    .avm-entry-label {
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .avm-entry-stat {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 6px;
+    }
+
+    .avm-entry-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, .9);
+    }
+
+    .avm-entry-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      gap: 8px;
+    }
+
+    .avm-entry-footer button {
+      flex: 1;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .avm-entry-btn-primary {
+      background: linear-gradient(120deg, #facc15, #f97316);
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .avm-entry-btn-secondary {
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, .96);
+      color: #e5e7eb;
+    }
+
+    .avm-entry-card--magaza {
+      border-color: rgba(56, 189, 248, 0.7);
+    }
+
+
+    .avm-entry-sub {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    @keyframes avmEntryPulse {
+      0%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 18px 40px rgba(0,0,0,0.85);
+      }
+      50% {
+        transform: translateY(-2px);
+        box-shadow: 0 22px 50px rgba(0,0,0,0.95);
+      }
+    }
+
+    .avm-entry-card--ikinciel {
+      border-color: rgba(34, 197, 94, 0.85);
+      animation: avmEntryPulse 5s ease-in-out infinite;
+    }
+
+    .avm-entry-card--tumilan {
+      border-color: rgba(250, 204, 21, 0.7);
+    }
+
+    
+    .avm-entry-card--hizmet {
+      border-color: rgba(129, 140, 248, 0.8);
+    }
+
+@media (max-width: 768px) {
+      .avm-entry-inner {
+        padding: 14px 12px 16px;
+      }
+    }
+
+/* ROLES STRIP --------------------------------------------- */
+    .roles {
+      padding: 6px 0 30px;
+    }
+
+    .roles-inner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .role-card {
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, .45);
+      background: radial-gradient(circle at top left, rgba(15,23,42,.98), rgba(15,23,42,.99));
+      box-shadow: 0 16px 40px rgba(0,0,0,.85);
+      padding: 18px 18px 16px;
+    }
+
+    .role-label {
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    .role-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .role-text {
+      font-size: 13px;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+    }
+
+    .role-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .role-secondary {
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, .9);
+      color: #e5e7eb;
+      cursor: pointer;
+    }
+
+    .role-secondary:hover {
+      background: rgba(15, 23, 42, 1);
+      border-color: rgba(148, 163, 184, .9);
+    }
+
+/* FEATURED SLIDER ---------------------------------------- */
+    .featured-section {
+      padding: 14px 0 32px;
+    }
+
+    .featured-shell {
+      position: relative;
+      border-radius: 24px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,.98), rgba(15,23,42,.99));
+      border: 1px solid rgba(148, 163, 184, .4);
+      padding: 10px;
+      box-shadow: 0 22px 60px rgba(0,0,0,.8);
+      overflow: hidden;
+    }
+
+    .featured-track {
+      display: flex;
+      transition: transform .45s ease;
+    }
+
+    .featured-slide {
+      min-width: 100%;
+      padding: 20px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .featured-info {
+      flex: 1;
+    }
+
+    .featured-tag {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(34,197,94,.16);
+      border: 1px solid rgba(21,128,61,.9);
+      color: #bbf7d0;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .featured-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .featured-desc {
+      font-size: 14px;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+
+    .featured-meta {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 12px;
+    }
+
+    .featured-price {
+      font-size: 22px;
+      font-weight: 700;
+      color: #4ade80;
+      margin-bottom: 14px;
+    }
+
+    .featured-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn-outline {
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 13px;
+      border: 1px solid rgba(148,163,184,.7);
+      background: transparent;
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: .18s;
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(251,191,36,.9);
+      background: rgba(15,23,42,1);
+    }
+
+    .featured-visual {
+      flex: 1;
+      min-width: 260px;
+      min-height: 190px;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, .6);
+      background:
+        radial-gradient(circle at top left, rgba(251,191,36,.45), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(56,189,248,.45), transparent 55%),
+        linear-gradient(135deg, #020617, #020617);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-circle {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(2px);
+      opacity: .9;
+    }
+
+    .circle-one {
+      width: 140px; height: 140px;
+      background: radial-gradient(circle, #facc15, transparent 60%);
+      top: 22px; left: 30px;
+    }
+
+    .circle-two {
+      width: 110px; height: 110px;
+      background: radial-gradient(circle, #22d3ee, transparent 60%);
+      bottom: 18px; right: 32px;
+    }
+
+    .featured-label {
+      position: absolute;
+      top: 14px; right: 16px;
+      padding: 4px 10px;
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.7);
+      background: rgba(15,23,42,.92);
+    }
+
+    .featured-note {
+      position: absolute;
+      left: 20px; bottom: 18px;
+      font-size: 12px;
+      color: #e5e7eb;
+      max-width: 160px;
+    }
+
+    .slider-arrows {
+      position: absolute;
+      top: 50%;
+      left: 0; right: 0;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+      pointer-events: none;
+    }
+
+    .slider-arrow {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(15,23,42,.95);
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,.8);
+      pointer-events: auto;
+      transition: .18s;
+    }
+
+    .slider-arrow:hover {
+      transform: scale(1.06);
+      background: rgba(15,23,42,1);
+    }
+
+    .featured-dots {
+      position: absolute;
+      bottom: 10px; left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 999px;
+      background: rgba(148,163,184,.7);
+      transition: .2s;
+    }
+
+    .dot.active {
+      width: 18px;
+      background: #facc15;
+    }
+
+    /* STATS --------------------------------------------------- */
+    .stats {
+      padding: 20px 0 30px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    .stat-card {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,.98), rgba(15,23,42,.99));
+      border: 1px solid rgba(148,163,184,.5);
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0,0,0,.85);
+    }
+
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #facc15;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+
+    /* WHY ALSATGO --------------------------------------------- */
+    .why {
+      padding: 10px 0 30px;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .why-card {
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,.98), rgba(15,23,42,.99));
+      border: 1px solid rgba(148,163,184,.45);
+      box-shadow: 0 16px 40px rgba(0,0,0,.8);
+      padding: 14px 16px;
+      font-size: 13px;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .why-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(250,204,21,.9);
+      box-shadow: 0 20px 50px rgba(0,0,0,.9);
+    }
+
+    .why-icon {
+      font-size: 18px;
+    }
+
+    .why-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .why-text {
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+
+
+    /* LATEST GRID -------------------------------------------- */
+    .latest {
+      padding: 10px 0 36px;
+    }
+
+    .latest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .item-card {
+      border-radius: 18px;
+      background: rgba(15,23,42,.95);
+      border: 1px solid rgba(148,163,184,.45);
+      box-shadow: 0 16px 40px rgba(0,0,0,.8);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      transition: .2s;
+      cursor: pointer;
+    }
+
+    .item-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(251,191,36,.9);
+    }
+
+    
+    .item-badge {
+      align-self: flex-start;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.6);
+      color: #e5e7eb;
+      margin-bottom: 4px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,.98), rgba(15,23,42,.9));
+    }
+
+    .item-badge-hot {
+      border-color: rgba(248,113,113,.9);
+      color: #fecaca;
+    }
+
+    .item-badge-new {
+      border-color: rgba(52,211,153,.9);
+      color: #bbf7d0;
+    }
+
+    .item-badge-trust {
+      border-color: rgba(56,189,248,.9);
+      color: #bae6fd;
+    }
+
+    .item-badge-featured {
+      border-color: rgba(250,204,21,.9);
+      color: #fef9c3;
+    }
+
+.item-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .item-price {
+      font-size: 15px;
+      color: #facc15;
+      font-weight: 600;
+    }
+
+    .item-meta {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    /* TESTIMONIALS ------------------------------------------- */
+    .testimonials {
+      padding: 10px 0 40px;
+    }
+
+    .test-shell {
+      border-radius: 22px;
+      background: rgba(15,23,42,.96);
+      border: 1px solid rgba(148,163,184,.5);
+      box-shadow: 0 20px 60px rgba(0,0,0,.85);
+      padding: 20px 20px 24px;
+    }
+
+    .test-header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .test-header h2 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .test-header p {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .test-card {
+      border-radius: 18px;
+      padding: 14px 14px 16px;
+      background: rgba(15,23,42,.98);
+      border: 1px solid rgba(148,163,184,.4);
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .stars {
+      color: #facc15;
+      font-size: 13px;
+    }
+
+    .test-text {
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    .test-name {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    /* FOOTER -------------------------------------------------- */
+    footer {
+      border-top: 1px solid rgba(15,23,42,1);
+      background: #020617;
+      padding: 18px 0 24px;
+      margin-top: 10px;
+    }
+
+    footer .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      font-size: 12px;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+
+    /* MICRO ANIMATIONS - PREMIUM UPGRADE -------------------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .7s ease-out, transform .7s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stat-card {
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(0,0,0,.85);
+      border-color: rgba(250, 204, 21, .7);
+    }
+
+    .item-card {
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .item-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.9);
+      border-color: rgba(250, 204, 21, .7);
+    }
+
+    .test-card {
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .test-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0,0,0,.8);
+    }
+
+    .hero-bg-orbit {
+      animation: orbitMove 26s ease-in-out infinite alternate;
+    }
+
+    @keyframes orbitMove {
+      0% { transform: translate3d(-14px, 0, 0) scale(1); }
+      100% { transform: translate3d(10px, 8px, 0) scale(1.05); }
+    }
+
+    /* RESPONSIVE --------------------------------------------- */
+    @media (max-width: 768px) {
+      .header-inner { flex-wrap: wrap; }
+      .search { order: 3; width: 100%; }
+      .featured-slide { flex-direction: column; }
+      .hero-title { font-size: 30px; }
+    }
+  
+    /* GLOBAL TOAST --------------------------------------------- */
+    #global-toast {
+      position: fixed;
+      bottom: 88px;
+      right: 20px;
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 999px;
+      border: 1px solid rgba(250, 204, 21, 0.85);
+      padding: 8px 16px;
+      font-size: 13px;
+      color: #e5e7eb;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity .23s ease, transform .23s ease;
+      z-index: 60;
+    }
+    #global-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* AlSatGo Assistant -------------------------------------------------- */
+    .asg-assistant-fab{
+      position: fixed;
+      bottom: 24px;
+      left: 20px;
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      border: 1px solid rgba(250,204,21,0.9);
+      background: radial-gradient(circle at top,#facc15,#eab308 50%,#78350f 100%);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 55;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .asg-assistant-fab span{
+      font-size: 22px;
+      color: #0f172a;
+    }
+    .asg-assistant-fab:hover{
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 26px 75px rgba(0,0,0,1);
+    }
+
+    .asg-assistant-panel{
+      position: fixed;
+      bottom: 88px;
+      left: 20px;
+      width: 320px;
+      max-width: calc(100% - 40px);
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.98), rgba(2,6,23,0.98));
+      border: 1px solid rgba(148,163,184,0.6);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.95);
+      overflow: hidden;
+      transform: translateY(16px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s ease, transform .22s ease;
+      z-index: 54;
+      backdrop-filter: blur(18px);
+    }
+    .asg-assistant-panel.open{
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .asg-assistant-header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px 8px;
+      border-bottom: 1px solid rgba(31,41,55,0.95);
+      background: radial-gradient(circle at top left,rgba(250,204,21,0.12),rgba(15,23,42,0.98));
+    }
+    .asg-assistant-header-left{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .asg-assistant-avatar{
+      width:26px;
+      height:26px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:16px;
+      background: radial-gradient(circle at top,#facc15,#eab308 50%,#92400e 100%);
+      color:#0f172a;
+      box-shadow:0 8px 20px rgba(0,0,0,0.8);
+    }
+    .asg-assistant-title{
+      font-size:13px;
+      font-weight:600;
+    }
+    .asg-assistant-sub{
+      font-size:11px;
+      color:#9ca3af;
+    }
+    .asg-assistant-close{
+      border:none;
+      background:transparent;
+      color:#9ca3af;
+      cursor:pointer;
+      font-size:16px;
+      padding:2px;
+    }
+    .asg-assistant-close:hover{
+      color:#e5e7eb;
+    }
+    .asg-assistant-body{
+      padding:10px 12px 12px;
+      font-size:12px;
+      color:#e5e7eb;
+    }
+    .asg-assistant-body p{
+      margin-bottom:8px;
+      line-height:1.4;
+    }
+    .asg-assistant-quick{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      margin-top:4px;
+    }
+    .asg-assistant-chip{
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.7);
+      background:rgba(15,23,42,0.95);
+      padding:6px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      cursor:pointer;
+      transition: border-color .18s ease, background .18s ease, transform .12s ease;
+    }
+    .asg-assistant-chip-main{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      font-size:12px;
+    }
+    .asg-assistant-chip-main span.icon{
+      font-size:15px;
+    }
+    .asg-assistant-chip-sub{
+      font-size:10px;
+      color:#9ca3af;
+    }
+    .asg-assistant-chip:hover{
+      border-color:rgba(250,204,21,0.9);
+      background:radial-gradient(circle at top left,rgba(250,204,21,0.10),rgba(15,23,42,0.98));
+      transform:translateY(-1px);
+    }
+    .asg-assistant-footer{
+      padding:6px 12px 9px;
+      border-top:1px solid rgba(31,41,55,0.9);
+      font-size:10px;
+      color:#6b7280;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:6px;
+    }
+    .asg-assistant-footer span.badge{
+      padding:2px 7px;
+      border-radius:999px;
+      border:1px solid rgba(56,189,248,0.8);
+      background:rgba(8,47,73,0.9);
+      color:#e0f2fe;
+      font-size:10px;
+    }
+
+    @media(max-width:640px){
+      .asg-assistant-panel{
+        right:10px;
+        left:10px;
+        width:auto;
+        bottom:80px;
+      }
+      .asg-assistant-fab{
+        bottom:16px;
+        left:16px;
+        right:auto;
+      }
+    }
+
+    /* SAĞ SOHBET PANELİ + MİNİ CHAT -------------------------------------------- */
+    .asg-chat-rail{
+      position: fixed;
+      top: 80px;
+      right: 0;
+      bottom: 0;
+      width: 260px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.98), rgba(2,6,23,0.98));
+      border-left: 1px solid rgba(30,64,175,0.45);
+      box-shadow: -18px 0 40px rgba(0,0,0,0.85);
+      display: flex;
+      flex-direction: column;
+      z-index: 45;
+      backdrop-filter: blur(18px);
+    }
+    .asg-chat-rail.hidden{
+      display: none;
+    }
+    .asg-chat-rail-header{
+      padding: 10px 12px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border-bottom: 1px solid rgba(30,64,175,0.5);
+    }
+    .asg-chat-rail-title{
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .asg-chat-rail-status{
+      font-size: 11px;
+      color: #9ca3af;
+    }
+    .asg-chat-rail-close{
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.96);
+      color: #9ca3af;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .asg-chat-rail-section-label{
+      padding: 4px 12px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #6b7280;
+    }
+    .asg-chat-rail-list{
+      flex: 1;
+      overflow-y: auto;
+      padding: 2px 6px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .asg-chat-rail-item{
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+      padding: 4px 6px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background .12s ease, transform .08s ease;
+      color: #e5e7eb;
+    }
+    .asg-chat-rail-item:hover{
+      background: rgba(30,64,175,0.35);
+      transform: translateY(-1px);
+    }
+    .asg-chat-rail-avatar{
+      position: relative;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top, #38bdf8, #0f172a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0 0 0 1px rgba(148,163,184,0.7);
+    }
+    .asg-chat-rail-dot{
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(15,23,42,0.95);
+    }
+    .asg-chat-rail-dot.idle{ background:#facc15; }
+    .asg-chat-rail-dot.off{ background:#4b5563; }
+    .asg-chat-rail-texts{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+    .asg-chat-rail-name{
+      font-size:12px;
+      font-weight:500;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .asg-chat-rail-sub{
+      font-size:11px;
+      color:#9ca3af;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .asg-chat-rail-unread{
+      min-width:18px;
+      padding:2px 6px;
+      border-radius:999px;
+      background:radial-gradient(circle at top,#f97316,#ea580c);
+      color:#020617;
+      font-size:10px;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 0 0 1px rgba(15,23,42,0.95);
+    }
+    .asg-chat-rail-footer{
+      padding:6px 10px 10px;
+      border-top:1px solid rgba(30,64,175,0.5);
+      background:rgba(15,23,42,0.98);
+    }
+    .asg-chat-rail-search{
+      width:100%;
+      border-radius:999px;
+      border:1px solid rgba(55,65,81,0.9);
+      background:rgba(15,23,42,0.95);
+      padding:5px 9px;
+      font-size:11px;
+      color:#e5e7eb;
+    }
+    .asg-chat-rail-search::placeholder{ color:#6b7280; }
+    .asg-chat-rail-search:focus{
+      outline:none;
+      border-color:rgba(129,140,248,0.9);
+    }
+    .asg-chat-rail-toggle{
+      position:fixed;
+      top:50%;
+      right:0;
+      transform:translateY(-50%);
+      width:28px;
+      border-radius:12px 0 0 12px;
+      background:radial-gradient(circle at top left,rgba(15,23,42,0.98),rgba(2,6,23,0.98));
+      border:1px solid rgba(30,64,175,0.55);
+      border-right:none;
+      box-shadow:-10px 0 30px rgba(0,0,0,0.9);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      z-index:44;
+      color:#e5e7eb;
+      writing-mode:vertical-rl;
+      text-orientation:mixed;
+      font-size:11px;
+      letter-spacing:0.08em;
+    }
+    .asg-chat-rail-toggle.visible{
+      display:flex;
+    }
+
+    .asg-chat-window{
+      position:fixed;
+      bottom:24px;
+      right:280px;
+      width:320px;
+      max-width:calc(100% - 320px);
+      max-height:380px;
+      border-radius:18px;
+      background:radial-gradient(circle at top left,rgba(15,23,42,0.98),rgba(2,6,23,0.98));
+      border:1px solid rgba(148,163,184,0.7);
+      box-shadow:0 26px 70px rgba(0,0,0,0.9);
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      opacity:0;
+      transform:translateY(16px);
+      pointer-events:none;
+      z-index:46;
+      backdrop-filter:blur(18px);
+      transition:opacity .2s ease, transform .2s ease;
+    }
+    .asg-chat-window.open{
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+    }
+    .asg-chat-header{
+      padding:8px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      border-bottom:1px solid rgba(148,163,184,0.5);
+      background:radial-gradient(circle at top left,rgba(15,23,42,0.98),rgba(15,23,42,0.96));
+    }
+    .asg-chat-header-main{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .asg-chat-header-avatar{
+      width:28px;
+      height:28px;
+      border-radius:999px;
+      background:radial-gradient(circle at top,#38bdf8,#0f172a);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:13px;
+      font-weight:600;
+      color:#e5f2ff;
+      box-shadow:0 0 0 1px rgba(148,163,184,0.7);
+      position:relative;
+    }
+    .asg-chat-header-dot{
+      position:absolute;
+      bottom:-2px;
+      right:-2px;
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:#22c55e;
+      box-shadow:0 0 0 3px rgba(15,23,42,0.95);
+    }
+    .asg-chat-header-texts{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .asg-chat-header-name{
+      font-size:13px;
+      font-weight:600;
+    }
+    .asg-chat-header-sub{
+      font-size:11px;
+      color:#9ca3af;
+    }
+    .asg-chat-header-actions{
+      display:flex;
+      align-items:center;
+      gap:4px;
+    }
+    .asg-chat-header-icon{
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      color:#9ca3af;
+      cursor:pointer;
+      background:rgba(15,23,42,0.96);
+    }
+    .asg-chat-body{
+      flex:1;
+      padding:8px 10px 6px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      overflow-y:auto;
+      font-size:12px;
+    }
+    .asg-chat-day{
+      text-align:center;
+      margin:2px 0 4px;
+    }
+    .asg-chat-day span{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.4);
+      font-size:10px;
+      color:#9ca3af;
+      background:rgba(15,23,42,0.95);
+    }
+    .asg-chat-row{
+      display:flex;
+      gap:4px;
+      max-width:100%;
+    }
+    .asg-chat-row.me{ justify-content:flex-end; }
+    .asg-chat-bubble{
+      max-width:78%;
+      padding:6px 9px 5px;
+      border-radius:13px;
+      line-height:1.4;
+      box-shadow:0 10px 24px rgba(0,0,0,0.6);
+    }
+    .asg-chat-bubble.them{
+      background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(17,24,39,0.98));
+      border-bottom-left-radius:4px;
+      border:1px solid rgba(148,163,184,0.5);
+      color:#e5e7eb;
+    }
+    .asg-chat-bubble.me{
+      background:radial-gradient(circle at top left,rgba(56,189,248,0.3),rgba(8,47,73,0.96));
+      border-bottom-right-radius:4px;
+      color:#e0f2fe;
+    }
+    .asg-chat-meta{
+      margin-top:2px;
+      font-size:10px;
+      color:#9ca3af;
+      display:flex;
+      justify-content:flex-end;
+      gap:4px;
+    }
+    .asg-chat-input{
+      padding:6px 8px;
+      border-top:1px solid rgba(148,163,184,0.5);
+      background:radial-gradient(circle at top left,rgba(15,23,42,0.98),rgba(15,23,42,0.96));
+      display:flex;
+      align-items:flex-end;
+      gap:6px;
+    }
+    .asg-chat-textarea{
+      flex:1;
+      border:none;
+      background:rgba(15,23,42,0.9);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+      color:#e5e7eb;
+      resize:none;
+      max-height:72px;
+    }
+    .asg-chat-send{
+      border:none;
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:11px;
+      font-weight:600;
+      cursor:pointer;
+      background:linear-gradient(120deg,#facc15,#fb923c);
+      color:#0f172a;
+      box-shadow:0 12px 28px rgba(0,0,0,0.9);
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+    }
+    .asg-chat-footer{
+      padding:4px 10px 8px;
+      font-size:10px;
+      color:#9ca3af;
+      border-top:1px solid rgba(15,23,42,1);
+      background:rgba(15,23,42,0.98);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:6px;
+    }
+    .asg-chat-footer a{
+      font-weight:500;
+      color:#e5e7eb;
+      text-decoration:none;
+      cursor:pointer;
+    }
+
+    
+@media(min-width:1440px){
+  .listing-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+
+@media(max-width:1024px){
+      .asg-chat-rail{
+        width:100%;
+        max-width:none;
+      }
+      .asg-chat-rail-toggle{
+        display:flex;
+        bottom:20px;
+        top:auto;
+        transform:none;
+        width:auto;
+        height:32px;
+        border-radius:999px;
+        writing-mode:horizontal-tb;
+        padding:0 12px;
+        font-size:12px;
+      }
+      .asg-chat-window{
+        right:12px;
+        left:12px;
+        width:auto;
+        max-width:none;
+      }
+    }
+
+
+/* TUM URUNLER LISTESI ---------------------------------------------- */
+.listing-section{
+  margin-top:32px;
+  padding:20px;
+  border-radius:24px;
+  background:radial-gradient(circle at top left,rgba(56,189,248,0.08),transparent 55%),rgba(15,23,42,0.9);
+  border:1px solid rgba(148,163,184,0.35);
+  box-shadow:0 24px 60px rgba(15,23,42,0.9);
+  backdrop-filter:blur(18px);
+}
+.listing-header{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  align-items:flex-start;
+  margin-bottom:16px;
+  flex-wrap:wrap;
+}
+.listing-title{
+  font-size:20px;
+  font-weight:600;
+  color:#e5e7eb;
+  margin:0 0 4px;
+}
+.listing-subtitle{
+  font-size:13px;
+  color:#9ca3af;
+  margin:0;
+}
+.listing-meta-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.5);
+  background:rgba(15,23,42,0.9);
+  font-size:11px;
+  color:#d1d5db;
+  white-space:nowrap;
+}
+.listing-meta-pill .dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:#22c55e;
+  box-shadow:0 0 0 4px rgba(34,197,94,0.25);
+}
+.listing-filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:12px 0 18px;
+}
+.listing-filter-chip{
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.5);
+  background:rgba(15,23,42,0.8);
+  padding:6px 12px;
+  font-size:12px;
+  color:#e5e7eb;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  transition:background .18s ease,border-color .18s ease,transform .08s ease;
+}
+.listing-filter-chip.active{
+  background:linear-gradient(120deg,#facc15,#f97316);
+  border-color:transparent;
+  color:#0f172a;
+  transform:translateY(-1px);
+}
+.listing-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.listing-card{
+  border-radius:18px;
+  border:1px solid rgba(148,163,184,0.5);
+  background:radial-gradient(circle at top,rgba(148,163,184,0.12),rgba(15,23,42,0.96));
+  padding:10px;
+  display:flex;
+  gap:10px;
+  backdrop-filter:blur(10px);
+  position:relative;
+  overflow:hidden;
+}
+.listing-media{
+  width:96px;
+  flex-shrink:0;
+}
+.listing-image{
+  width:100%;
+  height:88px;
+  border-radius:14px;
+  background:radial-gradient(circle at top,rgba(55,65,81,0.9),rgba(15,23,42,1));
+}
+.skeleton{
+  position:relative;
+  overflow:hidden;
+}
+.skeleton::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(156,163,175,0.22),transparent);
+  transform:translateX(-100%);
+  animation:skeleton 1.4s infinite;
+}
+@keyframes skeleton{
+  to{transform:translateX(100%);}
+}
+.listing-body{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.listing-kat-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+.listing-kat-badge{
+  font-size:11px;
+  padding:3px 8px;
+  border-radius:999px;
+  border:1px solid;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  white-space:nowrap;
+}
+.listing-kat-badge.magaza{
+  border-color:rgba(56,189,248,0.7);
+  color:#7dd3fc;
+  background:rgba(8,47,73,0.5);
+}
+.listing-kat-badge.ikinciel{
+  border-color:rgba(34,197,94,0.7);
+  color:#bbf7d0;
+  background:rgba(5,46,22,0.6);
+}
+.listing-kat-badge.hizmet{
+  border-color:rgba(246,191,38,0.85);
+  color:#fee2b3;
+  background:rgba(82,47,10,0.7);
+}
+.listing-follow-btn{
+  font-size:11px;
+  padding:4px 9px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.7);
+  background:rgba(15,23,42,0.9);
+  color:#e5e7eb;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.listing-follow-btn.following{
+  background:rgba(34,197,94,0.12);
+  border-color:rgba(34,197,94,0.6);
+  color:#bbf7d0;
+}
+.listing-name{
+  font-size:13px;
+  font-weight:600;
+  color:#e5e7eb;
+  margin:0;
+}
+.listing-desc{
+  font-size:12px;
+  color:#9ca3af;
+  margin:0;
+  line-height:1.4;
+}
+.listing-price-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+.listing-price{
+  font-size:13px;
+  font-weight:600;
+  color:#f9fafb;
+}
+.listing-msg-btn{
+  font-size:11px;
+  padding:4px 9px;
+  border-radius:999px;
+  border:none;
+  background:rgba(37,99,235,0.85);
+  color:#e5e7eb;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.listing-meta-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin-top:auto;
+}
+.listing-seller{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.avatar{
+  width:22px;
+  height:22px;
+  border-radius:999px;
+  background:radial-gradient(circle at top,#facc15,#f97316);
+  box-shadow:0 0 0 2px rgba(15,23,42,0.9);
+  flex-shrink:0;
+}
+.avatar-magaza{
+  background:radial-gradient(circle at top,#38bdf8,#0ea5e9);
+}
+.avatar-bireysel{
+  background:radial-gradient(circle at top,#22c55e,#16a34a);
+}
+.avatar-hizmet{
+  background:radial-gradient(circle at top,#f97316,#ea580c);
+}
+.seller-name{
+  font-size:12px;
+  color:#e5e7eb;
+}
+.seller-sub{
+  font-size:11px;
+  color:#9ca3af;
+}
+.listing-link{
+  font-size:11px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.5);
+  background:rgba(15,23,42,0.9);
+  color:#e5e7eb;
+  padding:4px 9px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.listing-footer-note{
+  margin-top:14px;
+  font-size:11px;
+  color:#9ca3af;
+}
+
+@media(max-width:1024px){
+  .listing-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:768px){
+  .listing-section{
+    margin-top:20px;
+    padding:14px;
+    border-radius:20px;
+  }
+  .listing-header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .listing-grid{
+    grid-template-columns:1fr;
+  }
+  .listing-media{
+    width:80px;
+  }
+}
+
+  
+    /* PAGE HEADER (TUM URUNLER) ------------------------------ */
+    .page-header{
+      padding:20px 0 6px;
+    }
+    .page-kicker{
+      font-size:11px;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      color:#9ca3af;
+      margin-bottom:4px;
+    }
+    .page-title{
+      font-size:24px;
+      font-weight:700;
+      margin-bottom:4px;
+      color:#e5e7eb;
+    }
+    .page-subtitle{
+      font-size:13px;
+      color:#9ca3af;
+      max-width:640px;
+      line-height:1.5;
+    }
+    .listing-section{
+      margin-top:14px;
+    }
+
+  
+    /* LISTING LAYOUT WITH SIDEBAR ---------------------------------- */
+    .listing-layout{
+      display:flex;
+      align-items:flex-start;
+      gap:24px;
+      padding-top:12px;
+      padding-bottom:32px;
+    }
+    .listing-sidebar{
+      width:260px;
+      position:sticky;
+      top:80px;
+      align-self:flex-start;
+    }
+    .listing-sidebar-inner{
+      border-radius:24px;
+      border:1px solid rgba(148,163,184,0.5);
+      background:radial-gradient(circle at top left,rgba(148,163,184,0.18),rgba(15,23,42,0.98));
+      padding:14px 12px;
+      box-shadow:0 24px 60px rgba(15,23,42,0.9);
+      backdrop-filter:blur(18px);
+    }
+    .listing-sidebar-head{
+      margin-bottom:10px;
+    }
+    .sidebar-kicker{
+      font-size:10px;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      color:#9ca3af;
+      margin-bottom:4px;
+    }
+    .sidebar-title{
+      font-size:16px;
+      font-weight:600;
+      color:#e5e7eb;
+      margin:0 0 4px;
+    }
+    .sidebar-subtitle{
+      font-size:11px;
+      color:#9ca3af;
+      margin:0;
+      line-height:1.5;
+    }
+    .sidebar-category-list{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      margin-top:10px;
+      max-height:420px;
+      overflow-y:auto;
+      padding-right:4px;
+    }
+    .sidebar-cat-chip{
+      display:flex;
+      align-items:flex-start;
+      gap:8px;
+      padding:7px 8px;
+      border-radius:14px;
+      border:1px solid rgba(148,163,184,0.45);
+      background:rgba(15,23,42,0.96);
+      cursor:pointer;
+      text-align:left;
+      transition:background .18s ease,border-color .18s ease,transform .08s ease;
+    }
+    .sidebar-cat-chip:hover{
+      transform:translateY(-1px);
+      border-color:rgba(148,163,184,0.9);
+    }
+    .sidebar-cat-chip.active{
+      background:linear-gradient(135deg,rgba(250,204,21,0.18),rgba(248,113,113,0.12));
+      border-color:rgba(250,204,21,0.8);
+    }
+    .sidebar-dot{
+      width:18px;
+      height:18px;
+      border-radius:999px;
+      flex-shrink:0;
+      background:radial-gradient(circle at top,#e5e7eb,#9ca3af);
+      box-shadow:0 0 0 2px rgba(15,23,42,1);
+    }
+    .sidebar-dot.all{
+      background:radial-gradient(circle at top,#facc15,#f97316);
+    }
+    .sidebar-dot.telefon{
+      background:radial-gradient(circle at top,#22c55e,#16a34a);
+    }
+    .sidebar-dot.bilgisayar{
+      background:radial-gradient(circle at top,#38bdf8,#0ea5e9);
+    }
+    .sidebar-dot.ev{
+      background:radial-gradient(circle at top,#a855f7,#7c3aed);
+    }
+    .sidebar-dot.servis{
+      background:radial-gradient(circle at top,#fb923c,#ea580c);
+    }
+    .sidebar-dot.dekor{
+      background:radial-gradient(circle at top,#f97316,#facc15);
+    }
+    .sidebar-cat-name{
+      font-size:12px;
+      color:#e5e7eb;
+    }
+    .sidebar-cat-sub{
+      font-size:11px;
+      color:#9ca3af;
+    }
+    .listing-main{
+      flex:1;
+      min-width:0;
+    }
+    .page-header{
+      padding-top:4px;
+      padding-bottom:8px;
+    }
+    .listing-section{
+      margin-top:8px;
+    }
+
+    @media(max-width:1024px){
+      .listing-layout{
+        flex-direction:column;
+      }
+      .listing-sidebar{
+        width:100%;
+        position:static;
+      }
+      .sidebar-category-list{
+        max-height:none;
+        display:flex;
+        flex-direction:row;
+        overflow-x:auto;
+        overflow-y:hidden;
+        padding-bottom:4px;
+      }
+      .sidebar-cat-chip{
+        min-width:210px;
+      }
+    }
+
+  
+    /* Sidebar text + subfilters ----------------------------------- */
+    .sidebar-cat-sub{
+      font-size:10px;
+      color:#9ca3af;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .sidebar-subfilters{
+      margin-top:10px;
+      padding-top:8px;
+      border-top:1px dashed rgba(148,163,184,0.5);
+    }
+    .sidebar-subfilters-head{
+      margin-bottom:6px;
+    }
+    .sidebar-subfilters-kicker{
+      font-size:10px;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      color:#9ca3af;
+      margin-bottom:2px;
+    }
+    .sidebar-subfilters-title{
+      font-size:12px;
+      color:#e5e7eb;
+    }
+    .sidebar-subfilters-body{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .sidebar-subfilters-placeholder{
+      font-size:11px;
+      color:#9ca3af;
+    }
+    .sidebar-subfilters-group{
+      display:none;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .subfilter-chip{
+      font-size:10px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.6);
+      background:rgba(15,23,42,0.95);
+      color:#e5e7eb;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .subfilter-chip.active{
+      background:linear-gradient(120deg,#facc15,#f97316);
+      border-color:transparent;
+      color:#0f172a;
+    }
+
+    .listing-desc{
+      font-size:11px;
+      color:#9ca3af;
+      margin:0;
+      line-height:1.4;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+    .listing-price{
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .sidebar-dot.elektronik{
+      background:radial-gradient(circle at top,#0ea5e9,#0369a1);
+    }
+    .sidebar-dot.beyaz{
+      background:radial-gradient(circle at top,#e5e7eb,#9ca3af);
+    }
+    .sidebar-dot.giyim{
+      background:radial-gradient(circle at top,#f97316,#ec4899);
+    }
+    .sidebar-dot.spor{
+      background:radial-gradient(circle at top,#22c55e,#15803d);
+    }
+    .sidebar-dot.cocuk{
+      background:radial-gradient(circle at top,#fb7185,#f97316);
+    }
+    .sidebar-dot.emlak{
+      background:radial-gradient(circle at top,#22c55e,#14b8a6);
+    }
+    .sidebar-dot.vasita{
+      background:radial-gradient(circle at top,#f97316,#ef4444);
+    }
+    .sidebar-dot.hobi{
+      background:radial-gradient(circle at top,#6366f1,#a855f7);
+    }
+    .sidebar-dot.nakliye{
+      background:radial-gradient(circle at top,#38bdf8,#0ea5e9);
+    }
+    .sidebar-dot.dijital{
+      background:radial-gradient(circle at top,#a855f7,#ec4899);
+    }
+
+  
+    .listing-layout{
+      padding-bottom:80px;
+    }
+
+  
+    /* PRODUCT DETAIL LAYOUT ------------------------------------------ */
+    .product-layout{
+      padding:18px 0 80px;
+    }
+    .product-breadcrumb{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      font-size:11px;
+      color:#9ca3af;
+      margin-bottom:10px;
+    }
+    .product-breadcrumb a{
+      color:#e5e7eb;
+      text-decoration:none;
+    }
+    .product-breadcrumb a:hover{
+      text-decoration:underline;
+    }
+    .crumb-sep{
+      opacity:0.6;
+    }
+    .crumb-pill{
+      border-radius:999px;
+      border:1px solid rgba(52,211,153,0.7);
+      background:rgba(6,95,70,0.7);
+      color:#bbf7d0;
+      font-size:11px;
+      padding:2px 8px;
+      cursor:pointer;
+    }
+    .crumb-current{
+      color:#e5e7eb;
+    }
+
+    .product-hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(0,1.5fr);
+      gap:24px;
+      margin-bottom:18px;
+    }
+    .product-hero-left{
+      border-radius:24px;
+      border:1px solid rgba(148,163,184,0.6);
+      background:radial-gradient(circle at top left,rgba(148,163,184,0.16),rgba(15,23,42,0.98));
+      padding:14px;
+      box-shadow:0 22px 60px rgba(15,23,42,0.9);
+      backdrop-filter:blur(18px);
+    }
+    .product-media-main{
+      border-radius:20px;
+      border:1px dashed rgba(148,163,184,0.8);
+      height:260px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:radial-gradient(circle at top,#1f2937,#020617);
+      position:relative;
+      overflow:hidden;
+    }
+    .product-media-image{
+      width:72%;
+      height:78%;
+      border-radius:18px;
+      background:linear-gradient(145deg,#111827,#020617);
+    }
+    .product-media-label{
+      position:absolute;
+      bottom:8px;
+      left:12px;
+      font-size:10px;
+      color:#9ca3af;
+    }
+    .product-media-thumbs{
+      display:flex;
+      gap:8px;
+      margin-top:10px;
+    }
+    .product-media-thumbs .thumb{
+      flex:1;
+      height:46px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.7);
+      background:radial-gradient(circle at top,#1f2937,#020617);
+      cursor:pointer;
+      opacity:0.7;
+    }
+    .product-media-thumbs .thumb.active{
+      opacity:1;
+      border-color:rgba(250,204,21,0.9);
+    }
+
+    .product-hero-right{
+      border-radius:24px;
+      border:1px solid rgba(148,163,184,0.6);
+      background:radial-gradient(circle at top right,rgba(56,189,248,0.16),rgba(15,23,42,0.98));
+      padding:16px 16px 14px;
+      box-shadow:0 22px 60px rgba(15,23,42,0.9);
+      backdrop-filter:blur(18px);
+    }
+    .product-hero-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:6px;
+    }
+    .product-follow-btn{
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.8);
+      background:rgba(15,23,42,0.9);
+      color:#e5e7eb;
+      font-size:11px;
+      padding:5px 10px;
+      cursor:pointer;
+    }
+    .product-follow-btn.active{
+      background:linear-gradient(120deg,#22c55e,#16a34a);
+      border-color:transparent;
+      color:#0f172a;
+    }
+    .product-title{
+      font-size:20px;
+      font-weight:700;
+      color:#f9fafb;
+      margin:2px 0 6px;
+    }
+    .product-subtitle{
+      font-size:12px;
+      color:#9ca3af;
+      line-height:1.5;
+      margin:0 0 8px;
+      max-width:640px;
+    }
+    .product-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-bottom:10px;
+    }
+    .product-tag{
+      font-size:11px;
+      border-radius:999px;
+      padding:3px 8px;
+      border:1px solid rgba(148,163,184,0.7);
+      color:#e5e7eb;
+      background:rgba(15,23,42,0.8);
+    }
+
+    .product-price-card{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      border-radius:18px;
+      border:1px solid rgba(148,163,184,0.7);
+      background:radial-gradient(circle at top left,rgba(250,204,21,0.12),rgba(15,23,42,0.98));
+      padding:10px 12px;
+      margin-bottom:10px;
+    }
+    .product-price-label{
+      font-size:11px;
+      color:#9ca3af;
+    }
+    .product-price{
+      font-size:22px;
+      font-weight:700;
+      color:#f9fafb;
+    }
+    .product-price-note{
+      font-size:11px;
+      color:#9ca3af;
+      max-width:280px;
+    }
+    .product-cta-col{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      align-items:flex-end;
+      text-align:right;
+    }
+    .product-primary-cta{
+      border-radius:999px;
+      border:none;
+      padding:7px 14px;
+      font-size:12px;
+      background:linear-gradient(120deg,#38bdf8,#0ea5e9);
+      color:#0f172a;
+      cursor:pointer;
+    }
+    .product-secondary-cta{
+      border-radius:999px;
+      padding:6px 12px;
+      font-size:11px;
+      border:1px solid rgba(148,163,184,0.8);
+      background:rgba(15,23,42,0.9);
+      color:#e5e7eb;
+      cursor:pointer;
+    }
+    .product-safe-note{
+      font-size:10px;
+      color:#9ca3af;
+      max-width:240px;
+    }
+
+    .product-highlights{
+      margin-top:8px;
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      font-size:11px;
+      color:#e5e7eb;
+    }
+    .highlight-item{
+      display:flex;
+      align-items:flex-start;
+      gap:6px;
+    }
+    .highlight-item .dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      margin-top:2px;
+      flex-shrink:0;
+    }
+    .highlight-item .dot.ok{
+      background:radial-gradient(circle at top,#22c55e,#16a34a);
+    }
+    .highlight-item .dot.info{
+      background:radial-gradient(circle at top,#38bdf8,#0ea5e9);
+    }
+
+    .product-body{
+      display:grid;
+      grid-template-columns:minmax(0,2fr) minmax(0,1.1fr);
+      gap:18px;
+      margin-top:4px;
+    }
+    .product-main-col{
+      border-radius:24px;
+      border:1px solid rgba(148,163,184,0.7);
+      background:radial-gradient(circle at top left,rgba(148,163,184,0.14),rgba(15,23,42,0.98));
+      padding:12px 14px 16px;
+      box-shadow:0 22px 50px rgba(15,23,42,0.9);
+      backdrop-filter:blur(18px);
+    }
+    .product-side-col{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .product-tabs{
+      display:flex;
+      gap:6px;
+      margin-bottom:8px;
+    }
+    .product-tab{
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.8);
+      background:rgba(15,23,42,0.95);
+      color:#e5e7eb;
+      font-size:11px;
+      padding:5px 10px;
+      cursor:pointer;
+    }
+    .product-tab.active{
+      background:linear-gradient(120deg,#facc15,#f97316);
+      border-color:transparent;
+      color:#0f172a;
+    }
+    .product-tab-panels{
+      font-size:12px;
+      color:#e5e7eb;
+    }
+    .product-tab-panel{
+      display:none;
+    }
+    .product-tab-panel.active{
+      display:block;
+    }
+    .panel-title{
+      font-size:14px;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+    .panel-subtitle{
+      font-size:13px;
+      font-weight:500;
+      margin:12px 0 4px;
+    }
+    .panel-text{
+      font-size:12px;
+      color:#cbd5f5;
+      line-height:1.6;
+      margin:0 0 6px;
+    }
+    .panel-list{
+      margin:6px 0 6px 14px;
+      padding:0;
+      font-size:12px;
+      color:#e5e7eb;
+    }
+    .panel-note{
+      font-size:11px;
+      color:#9ca3af;
+      border-radius:12px;
+      border:1px dashed rgba(148,163,184,0.7);
+      padding:6px 8px;
+      margin-top:6px;
+    }
+
+    .product-spec-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:4px 12px;
+      margin-bottom:6px;
+    }
+    .spec-row{
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      font-size:12px;
+    }
+    .spec-label{
+      color:#9ca3af;
+    }
+    .spec-value{
+      color:#e5e7eb;
+      text-align:right;
+    }
+
+    .reviews-list{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-bottom:8px;
+    }
+    .review-card{
+      border-radius:14px;
+      border:1px solid rgba(148,163,184,0.7);
+      background:rgba(15,23,42,0.96);
+      padding:8px 10px;
+    }
+    .review-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:4px;
+    }
+    .review-author{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .review-avatar{
+      width:24px;
+      height:24px;
+      border-radius:999px;
+      background:radial-gradient(circle at top,#facc15,#f97316);
+    }
+    .review-name{
+      font-size:12px;
+      color:#e5e7eb;
+    }
+    .review-meta{
+      font-size:10px;
+      color:#9ca3af;
+    }
+    .review-rating{
+      font-size:12px;
+      color:#fbbf24;
+      font-weight:600;
+    }
+    .review-text{
+      font-size:12px;
+      color:#cbd5f5;
+      margin:0;
+    }
+
+    .product-related{
+      margin-top:12px;
+      border-top:1px solid rgba(148,163,184,0.4);
+      padding-top:10px;
+    }
+    .related-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:8px;
+    }
+    .related-header h2{
+      font-size:14px;
+      color:#e5e7eb;
+      margin:0;
+    }
+    .product-link-cta{
+      border-radius:999px;
+      padding:4px 10px;
+      border:1px solid rgba(148,163,184,0.8);
+      background:rgba(15,23,42,0.95);
+      color:#e5e7eb;
+      font-size:11px;
+      cursor:pointer;
+    }
+    .related-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
+    }
+    .related-card{
+      border-radius:16px;
+      border:1px solid rgba(148,163,184,0.7);
+      background:rgba(15,23,42,0.96);
+      padding:8px 10px;
+      font-size:12px;
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .related-pill{
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:0.12em;
+      color:#9ca3af;
+    }
+    .related-card h3{
+      font-size:13px;
+      color:#e5e7eb;
+      margin:0;
+    }
+    .related-card p{
+      font-size:11px;
+      color:#9ca3af;
+      margin:0;
+    }
+    .related-footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:4px;
+    }
+    .related-price{
+      font-size:12px;
+      font-weight:600;
+      color:#f9fafb;
+    }
+
+    .seller-card{
+      border-radius:24px;
+      border:1px solid rgba(148,163,184,0.7);
+      background:radial-gradient(circle at top right,rgba(34,197,94,0.12),rgba(15,23,42,0.98));
+      padding:12px 13px;
+      box-shadow:0 22px 50px rgba(15,23,42,0.9);
+      backdrop-filter:blur(18px);
+    }
+    .seller-card-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:8px;
+    }
+    .seller-card-head h2{
+      font-size:14px;
+      color:#e5e7eb;
+      margin:0;
+    }
+    .seller-chip{
+      font-size:11px;
+      border-radius:999px;
+      padding:3px 8px;
+      border:1px solid rgba(34,197,94,0.8);
+      color:#bbf7d0;
+      background:rgba(6,95,70,0.7);
+    }
+    .seller-main{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:8px;
+    }
+    .seller-avatar{
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      background:radial-gradient(circle at top,#22c55e,#16a34a);
+    }
+    .seller-name-main{
+      font-size:13px;
+      color:#e5e7eb;
+    }
+    .seller-meta-main{
+      font-size:11px;
+      color:#9ca3af;
+    }
+    .seller-stats{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:6px;
+      margin-bottom:8px;
+    }
+    .seller-stat{
+      border-radius:10px;
+      border:1px solid rgba(148,163,184,0.6);
+      padding:4px 6px;
+      font-size:10px;
+      color:#9ca3af;
+    }
+    .seller-stat-value{
+      font-size:12px;
+      color:#e5e7eb;
+      font-weight:600;
+    }
+    .seller-safe-note{
+      font-size:10px;
+      color:#9ca3af;
+      margin-top:6px;
+    }
+
+    .service-card{
+      border-radius:20px;
+      border:1px solid rgba(148,163,184,0.7);
+      background:radial-gradient(circle at top left,rgba(248,113,113,0.18),rgba(15,23,42,0.98));
+      padding:10px 12px;
+      font-size:11px;
+      color:#e5e7eb;
+    }
+    .service-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:6px;
+    }
+    .service-head h2{
+      font-size:13px;
+      margin:0;
+    }
+    .service-chip{
+      font-size:10px;
+      border-radius:999px;
+      padding:3px 8px;
+      border:1px solid rgba(248,250,252,0.7);
+    }
+    .service-text{
+      margin:0 0 6px;
+      color:#e5e7eb;
+    }
+    .service-list{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .service-name{
+      font-size:12px;
+    }
+    .service-meta{
+      font-size:10px;
+      color:#e5e7eb;
+    }
+    .service-msg-btn{
+      margin-top:2px;
+      font-size:10px;
+    }
+
+    @media(max-width:1024px){
+      .product-hero{
+        grid-template-columns:1fr;
+      }
+      .product-body{
+        grid-template-columns:1fr;
+      }
+      .product-price-card{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .product-cta-col{
+        align-items:flex-start;
+        text-align:left;
+      }
+      .related-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+    @media(max-width:768px){
+      .product-layout{
+        padding-top:12px;
+      }
+      .related-grid{
+        grid-template-columns:1fr;
+      }
+      .product-main-col{
+        padding:10px;
+      }
+      .product-hero-left,
+      .product-hero-right{
+        padding:10px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon"></span>
+      <span class="logo-text">
+        <span class="logo-word">
+          <span class="logo-word-main">AlSat</span>
+          <span class="logo-word-go">Go</span>
+        </span>
+        <span class="logo-tagline">Komisyonsuz Dijital AVM</span>
+      </span>
+    </a>
+    <div class="search">
+      <input type="text" id="globalSearch" placeholder="Aradığınız ürün veya kategoriyi yazın..." />
+    </div>
+    <div class="header-actions">
+      <a href="ilanlar.html" class="header-link">Tüm Ürünler</a>
+      <a href="ikinciel.html" class="header-link">2. El Pazarı</a>
+      <a href="magazalar.html" class="header-link">Mağazalar</a>
+      <a href="hizmetler.html" class="header-link">Hizmetler</a>
+      <a href="profil.html" class="header-link">Profilim</a>
+      <a href="login.html" class="header-link">Giriş Yap</a>
+      <a href="register.html"><button class="btn-pill">Üye Ol</button></a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container product-layout">
+    <section class="product-breadcrumb">
+      <a href="index.html">Ana Sayfa</a>
+      <span class="crumb-sep">›</span>
+      <a href="ilanlar.html">Tüm Ürünler</a>
+      <span class="crumb-sep">›</span>
+      <button class="crumb-pill" data-kat="ikinciel">2. El Pazarı</button>
+      <span class="crumb-sep">›</span>
+      <span class="crumb-current">2. El iPhone 13 - 128GB</span>
+    </section>
+
+    <section class="product-hero">
+      <div class="product-hero-left">
+        <div class="product-media-main">
+          <div class="product-media-image skeleton"></div>
+          <div class="product-media-label">Ürün görselleri demo amaçlıdır.</div>
+        </div>
+        <div class="product-media-thumbs">
+          <button class="thumb active"></button>
+          <button class="thumb"></button>
+          <button class="thumb"></button>
+          <button class="thumb"></button>
+        </div>
+      </div>
+
+      <div class="product-hero-right">
+        <div class="product-hero-header">
+          <span class="listing-kat-badge ikinciel">2. El Pazarı</span>
+          <button class="product-follow-btn" id="productFollowBtn">Takip et</button>
+        </div>
+        <h1 class="product-title">2. El iPhone 13 - 128GB (Demo İlan)</h1>
+        <p class="product-subtitle">
+          Kutu ve fatura mevcut, pil sağlığı %88 civarında. Sadece bireysel satış, komisyon yok. Bu sayfa,
+          AlSatGo üzerinde bir ürün detay ekranının nasıl hissedebileceğini göstermek için tasarlanmış demo akıştır.
+        </p>
+
+        <div class="product-tags">
+          <span class="product-tag">Telefon &amp; Tablet</span>
+          <span class="product-tag">Bireysel satıcı</span>
+          <span class="product-tag">Kimlik doğrulanmış (demo)</span>
+        </div>
+
+        <div class="product-price-card">
+          <div>
+            <div class="product-price-label">Satış fiyatı</div>
+            <div class="product-price">22.000 TL</div>
+            <div class="product-price-note">Fiyatta küçük pazarlık payı olduğu varsayılan demo senaryo.</div>
+          </div>
+          <div class="product-cta-col">
+            <button class="product-primary-cta" id="productMessageBtn">Mesaj Gönder</button>
+            <button class="product-secondary-cta" id="productCallBtn">Telefon numarasını iste (demo)</button>
+            <div class="product-safe-note">
+              AlSatGo şu an için yalnızca alıcı ve satıcıları bir araya getirir; ödeme akışı demo amaçlıdır.
+            </div>
+          </div>
+        </div>
+
+        <div class="product-highlights">
+          <div class="highlight-item">
+            <span class="dot ok"></span>
+            <span>Orijinal Türkiye cihazı, kayıtlı IMEI (demo metin).</span>
+          </div>
+          <div class="highlight-item">
+            <span class="dot ok"></span>
+            <span>Kutu, fatura ve şarj adaptörü ile birlikte teslim edildiği varsayılır.</span>
+          </div>
+          <div class="highlight-item">
+            <span class="dot info"></span>
+            <span>Bu alan, gerçek projede cihaz durumu ve minik uyarılar için kullanılacak.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-body">
+      <div class="product-main-col">
+        <div class="product-tabs">
+          <button class="product-tab active" data-tab="details">Ürün Detayları</button>
+          <button class="product-tab" data-tab="delivery">Teslimat &amp; Güven (demo)</button>
+          <button class="product-tab" data-tab="reviews">Yorumlar (demo)</button>
+        </div>
+
+        <div class="product-tab-panels">
+          <div class="product-tab-panel active" data-tab-panel="details">
+            <h2 class="panel-title">Teknik Bilgiler</h2>
+            <div class="product-spec-grid">
+              <div class="spec-row">
+                <span class="spec-label">Marka / Model</span>
+                <span class="spec-value">Apple iPhone 13</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Depolama</span>
+                <span class="spec-value">128 GB</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Renk</span>
+                <span class="spec-value">Gece Yarısı (demo)</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Pil Sağlığı</span>
+                <span class="spec-value">%88 (kullanıcı beyanı)</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Garanti</span>
+                <span class="spec-value">Resmi garanti bitmiş varsayılır, yeniden satış ilanı.</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Kutu &amp; Aksesuar</span>
+                <span class="spec-value">Orijinal kutu, kablo, adaptör demo metin olarak ekli.</span>
+              </div>
+            </div>
+
+            <h3 class="panel-subtitle">İlan Açıklaması (demo)</h3>
+            <p class="panel-text">
+              Bu alan, satıcının ilan açıklamasını yazdığı bölümün örnek halidir. Gerçek ilanda cihazın kozmetik
+              durumu, teknik durumu, varsa çizikler ve değişen parçalar detaylı şekilde anlatılmalıdır. AlSatGo,
+              alıcı ve satıcı arasında güvenli iletişimi destekler; son karar, tarafların kendi aralarında yaptığı
+              anlaşmaya göre verilir.
+            </p>
+          </div>
+
+          <div class="product-tab-panel" data-tab-panel="delivery">
+            <h2 class="panel-title">Teslimat &amp; Güven Akışı (demo)</h2>
+            <p class="panel-text">
+              Bu proje henüz demo aşamasındadır. Gerçek ürün devreye alındığında; teslimat, ödeme ve kimlik
+              doğrulama akışları AlSatGo'nun hukuki ve teknik alt yapısına göre şekillenecektir.
+            </p>
+            <ul class="panel-list">
+              <li>Alıcı ve satıcı, mesajlaşma üzerinden teslimat noktasını ve zamanını netleştirir.</li>
+              <li>Kimlik doğrulamış satıcılar için profilinde ek güven rozetleri gösterilir.</li>
+              <li>İleride, üçüncü parti ödeme sağlayıcısı ile güvenli ödeme kurgusu planlanmaktadır (demo).</li>
+            </ul>
+            <div class="panel-note">
+              Bu metinler, gerçek lansman öncesi hukuk ve operasyon ekipleri ile birlikte güncellenecek demo içeriklerdir.
+            </div>
+          </div>
+
+          <div class="product-tab-panel" data-tab-panel="reviews">
+            <h2 class="panel-title">Kullanıcı Yorumları (demo)</h2>
+            <div class="reviews-list">
+              <article class="review-card">
+                <div class="review-header">
+                  <div class="review-author">
+                    <div class="review-avatar"></div>
+                    <div>
+                      <div class="review-name">@alisatinal</div>
+                      <div class="review-meta">Geçmişte @onder'den alışveriş yapmış (demo)</div>
+                    </div>
+                  </div>
+                  <div class="review-rating">4.8 / 5</div>
+                </div>
+                <p class="review-text">
+                  Teslimat hızlıydı, cihaz anlatıldığı gibiydi. Gerçek bir yorum olsaydı bu alanda detayları görüyor olurdun.
+                </p>
+              </article>
+
+              <article class="review-card">
+                <div class="review-header">
+                  <div class="review-author">
+                    <div class="review-avatar"></div>
+                    <div>
+                      <div class="review-name">@gundelik</div>
+                      <div class="review-meta">Demo kullanıcı</div>
+                    </div>
+                  </div>
+                  <div class="review-rating">4.5 / 5</div>
+                </div>
+                <p class="review-text">
+                  Arayüz temiz ve anlaşılır. Bu kartlar tamamen demo amaçlı; gerçek projede hem ürün hem satıcı
+                  bazlı yorumlar ayrı ayrı listelenebilir.
+                </p>
+              </article>
+            </div>
+            <button class="product-secondary-cta" id="addReviewBtn">Yorum ekle (demo)</button>
+          </div>
+        </div>
+
+        <section class="product-related">
+          <div class="related-header">
+            <h2>Bu ürüne bakanlar şunlara da baktı (demo)</h2>
+            <button class="product-link-cta" id="seeAllFromListing">Tüm ürünleri gör</button>
+          </div>
+          <div class="related-grid">
+            <article class="related-card magaza">
+              <div class="related-pill">Mağaza Katı</div>
+              <h3>MegaTV Mağazası - 55&quot; 4K Smart TV</h3>
+              <p>Salon için uygun, 4K çözünürlüklü smart TV. Mağaza faturası ile.</p>
+              <div class="related-footer">
+                <span class="related-price">16.999 TL</span>
+                <button class="product-link-cta">Detaya git (demo)</button>
+              </div>
+            </article>
+            <article class="related-card ikinciel">
+              <div class="related-pill">2. El Pazarı</div>
+              <h3>2. El Oyun Laptopu - RTX Serisi</h3>
+              <p>Yüksek performanslı oyun laptopu. Bireysel satıcı ilanı.</p>
+              <div class="related-footer">
+                <span class="related-price">27.500 TL</span>
+                <button class="product-link-cta">Detaya git (demo)</button>
+              </div>
+            </article>
+            <article class="related-card hizmet">
+              <div class="related-pill">Hizmet Katı</div>
+              <h3>Ekran Değişimi - iPhone Servisi</h3>
+              <p>iPhone modelleri için cam ve ekran değişimi yapan demo servis ilanı.</p>
+              <div class="related-footer">
+                <span class="related-price">Hizmet: 1.200 TL'den</span>
+                <button class="product-link-cta" id="seeServiceProviders">Servis verenleri gör</button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <aside class="product-side-col">
+        <section class="seller-card">
+          <div class="seller-card-head">
+            <h2>Satıcı Bilgisi</h2>
+            <span class="seller-chip bireysel">Bireysel Satıcı</span>
+          </div>
+          <div class="seller-main">
+            <div class="seller-avatar"></div>
+            <div>
+              <div class="seller-name-main">@onder</div>
+              <div class="seller-meta-main">Kimlik doğrulandı • 12 satış (demo)</div>
+            </div>
+          </div>
+          <div class="seller-stats">
+            <div class="seller-stat">
+              <div class="seller-stat-label">Tamamlanan satış</div>
+              <div class="seller-stat-value">12</div>
+            </div>
+            <div class="seller-stat">
+              <div class="seller-stat-label">Puan (demo)</div>
+              <div class="seller-stat-value">4.8 / 5</div>
+            </div>
+            <div class="seller-stat">
+              <div class="seller-stat-label">Yanıt süresi</div>
+              <div class="seller-stat-value">Genelde 1 saatte</div>
+            </div>
+          </div>
+          <button class="product-secondary-cta" id="viewSellerProfileBtn">Satıcı profiline git</button>
+          <button class="product-link-cta" id="viewSellerOtherListingsBtn">Satıcının diğer ilanları</button>
+          <div class="seller-safe-note">
+            Güvenli deneyim için; teslimat öncesi mesaj geçmişini kontrol et, ödeme/teslim senaryosunu netleştir.
+          </div>
+        </section>
+
+        <section class="service-card">
+          <div class="service-head">
+            <h2>Bu ürüne hizmet veren ustalar</h2>
+            <span class="service-chip">Hizmet Katı</span>
+          </div>
+          <p class="service-text">
+            Gerçek projede, bu ürünle ilişkili servis sağlayıcılar (ekran değişimi, batarya değişimi vb.) burada listelenecek.
+          </p>
+          <ul class="service-list">
+            <li>
+              <div class="service-name">Usta Mehmet - iPhone Servisi</div>
+              <div class="service-meta">Hizmet veren • 4.8/5 puan (demo)</div>
+              <button class="product-link-cta service-msg-btn">Mesaj Gönder (demo)</button>
+            </li>
+            <li>
+              <div class="service-name">TeknoFix - Yetkili Servis Değil</div>
+              <div class="service-meta">Bağımsız servis • Parça garantisi yok (demo)</div>
+              <button class="product-link-cta service-msg-btn">Mesaj Gönder (demo)</button>
+            </li>
+          </ul>
+        </section>
+      </aside>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    © 2025 AlSatGo. Tüm hakları saklıdır. • Komisyonsuz alım satım deneyimi. • AlSatGo bir aracı kurum değildir, alıcı ve satıcıyı bir araya getiren dijital AVM altyapısı sunar.
+  </div>
+</footer>
+
+<script>
+  // Öne çıkanlar slider
+  const track = document.getElementById("featuredTrack");
+  const slides = document.querySelectorAll(".featured-slide");
+  const prevBtn = document.getElementById("featuredPrev");
+  const nextBtn = document.getElementById("featuredNext");
+  const dots = document.querySelectorAll(".dot");
+  let currentIndex = 0;
+
+  function updateSlider() {
+    track.style.transform = "translateX(" + (-currentIndex * 100) + "%)";
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle("active", idx === currentIndex);
+    });
+  }
+
+  prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateSlider();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateSlider();
+  });
+
+  // otomatik geçiş
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateSlider();
+  }, 7000);
+
+  // SCROLL REVEAL ANIMATIONS
+  const revealElements = document.querySelectorAll(".hero-inner, .strip, .roles-inner, .category-grid, .avm-entry-inner, .featured-shell, .stats-grid, .latest-grid, .test-shell");
+
+  revealElements.forEach(el => {
+    el.classList.add("reveal");
+  });
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  } else {
+    revealElements.forEach(el => el.classList.add("visible"));
+  }
+
+  // STATS COUNTER
+  const statNumbers = document.querySelectorAll(".stat-number");
+  let statsStarted = false;
+
+  function animateStats() {
+    statNumbers.forEach(el => {
+      const raw = el.textContent.trim();
+      const hasPlus = raw.includes("+");
+      const hasPercent = raw.includes("%");
+      const hasTL = raw.includes("TL");
+
+      const numeric = parseInt(raw.replace(/[^0-9]/g, "")) || 0;
+      let current = 0;
+      const duration = 1200;
+      const steps = 60;
+      const increment = numeric / steps;
+
+      function step() {
+        current += increment;
+        if (current >= numeric) current = numeric;
+        let text = Math.round(current).toLocaleString("tr-TR");
+        if (hasPercent) text = "%" + text;
+        if (hasTL) text = text + " TL";
+        if (hasPlus) text = text + "+";
+        el.textContent = text;
+        if (current < numeric) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      step();
+    });
+  }
+
+  const statsSection = document.querySelector(".stats");
+  if (statsSection && "IntersectionObserver" in window) {
+    const statsObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !statsStarted) {
+          statsStarted = true;
+          animateStats();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.35 });
+    statsObserver.observe(statsSection);
+  } else {
+    animateStats();
+  }
+
+
+
+  function showToast(message) {
+    const toast = document.getElementById("global-toast");
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2400);
+  }
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // SOHBET PANELİ & MİNİ CHAT
+    const chatRail = document.getElementById("asgChatRail");
+    const chatRailClose = document.getElementById("asgChatRailClose");
+    const chatRailToggle = document.getElementById("asgChatRailToggle");
+    const chatRailItems = document.querySelectorAll(".asg-chat-rail-item");
+    const chatRailSearch = document.getElementById("asgChatRailSearch");
+
+    const chatWindow = document.getElementById("asgChatWindow");
+    const chatHeaderName = document.querySelector(".asg-chat-header-name");
+    const chatHeaderSub = document.querySelector(".asg-chat-header-sub");
+    const chatClose = document.getElementById("asgChatClose");
+    const chatSend = document.getElementById("asgChatSend");
+    const chatInput = document.getElementById("asgChatInput");
+    const chatBody = document.getElementById("asgChatBody");
+    const chatOpenMessages = document.getElementById("asgChatOpenMessages");
+    const chatOpenMessagesIcon = document.getElementById("asgChatOpenMessagesIcon");
+
+    function safeToast(msg, type){
+      try{
+        if(typeof showToast === "function"){
+          showToast(msg, type || "info");
+        }
+      }catch(e){}
+    }
+
+    function openChatWindow(){
+      if (!chatWindow) return;
+      chatWindow.classList.add("open");
+      if (chatInput){
+        setTimeout(() => chatInput.focus(), 80);
+      }
+    }
+    function closeChatWindow(){
+      if (!chatWindow) return;
+      chatWindow.classList.remove("open");
+    }
+
+    if (chatRailClose && chatRail){
+      chatRailClose.addEventListener("click", () => {
+        chatRail.classList.add("hidden");
+        if (chatRailToggle){
+          chatRailToggle.classList.add("visible");
+        }
+      });
+    }
+    if (chatRailToggle && chatRail){
+      chatRailToggle.addEventListener("click", () => {
+        chatRail.classList.remove("hidden");
+        chatRailToggle.classList.remove("visible");
+      });
+    }
+
+    if (chatRailItems && chatRailItems.length){
+      chatRailItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          const name = item.dataset.name || item.querySelector(".asg-chat-rail-name")?.textContent.trim();
+          const context = item.dataset.context || item.querySelector(".asg-chat-rail-sub")?.textContent.trim();
+          if (chatHeaderName && name) chatHeaderName.textContent = name;
+          if (chatHeaderSub && context) chatHeaderSub.textContent = context;
+          openChatWindow();
+          if (name){
+            safeToast(name + " ile sohbet penceresi açıldı (demo).", "info");
+          }
+        });
+      });
+    }
+
+    if (chatRailSearch && chatRailItems && chatRailItems.length){
+      chatRailSearch.addEventListener("input", () => {
+        const q = chatRailSearch.value.toLowerCase();
+        chatRailItems.forEach((item) => {
+          const nm = item.dataset.name || item.textContent;
+          const match = !q || (nm && nm.toLowerCase().includes(q));
+          item.style.display = match ? "flex" : "none";
+        });
+      });
+    }
+
+    if (chatClose){
+      chatClose.addEventListener("click", () => {
+        closeChatWindow();
+      });
+    }
+
+    if (chatSend && chatInput && chatBody){
+      const pushMsg = () => {
+        const text = chatInput.value.trim();
+        if (!text){
+          safeToast("Mesaj alanı boş.", "warning");
+          return;
+        }
+        const row = document.createElement("div");
+        row.className = "asg-chat-row me";
+        const bubble = document.createElement("div");
+        bubble.className = "asg-chat-bubble me";
+        bubble.textContent = text;
+        const meta = document.createElement("div");
+        meta.className = "asg-chat-meta";
+        const status = document.createElement("span");
+        status.textContent = "✔✔ İletildi";
+        const now = new Date();
+        const t = String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0");
+        const time = document.createElement("span");
+        time.textContent = t;
+        meta.appendChild(status);
+        meta.appendChild(time);
+        bubble.appendChild(meta);
+        row.appendChild(bubble);
+        chatBody.appendChild(row);
+        chatInput.value = "";
+        chatInput.style.height = "auto";
+        chatBody.scrollTop = chatBody.scrollHeight;
+        safeToast("Mesajın satıcıya iletildi (demo).", "success");
+      };
+      chatSend.addEventListener("click", pushMsg);
+      chatInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey){
+          e.preventDefault();
+          pushMsg();
+        }
+      });
+      chatInput.addEventListener("input", () => {
+        chatInput.style.height = "auto";
+        chatInput.style.height = Math.min(chatInput.scrollHeight, 72) + "px";
+      });
+    }
+
+    if (chatOpenMessages){
+      chatOpenMessages.addEventListener("click", () => {
+        safeToast("Mesajlar ekranına yönlendiriliyorsun (demo).", "info");
+        setTimeout(() => {
+          window.location.href = "mesajlar.html";
+        }, 700);
+      });
+    }
+    if (chatOpenMessagesIcon){
+      chatOpenMessagesIcon.addEventListener("click", () => {
+        safeToast("Mesajlar ekranında tam ekrana geçiliyor (demo).", "info");
+        setTimeout(() => {
+          window.location.href = "mesajlar.html";
+        }, 700);
+      });
+    }
+
+    const panel = document.getElementById("asgAssistantPanel");
+    const toggle = document.getElementById("asgAssistantToggle");
+    const closeBtn = document.getElementById("asgAssistantClose");
+    const qProfil = document.getElementById("asgQuickProfil");
+    const qMagazaKat = document.getElementById("asgQuickMagazaKat");
+    const qIkinciEl = document.getElementById("asgQuickIkinciEl");
+    const qGuven = document.getElementById("asgQuickGuvenlik");
+    const searchInput = document.getElementById("globalSearch");
+    const heroMagazaBtn = document.getElementById("heroMagazalariKesfet");
+    const heroPazarBtn = document.getElementById("heroIkinciElPazari");
+    const heroKurumsalBtn = document.getElementById("heroKurumsalMagaza");
+    const roleBireyselPazarBtn = document.getElementById("roleBireyselPazar");
+    const roleBireyselIlanBtn = document.getElementById("roleBireyselIlan");
+    const roleMagazalariKesfetBtn = document.getElementById("roleMagazalariKesfet");
+    const roleKurumsalAcBtn = document.getElementById("roleKurumsalAc");
+    const entryMagazaKatBtn = document.getElementById("entryMagazaKatBtn");
+    const entryIkinciElBtn = document.getElementById("entryIkinciElBtn");
+    const entryTumIlanBtn = document.getElementById("entryTumIlanBtn");
+    const entryHizmetKatBtn = document.getElementById("entryHizmetKatBtn");
+    const latestCards = document.querySelectorAll(".latest .item-card");
+    const whyCards = document.querySelectorAll(".why-card");
+
+    // Asistan paneli
+    if (toggle && panel) {
+      toggle.addEventListener("click", () => {
+        panel.classList.toggle("open");
+      });
+    }
+    if (closeBtn && panel) {
+      closeBtn.addEventListener("click", () => {
+        panel.classList.remove("open");
+      });
+    }
+    if (qIlan) {
+      qIlan.addEventListener("click", () => {
+        showToast("İlan oluşturma ekranına yönlendiriliyorsun...");
+        setTimeout(() => {
+          window.location.href = "ilan-ver.html";
+        }, 700);
+      });
+    }
+    if (qUrun) {
+      qUrun.addEventListener("click", () => {
+        showToast("Tüm ilanlar sayfasına gidiliyor...");
+        setTimeout(() => {
+          window.location.href = "ilanlar.html";
+        }, 700);
+      });
+    }
+    if (qGuven) {
+      qGuven.addEventListener("click", () => {
+        showToast("Güvenlik rehberine yönlendiriliyorsun...");
+        setTimeout(() => {
+          window.location.href = "guvenlik.html";
+        }, 700);
+      });
+    }
+
+    // Header arama alanı
+    if (searchInput) {
+      searchInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          const value = (searchInput.value || "").trim();
+          if (!value) {
+            showToast("Arama yapmak için bir kelime yazabilirsin (demo).");
+            return;
+          }
+          showToast("Arama sonuçların Tüm İlanlar sayfasında gösterilecek (demo).");
+          setTimeout(() => {
+            const q = encodeURIComponent(value);
+            window.location.href = "ilanlar.html?q=" + q;
+          }, 800);
+        }
+      });
+    }
+
+    // Hero CTA butonları
+    if (heroMagazaBtn) {
+      heroMagazaBtn.addEventListener("click", () => {
+        showToast("Mağaza katına yönlendiriliyorsun (demo).");
+        setTimeout(() => {
+          window.location.href = "magazalar.html";
+        }, 800);
+      });
+    }
+    if (heroPazarBtn) {
+      heroPazarBtn.addEventListener("click", () => {
+        showToast("2. El Pazarı sayfasına yönlendiriliyorsun (demo).");
+        setTimeout(() => {
+          window.location.href = "ikinciel.html";
+        }, 800);
+      });
+    }
+    if (heroKurumsalBtn) {
+      heroKurumsalBtn.addEventListener("click", () => {
+        showToast("Kurumsal mağaza açma süreci yakında. Şimdilik örnek mağaza sayfası açılıyor (demo).");
+        setTimeout(() => {
+          window.location.href = "satici-profil.html";
+        }, 800);
+      });
+    }
+
+
+    if (entryMagazaKatBtn) {
+      entryMagazaKatBtn.addEventListener("click", () => {
+        showToast("Mağaza katına yönlendiriliyorsun (demo).");
+        setTimeout(() => {
+          window.location.href = "magazalar.html";
+        }, 800);
+      });
+    }
+    if (entryIkinciElBtn) {
+      entryIkinciElBtn.addEventListener("click", () => {
+        showToast("2. El Pazarı sayfasına yönlendiriliyorsun (demo).");
+        setTimeout(() => {
+          window.location.href = "ikinciel.html";
+        }, 800);
+      });
+    }
+    if (entryTumIlanBtn) {
+      entryTumIlanBtn.addEventListener("click", () => {
+        showToast("Tüm ilanlar sayfasına yönlendiriliyorsun...");
+        setTimeout(() => {
+          window.location.href = "ilanlar.html";
+        }, 800);
+      });
+    }
+
+        if (entryHizmetKatBtn) {
+      entryHizmetKatBtn.addEventListener("click", () => {
+        showToast("Hizmet katına yönlendiriliyorsun (demo).");
+        setTimeout(() => {
+          window.location.href = "hizmetler.html";
+        }, 800);
+      });
+    }
+
+
+    // Son eklenen ürünler kartları
+    if (latestCards && latestCards.length) {
+      latestCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          showToast("İlan detay sayfası demo içeriklerle gösterilecek (demo).");
+          setTimeout(() => {
+            window.location.href = "urun-detay.html";
+          }, 700);
+        });
+      });
+    }
+
+        // Rol kartları (Bireysel vs Mağaza)
+    if (roleBireyselPazarBtn) {
+      roleBireyselPazarBtn.addEventListener("click", () => {
+        showToast("2. El Pazarı sayfasına yönlendiriliyorsun (demo).");
+        setTimeout(() => {
+          window.location.href = "ikinciel.html";
+        }, 800);
+      });
+    }
+    if (roleBireyselIlanBtn) {
+      roleBireyselIlanBtn.addEventListener("click", () => {
+        showToast("İlan vermeden önce kimlik doğrulama adımına yönlendiriliyorsun (demo).");
+        setTimeout(() => {
+          window.location.href = "kimlik-uyari.html";
+        }, 800);
+      });
+    }
+    if (roleMagazalariKesfetBtn) {
+      roleMagazalariKesfetBtn.addEventListener("click", () => {
+        showToast("Mağaza katına yönlendiriliyorsun (demo).");
+        setTimeout(() => {
+          window.location.href = "magazalar.html";
+        }, 800);
+      });
+    }
+    if (roleKurumsalAcBtn) {
+      roleKurumsalAcBtn.addEventListener("click", () => {
+        showToast("Kurumsal mağaza açarken vergi numaran ve şirket bilgilerin istenecek (demo).");
+        setTimeout(() => {
+          window.location.href = "satici-profil.html";
+        }, 800);
+      });
+    }
+
+// Neden AlSatGo kartları
+    if (whyCards && whyCards.length) {
+      whyCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const type = card.getAttribute("data-why");
+          if (type === "komisyon") {
+            showToast("Tüm satışlar şu an demo ortamında komisyonsuz simüle ediliyor.");
+          } else if (type === "guven") {
+            showToast("Güvenlik rehberine yönlendiriliyorsun...");
+            setTimeout(() => {
+              window.location.href = "guvenlik.html";
+            }, 800);
+          } else if (type === "hiz") {
+            showToast("İlan oluşturma ekranına yönlendiriliyorsun (demo).");
+            setTimeout(() => {
+              window.location.href = "ilan-ver.html";
+            }, 800);
+          }
+        });
+      });
+    }
+
+    // Asistan hakkında kısa bilgilendirme
+    setTimeout(() => {
+      showToast("Yeni misin? Sol alttan AlSatGo Asistanı ile doğru sayfaya yönlenebilirsin (demo).");
+    }, 3500);
+  });
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  const chips = document.querySelectorAll(".listing-filter-chip");
+  const cards = document.querySelectorAll(".listing-card");
+  const catChips = document.querySelectorAll(".sidebar-cat-chip");
+  const subfilterGroups = document.querySelectorAll(".sidebar-subfilters-group");
+  const subfilterPlaceholder = document.querySelector(".sidebar-subfilters-placeholder");
+  const subfilterChips = document.querySelectorAll(".subfilter-chip");
+
+  let currentKatFilter = "all";
+  let currentCategoryFilter = "all";
+  let currentSubFilter = "all";
+
+  function applyListingFilters(){
+    cards.forEach(card => {
+      const kat = card.getAttribute("data-kat");
+      const cat = card.getAttribute("data-category") || "all";
+      const subsRaw = card.getAttribute("data-subfilters") || "";
+      const subs = subsRaw.split(",").map(s => s.trim()).filter(Boolean);
+
+      const katMatch = (currentKatFilter === "all" || kat === currentKatFilter);
+      const catMatch = (currentCategoryFilter === "all" || cat === currentCategoryFilter);
+      const subMatch = (currentSubFilter === "all" || subs.includes(currentSubFilter));
+
+      if (katMatch && catMatch && subMatch){
+        card.style.display = "";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  function updateSubfilterVisibility(){
+    let any = false;
+    subfilterGroups.forEach(group => {
+      const target = group.getAttribute("data-for");
+      if (target === currentCategoryFilter){
+        group.style.display = "flex";
+        any = true;
+        // reset active state inside this group
+        const chipsInGroup = group.querySelectorAll(".subfilter-chip");
+        chipsInGroup.forEach(c => c.classList.remove("active"));
+        const defaultChip = group.querySelector('.subfilter-chip[data-sub="all"]') || chipsInGroup[0];
+        if (defaultChip){
+          defaultChip.classList.add("active");
+        }
+      } else {
+        group.style.display = "none";
+      }
+    });
+
+    if (subfilterPlaceholder){
+      if (any){
+        subfilterPlaceholder.textContent = "Alt filtrelerden dilediğini seçebilirsin (demo).";
+      } else {
+        subfilterPlaceholder.textContent = "Bu kategori için detaylı alt filtreler yakında eklenecek (demo).";
+      }
+    }
+    currentSubFilter = "all";
+    applyListingFilters();
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      const filter = chip.getAttribute("data-filter");
+      currentKatFilter = filter || "all";
+      chips.forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      applyListingFilters();
+
+      if (typeof showToast === "function") {
+        const label = chip.textContent.trim();
+        showToast(label + " filtresi aktif (demo).");
+      }
+    });
+  });
+
+  catChips.forEach(catChip => {
+    catChip.addEventListener("click", () => {
+      const cat = catChip.getAttribute("data-category") || "all";
+      currentCategoryFilter = cat;
+      catChips.forEach(c => c.classList.remove("active"));
+      catChip.classList.add("active");
+      updateSubfilterVisibility();
+
+      if (typeof showToast === "function") {
+        const nameEl = catChip.querySelector(".sidebar-cat-name");
+        const label = nameEl ? nameEl.textContent.trim() : "Kategori";
+        showToast(label + " kategorisi aktif (demo).");
+      }
+    });
+  });
+
+  subfilterChips.forEach(subChip => {
+    subChip.addEventListener("click", () => {
+      const sub = subChip.getAttribute("data-sub") || "all";
+      currentSubFilter = sub;
+
+      const group = subChip.closest(".sidebar-subfilters-group");
+      if (group){
+        group.querySelectorAll(".subfilter-chip").forEach(c => c.classList.remove("active"));
+      }
+      subChip.classList.add("active");
+
+      applyListingFilters();
+
+      if (typeof showToast === "function") {
+        const txt = subChip.textContent.trim();
+        showToast(txt + " alt filtresi aktif (demo).");
+      }
+    });
+  });
+
+  // initial state
+  updateSubfilterVisibility();
+
+  // TUM URUNLER: kartlara tıklayınca detay sayfasına git (demo)
+  const listingCards = document.querySelectorAll(".listing-card");
+  if (listingCards && listingCards.length){
+    listingCards.forEach(card => {
+      card.style.cursor = "pointer";
+      card.addEventListener("click", (event) => {
+        // Eğer buton / link tıklanıyorsa kart navigasyonunu tetikleme
+        const isInteractive = event.target.closest("button, a");
+        if (isInteractive) return;
+        if (typeof showToast === "function"){
+          showToast("İlan detay sayfası açılıyor (demo).");
+        }
+        setTimeout(() => {
+          window.location.href = "urun-detay.html";
+        }, 700);
+      });
+    });
+  }
+
+
+  catChips.forEach(catChip => {
+    catChip.addEventListener("click", () => {
+      const cat = catChip.getAttribute("data-category") || "all";
+      currentCategoryFilter = cat;
+      catChips.forEach(c => c.classList.remove("active"));
+      catChip.classList.add("active");
+      applyListingFilters();
+
+      if (typeof showToast === "function") {
+        const nameEl = catChip.querySelector(".sidebar-cat-name");
+        const label = nameEl ? nameEl.textContent.trim() : "Kategori";
+        showToast(label + " kategorisi aktif (demo).");
+      }
+    });
+  });
+
+  applyListingFilters();
+
+  const followButtons = document.querySelectorAll(".listing-follow-btn");
+  followButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const seller = btn.getAttribute("data-seller") || "satıcı";
+      const following = btn.classList.toggle("following");
+      btn.textContent = following ? "Takip ediliyor" : "Takip et";
+      if (typeof showToast === "function") {
+        if (following) {
+          showToast(seller + " takibe alındı. Sohbet panelinden ulaşabilirsin (demo).");
+        } else {
+          showToast(seller + " takip listesinden çıkarıldı (demo).");
+        }
+      }
+    });
+  });
+
+  const msgButtons = document.querySelectorAll(".listing-msg-btn");
+  msgButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const seller = btn.getAttribute("data-seller") || "satıcı";
+      if (typeof showToast === "function") {
+        showToast(seller + " ile sohbet penceresi açılıyormuş gibi demo akış başlatıldı.");
+      }
+      const chatToggle = document.getElementById("asgChatRailToggle");
+      if (chatToggle && chatToggle.classList.contains("visible")) {
+        chatToggle.click();
+      }
+    });
+  });
+
+  const linkButtons = document.querySelectorAll(".listing-link");
+  linkButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const type = btn.getAttribute("data-link");
+      if (typeof showToast === "function") {
+        if (type === "magaza") {
+          showToast("Mağaza profiline yönlendiriliyorsun (demo).");
+          setTimeout(() => { window.location.href = "magaza-profil.html"; }, 700);
+        } else if (type === "satici") {
+          showToast("Satıcı profiline yönlendiriliyorsun (demo).");
+          setTimeout(() => { window.location.href = "satici-profil.html"; }, 700);
+        } else if (type === "hizmet") {
+          showToast("Hizmet profiline yönlendiriliyorsun (demo).");
+          setTimeout(() => { window.location.href = "hizmet-profil.html"; }, 700);
+        }
+      }
+    });
+  });
+});
+
+
+// PRODUCT DETAIL INTERACTIONS --------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  const productFollowBtn = document.getElementById("productFollowBtn");
+  if (productFollowBtn){
+    productFollowBtn.addEventListener("click", () => {
+      const active = productFollowBtn.classList.toggle("active");
+      productFollowBtn.textContent = active ? "Takip ediliyor" : "Takip et";
+      if (typeof showToast === "function") {
+        showToast(active ? "Satıcı takip ediliyormuş gibi demo akış başlatıldı." : "Takipten çıkarıldı (demo).");
+      }
+    });
+  }
+
+  const productMessageBtn = document.getElementById("productMessageBtn");
+  if (productMessageBtn){
+    productMessageBtn.addEventListener("click", () => {
+      if (typeof showToast === "function") {
+        showToast("Satıcı ile sohbet penceresi açılıyormuş gibi demo akış başlatıldı.");
+      }
+    });
+  }
+
+  const productCallBtn = document.getElementById("productCallBtn");
+  if (productCallBtn){
+    productCallBtn.addEventListener("click", () => {
+      if (typeof showToast === "function") {
+        showToast("Gerçek projede burada telefon numarası paylaşım akışı olacak (demo).");
+      }
+    });
+  }
+
+  const tabs = document.querySelectorAll(".product-tab");
+  const panels = document.querySelectorAll(".product-tab-panel");
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      const target = tab.getAttribute("data-tab");
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      panels.forEach(panel => {
+        panel.classList.toggle("active", panel.getAttribute("data-tab-panel") === target);
+      });
+    });
+  });
+
+  const addReviewBtn = document.getElementById("addReviewBtn");
+  if (addReviewBtn){
+    addReviewBtn.addEventListener("click", () => {
+      if (typeof showToast === "function") {
+        showToast("Gerçek projede burada yorum formu açılacak (demo).");
+      }
+    });
+  }
+
+  const seeAllFromListing = document.getElementById("seeAllFromListing");
+  if (seeAllFromListing){
+    seeAllFromListing.addEventListener("click", () => {
+      if (typeof showToast === "function") {
+        showToast("Tüm ürünler sayfasına yönlendiriliyorsun (demo).");
+      }
+      setTimeout(() => {
+        window.location.href = "ilanlar.html";
+      }, 650);
+    });
+  }
+
+  const seeServiceProviders = document.getElementById("seeServiceProviders");
+  if (seeServiceProviders){
+    seeServiceProviders.addEventListener("click", () => {
+      if (typeof showToast === "function") {
+        showToast("Hizmet Katı sayfasında ilgili ustalar listeleniyormuş gibi demo akış başlatıldı.");
+      }
+      setTimeout(() => {
+        window.location.href = "hizmetler.html";
+      }, 650);
+    });
+  }
+
+  const sellerProfileBtn = document.getElementById("viewSellerProfileBtn");
+  if (sellerProfileBtn){
+    sellerProfileBtn.addEventListener("click", () => {
+      if (typeof showToast === "function") {
+        showToast("Satıcı profil sayfasına yönlendiriliyorsun (demo).");
+      }
+      setTimeout(() => {
+        window.location.href = "satici-profil.html";
+      }, 650);
+    });
+  }
+
+  const sellerOtherListingsBtn = document.getElementById("viewSellerOtherListingsBtn");
+  if (sellerOtherListingsBtn){
+    sellerOtherListingsBtn.addEventListener("click", () => {
+      if (typeof showToast === "function") {
+        showToast("Bu satıcının diğer ilanları Tüm Ürünler ekranında filtrelenerek gösteriliyormuş gibi demo akış başlatıldı.");
+      }
+    });
+  }
+
+  const serviceMsgButtons = document.querySelectorAll(".service-msg-btn");
+  serviceMsgButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (typeof showToast === "function") {
+        showToast("İlgili hizmet veren ile sohbet penceresi açılıyormuş gibi demo akış başlatıldı.");
+      }
+    });
+  });
+
+  const crumbPill = document.querySelector(".crumb-pill[data-kat='ikinciel']");
+  if (crumbPill){
+    crumbPill.addEventListener("click", () => {
+      if (typeof showToast === "function") {
+        showToast("2. El Pazarı katına yönlendiriliyorsun (demo).");
+      }
+      setTimeout(() => {
+        window.location.href = "ikinciel.html";
+      }, 650);
+    });
+  }
+});
+
+</script>
+
+
+
+  
+  <div class="asg-chat-rail hidden" id="asgChatRail">
+    <div class="asg-chat-rail-header">
+      <div>
+        <div class="asg-chat-rail-title">Sohbet</div>
+        <div class="asg-chat-rail-status">Takip ettiğin mağaza ve satıcılar.</div>
+      </div>
+      <button class="asg-chat-rail-close" id="asgChatRailClose" title="Paneli küçült">×</button>
+    </div>
+    <div class="asg-chat-rail-section-label">Takip Ettiklerin</div>
+    <div class="asg-chat-rail-list" id="asgChatRailList">
+      <button class="asg-chat-rail-item" data-name="AVMTech Mağaza" data-context="Mağaza Katı · Son 10 dk içinde aktif">
+        <div class="asg-chat-rail-avatar">A<span class="asg-chat-rail-dot"></span></div>
+        <div class="asg-chat-rail-texts">
+          <div class="asg-chat-rail-name">AVMTech Mağaza</div>
+          <div class="asg-chat-rail-sub">Mağaza Katı · Son 10 dk içinde aktif</div>
+        </div>
+        <div class="asg-chat-rail-unread">2</div>
+      </button>
+      <button class="asg-chat-rail-item" data-name="Mobil Usta Hizmetleri" data-context="Hizmet Katı · Bugün aktifti">
+        <div class="asg-chat-rail-avatar">M<span class="asg-chat-rail-dot idle"></span></div>
+        <div class="asg-chat-rail-texts">
+          <div class="asg-chat-rail-name">Mobil Usta Hizmetleri</div>
+          <div class="asg-chat-rail-sub">Hizmet Katı · Bugün aktifti</div>
+        </div>
+      </button>
+      <button class="asg-chat-rail-item" data-name="Önder İkinci El" data-context="2. El Pazarı · Şu an aktif">
+        <div class="asg-chat-rail-avatar">Ö<span class="asg-chat-rail-dot"></span></div>
+        <div class="asg-chat-rail-texts">
+          <div class="asg-chat-rail-name">Önder İkinci El</div>
+          <div class="asg-chat-rail-sub">2. El Pazar Katı · Şu an aktif</div>
+        </div>
+        <div class="asg-chat-rail-unread">5</div>
+      </button>
+      <button class="asg-chat-rail-item" data-name="TeknoServis Mağaza" data-context="Mağaza Katı · Son günlerde aktif değil">
+        <div class="asg-chat-rail-avatar">T<span class="asg-chat-rail-dot off"></span></div>
+        <div class="asg-chat-rail-texts">
+          <div class="asg-chat-rail-name">TeknoServis Mağaza</div>
+          <div class="asg-chat-rail-sub">Mağaza Katı · Son günlerde aktif değil</div>
+        </div>
+      </button>
+    </div>
+    <div class="asg-chat-rail-footer">
+      <input type="text" id="asgChatRailSearch" class="asg-chat-rail-search" placeholder="Mağaza veya satıcı ara">
+    </div>
+  </div>
+
+  <div class="asg-chat-rail-toggle visible" id="asgChatRailToggle">Sohbet</div>
+
+  <div class="asg-chat-window" id="asgChatWindow">
+    <div class="asg-chat-header">
+      <div class="asg-chat-header-main">
+        <div class="asg-chat-header-avatar">
+          A
+          <div class="asg-chat-header-dot"></div>
+        </div>
+        <div class="asg-chat-header-texts">
+          <div class="asg-chat-header-name">AVMTech Mağaza</div>
+          <div class="asg-chat-header-sub">Mağaza Katı · Son 10 dk içinde aktif</div>
+        </div>
+      </div>
+      <div class="asg-chat-header-actions">
+        <button class="asg-chat-header-icon" type="button" id="asgChatOpenMessagesIcon" title="Mesajlar sayfasında aç">↗</button>
+        <button class="asg-chat-header-icon" type="button" id="asgChatClose" title="Sohbeti kapat">×</button>
+      </div>
+    </div>
+    <div class="asg-chat-body" id="asgChatBody">
+      <div class="asg-chat-day"><span>Bugün</span></div>
+      <div class="asg-chat-row">
+        <div class="asg-chat-bubble them">
+          Merhaba, iPhone 13 Pro ilanınız için yazıyorum. Ürün hâlâ satılık mı?
+          <div class="asg-chat-meta"><span>14:02</span></div>
+        </div>
+      </div>
+      <div class="asg-chat-row me">
+        <div class="asg-chat-bubble me">
+          Merhaba, evet satılık. Kutusu ve faturası tam, ciddi alıcıya ufak pazarlık payı var.
+          <div class="asg-chat-meta"><span>✔✔ Görüldü</span><span>14:05</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="asg-chat-input">
+      <textarea id="asgChatInput" class="asg-chat-textarea" rows="1" placeholder="Bu satıcıya mesaj yaz..."></textarea>
+      <button class="asg-chat-send" type="button" id="asgChatSend">Gönder ➤</button>
+    </div>
+    <div class="asg-chat-footer">
+      <span>Konuşmanın tamamı Mesajlar ekranında saklanır.</span>
+      <a id="asgChatOpenMessages">Mesajlar›</a>
+    </div>
+  </div>
+
+<div class="asg-assistant-panel" id="asgAssistantPanel">
+    <div class="asg-assistant-header">
+      <div class="asg-assistant-header-left">
+        <div class="asg-assistant-avatar">⚡</div>
+        <div>
+          <div class="asg-assistant-title">AlSatGo Asistanı</div>
+          <div class="asg-assistant-sub">Seni doğru yere yönlendireyim</div>
+        </div>
+      </div>
+      <button class="asg-assistant-close" type="button" id="asgAssistantClose">×</button>
+    </div>
+    <div class="asg-assistant-body">
+      <p>Ne yapmak istediğini seç, seni en doğru sayfaya götüreyim. Yakında buraya yapay zeka destekli sohbet de gelecek.</p>
+      <div class="asg-assistant-quick">
+        <div class="asg-assistant-chip" id="asgQuickProfil">
+          <div class="asg-assistant-chip-main">
+            <span class="icon">👤</span>
+            <div>
+              <div>Profilimi aç</div>
+              <div class="asg-assistant-chip-sub">Profilim, rozetlerim ve ayarlarım</div>
+            </div>
+          </div>
+          <span>›</span>
+        </div>
+        <div class="asg-assistant-chip" id="asgQuickMagazaKat">
+          <div class="asg-assistant-chip-main">
+            <span class="icon">🏬</span>
+            <div>
+              <div>Mağaza Katını keşfet</div>
+              <div class="asg-assistant-chip-sub">Kurumsal mağazaları ve vitrinleri incele</div>
+            </div>
+          </div>
+          <span>›</span>
+        </div>
+        <div class="asg-assistant-chip" id="asgQuickIkinciEl">
+          <div class="asg-assistant-chip-main">
+            <span class="icon">♻️</span>
+            <div>
+              <div>2. El Pazarı'na git</div>
+              <div class="asg-assistant-chip-sub">Bireysel satıcıların 2. el ürünlerini keşfet</div>
+            </div>
+          </div>
+          <span>›</span>
+        </div>
+        <div class="asg-assistant-chip" id="asgQuickGuvenlik">
+          <div class="asg-assistant-chip-main">
+            <span class="icon">🛡</span>
+            <div>
+              <div>Güvenlik &amp; kimlik doğrulama</div>
+              <div class="asg-assistant-chip-sub">Güvenli alışveriş ve kimlik doğrulama rehberi</div>
+            </div>
+          </div>
+          <span>›</span>
+        </div>
+      </div>
+    </div>
+    <div class="asg-assistant-footer">
+      <span class="badge">Beta • Yakında sohbet</span>
+      <span>7/24 yönlendirme asistanı</span>
+    </div>
+  </div>
+
+  <div class="asg-assistant-fab" id="asgAssistantToggle">
+    <span>✨</span>
+  </div>
+
+  <div id="global-toast"></div>
+
+</body>
+</html>

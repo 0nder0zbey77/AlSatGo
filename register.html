@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AlSatGo - Üye Ol</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      min-height: 100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.2), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(244,114,182,.22), transparent 60%),
+        #020617;
+      color:#e5e7eb;
+    }
+    .shell {
+      width:100%;
+      max-width: 460px;
+      padding: 28px 20px 26px;
+    }
+    .card {
+      border-radius: 24px;
+      padding: 26px 22px 22px;
+      background: rgba(15,23,42,.95);
+      border: 1px solid rgba(148,163,184,.5);
+      box-shadow: 0 22px 55px rgba(15,23,42,.95);
+      backdrop-filter: blur(18px);
+    }
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    .logo:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 0 0 1px rgba(250, 204, 21, 0.85),
+        0 22px 48px rgba(0, 0, 0, 0.98);
+      filter: brightness(1.06);
+    }
+
+    
+    h1 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      text-align:center;
+    }
+    .sub {
+      font-size: 13px;
+      color:#9ca3af;
+      text-align:center;
+      margin-bottom: 18px;
+    }
+    .social-group {
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom: 18px;
+    }
+    .social-btn {
+      width:100%;
+      border-radius: 999px;
+      border:1px solid rgba(148,163,184,.5);
+      padding: 9px 14px;
+      background: rgba(15,23,42,.9);
+      color:#e5e7eb;
+      font-size: 13px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      cursor:pointer;
+      transition:.18s;
+    }
+    .social-btn span.icon {
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:13px;
+      background:#fff;
+      color:#111827;
+    }
+    .social-btn.apple span.icon {
+      background:#0f172a;
+      color:#f9fafb;
+      font-size:15px;
+    }
+    .social-btn:hover {
+      border-color:#facc15;
+      box-shadow: 0 0 18px rgba(250,204,21,.45);
+      transform: translateY(-1px);
+    }
+    .divider {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin: 12px 0;
+      font-size: 11px;
+      color:#6b7280;
+    }
+    .divider span.line {
+      flex:1;
+      height:1px;
+      background: radial-gradient(circle, rgba(148,163,184,.7), transparent);
+      opacity:.6;
+    }
+    form {
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    label {
+      font-size: 12px;
+      color:#cbd5f5;
+    }
+    .field {
+      border-radius: 14px;
+      border:1px solid rgba(148,163,184,.55);
+      background: rgba(15,23,42,.9);
+      display:flex;
+      align-items:center;
+      padding: 8px 10px;
+      gap:8px;
+    }
+    .field span.icon {
+      font-size: 15px;
+      opacity:.8;
+    }
+    .field input, .field select {
+      border:none;
+      outline:none;
+      background:transparent;
+      color:#e5e7eb;
+      font-size: 13px;
+      flex:1;
+    }
+    .field input::placeholder { color:#6b7280; }
+    
+    .field-error{
+      border-color:#f97316 !important;
+      box-shadow:0 0 0 1px rgba(249,115,22,0.6);
+    }
+    .pass-strength{
+      margin-top:6px;
+      font-size:11px;
+      color:#9ca3af;
+    }
+    .pass-strength-bar{
+      width:100%;
+      height:5px;
+      border-radius:999px;
+      background:rgba(15,23,42,1);
+      overflow:hidden;
+      margin-bottom:4px;
+    }
+    .pass-strength-fill{
+      display:block;
+      height:100%;
+      width:0%;
+      border-radius:999px;
+      background:linear-gradient(90deg,#ef4444,#f97316);
+      transition:width .18s ease, background .18s ease;
+    }
+.row {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:11px;
+      color:#9ca3af;
+      margin-top:4px;
+    }
+    .row input[type="checkbox"] {
+      width:13px;
+      height:13px;
+      border-radius:3px;
+      border:1px solid rgba(148,163,184,.6);
+      accent-color:#facc15;
+    }
+    .btn-primary {
+      margin-top: 10px;
+      width:100%;
+      border-radius:999px;
+      border:none;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight:600;
+      cursor:pointer;
+      background: linear-gradient(135deg,#facc15,#d97706);
+      color:#111827;
+      box-shadow: 0 10px 30px rgba(234,179,8,.65);
+      transition:.2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter:brightness(1.05);
+    }
+    .foot {
+      margin-top: 12px;
+      font-size: 12px;
+      color:#9ca3af;
+      text-align:center;
+    }
+    .foot a {
+      color:#facc15;
+      text-decoration:none;
+      font-weight:500;
+    }
+    .foot a:hover { text-decoration:underline; }
+    .back-link {
+      margin-top: 18px;
+      text-align:center;
+      font-size:11px;
+      color:#6b7280;
+    }
+    .back-link a {
+      color:#9ca3af;
+      text-decoration:none;
+    }
+    .back-link a:hover { text-decoration:underline; }
+  
+    .toast{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      padding:10px 14px;
+      border-radius:12px;
+      background:rgba(15,23,42,0.97);
+      border:1px solid rgba(148,163,184,0.7);
+      box-shadow:0 18px 40px rgba(0,0,0,0.95);
+      font-size:13px;
+      color:#e5e7eb;
+      margin-top:8px;
+      animation:toast-in .2s ease-out;
+      z-index:9999;
+    }
+    .toast + .toast{
+      bottom:auto;
+      margin-top:8px;
+    }
+    .toast-success{border-color:rgba(34,197,94,0.8);}
+    .toast-warning{border-color:rgba(249,115,22,0.85);}
+    .toast-error{border-color:rgba(248,113,113,0.9);}
+    .toast-leave{
+      animation:toast-out .18s ease-in forwards;
+    }
+    @keyframes toast-in{
+      from{opacity:0;transform:translateY(6px) scale(.98);}
+      to{opacity:1;transform:translateY(0) scale(1);}
+    }
+    @keyframes toast-out{
+      from{opacity:1;transform:translateY(0) scale(1);}
+      to{opacity:0;transform:translateY(4px) scale(.98);}
+    }
+
+/* Logo from index */
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+/* Inline link style for KVKK link */
+
+    .link-inline {
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font-size: inherit;
+      color: #e5e7eb;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .link-inline:hover {
+      color: #facc15;
+    }
+
+
+    /* Assistant floating button & panel */
+    .assistant-wrapper {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    .assistant-fab {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 14px;
+      background: radial-gradient(circle at 0 0, rgba(251,191,36,0.3), transparent 55%),
+                  linear-gradient(135deg, #facc15, #fb923c);
+      color: #0b1120;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+    .assistant-fab:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+      filter: brightness(1.05);
+    }
+    .assistant-panel {
+      width: 280px;
+      max-width: 90vw;
+      border-radius: 18px;
+      background: radial-gradient(circle at 0 0, rgba(148,163,184,0.18), transparent 55%),
+                  rgba(15,23,42,0.96);
+      border: 1px solid rgba(148,163,184,0.45);
+      box-shadow: 0 22px 55px rgba(15,23,42,0.9);
+      padding: 14px 14px 10px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .assistant-panel.open {
+      display: flex;
+    }
+    .assistant-panel-header {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 4px;
+    }
+    .assistant-panel-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+    .assistant-panel-desc {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+    .assistant-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .assistant-action-btn {
+      width: 100%;
+      text-align: left;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.45);
+      background: radial-gradient(circle at 0 0, rgba(30,64,175,0.3), transparent 60%),
+                  rgba(15,23,42,0.95);
+      color: #e5e7eb;
+      font-size: 12px;
+      padding: 7px 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      transition: border-color 0.16s ease, background 0.16s ease, transform 0.12s ease;
+    }
+    .assistant-action-btn::after {
+      content: "↗";
+      font-size: 11px;
+      opacity: 0.7;
+    }
+    .assistant-action-btn:hover {
+      border-color: rgba(250,204,21,0.9);
+      background: radial-gradient(circle at 0 0, rgba(250,204,21,0.35), transparent 60%),
+                  rgba(15,23,42,0.98);
+      transform: translateY(-1px);
+    }
+
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="card">
+<a class="logo" href="index.html">
+<span class="logo-icon"></span>
+<span class="logo-word">
+<span class="logo-word-main">AlSat</span>
+<span class="logo-word-go">Go</span>
+</span>
+</a>
+<h1>Hesap Oluştur</h1>
+<p class="sub">Kimliğini doğrulayarak güvenli şekilde alım satım yapmaya başla.</p>
+<div class="social-group">
+<button class="social-btn" id="googleRegisterBtn" type="button">
+<span class="icon">G</span>
+<span>Google ile kayıt ol</span>
+</button>
+<button class="social-btn apple" id="appleRegisterBtn" type="button">
+<span class="icon"></span>
+<span>Apple ile kayıt ol</span>
+</button>
+</div>
+<div class="divider">
+<span class="line"></span>
+<span>veya form ile devam et</span>
+<span class="line"></span>
+</div>
+<form action="otp-dogrulama.html" id="registerForm" method="get">
+<div>
+<label for="name">Ad Soyad</label>
+<div class="field">
+<span class="icon">👤</span>
+<input id="name" placeholder="Adınız Soyadınız" required="" type="text"/>
+</div>
+</div>
+<div>
+<label for="email">E‑posta</label>
+<div class="field">
+<span class="icon">📧</span>
+<input id="email" placeholder="ornek@eposta.com" required="" type="email"/>
+</div>
+</div>
+<div>
+<label for="phone">Telefon</label>
+<div class="field">
+<span class="icon">📱</span>
+<input id="phone" placeholder="05xx xxx xx xx" required="" type="tel"/>
+</div>
+</div>
+<div>
+<label for="pass">Şifre</label>
+<div class="field">
+<span class="icon">🔒</span>
+<input id="pass" placeholder="En az 8 karakter" required="" type="password"/>
+</div>
+<div class="pass-strength">
+<div class="pass-strength-bar">
+<span class="pass-strength-fill" id="passStrengthFill"></span>
+</div>
+<div id="passStrengthText">Şifre gücü: -</div>
+</div>
+</div>
+<div class="row">
+<input id="terms" required="" type="checkbox"/>
+<label for="terms">Kullanım şartlarını ve <button class="link-inline" id="termsInfoLink" type="button">KVKK metnini</button> okudum, onaylıyorum.</label>
+</div>
+<button class="btn-primary" type="submit">Devam Et</button>
+</form>
+<div class="foot">
+        Zaten hesabın var mı?
+        <a href="login.html">Giriş yap</a>
+</div>
+</div>
+<div class="back-link">
+<a href="index.html">← Ana sayfaya dön</a>
+</div>
+</div>
+<div class="assistant-wrapper"><button class="assistant-fab" id="assistantToggle">🤖 Asistan</button><div class="assistant-panel" id="assistantPanel"><div class="assistant-panel-header"><div class="assistant-panel-title">Kayıt Asistanı</div><div class="assistant-panel-desc">Hızlıca gitmek istediğin adımı ya da sayfayı seçebilirsin (demo).</div></div><div class="assistant-actions"><button class="assistant-action-btn" data-action="login">Zaten hesabım var, giriş yapmak istiyorum</button><button class="assistant-action-btn" data-action="forgot">Şifremi unuttum, giriş yapamıyorum</button><button class="assistant-action-btn" data-action="kimlik">Kimlik doğrulama adımlarını öğrenmek istiyorum</button><button class="assistant-action-btn" data-action="alisveris">Alışverişe geri dönmek istiyorum</button></div></div></div><div id="toast-root"></div>
+<script>
+    const toastRoot = document.getElementById("toast-root");
+
+    function showToast(message, type = "info") {
+      if (!toastRoot) return;
+      const el = document.createElement("div");
+      el.className = "toast toast-" + type;
+      el.textContent = message;
+      toastRoot.appendChild(el);
+      setTimeout(() => {
+        el.classList.add("toast-leave");
+        el.addEventListener("animationend", () => el.remove());
+      }, 2600);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("registerForm");
+      const nameInput = document.getElementById("name");
+      const emailInput = document.getElementById("email");
+      const phoneInput = document.getElementById("phone");
+      const passInput = document.getElementById("pass");
+      const termsInput = document.getElementById("terms");
+      const googleBtn = document.getElementById("googleRegisterBtn");
+      const appleBtn = document.getElementById("appleRegisterBtn");
+      const passStrengthFill = document.getElementById("passStrengthFill");
+      const passStrengthText = document.getElementById("passStrengthText");
+
+      function markError(el){
+        if (!el) return;
+        const wrapper = el.closest(".field") || el;
+        wrapper.classList.add("field-error");
+        setTimeout(() => wrapper.classList.remove("field-error"), 700);
+      }
+
+      function validateForm(){
+        const messages = [];
+        if (nameInput){
+          const nameVal = nameInput.value.trim();
+          const parts = nameVal.split(" ").filter(Boolean);
+          if (!nameVal || nameVal.length < 3 || parts.length < 2){
+            messages.push("Lütfen ad soyad alanını doğru doldurun.");
+            markError(nameInput);
+          }
+        }
+        if (emailInput){
+          const emailVal = emailInput.value.trim();
+          const simpleEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!simpleEmail.test(emailVal)){
+            messages.push("Geçerli bir e-posta adresi girin (demo).");
+            markError(emailInput);
+          }
+        }
+        if (phoneInput){
+          const cleaned = phoneInput.value.replace(/\s+/g,"");
+          if (cleaned.length < 10){
+            messages.push("Telefon numaranı 05xx formatında gir (demo).");
+            markError(phoneInput);
+          }
+        }
+        if (passInput){
+          const v = passInput.value;
+          const hasLen = v.length >= 8;
+          const hasLetter = /[A-Za-zÇĞİÖŞÜçğıöşü]/.test(v);
+          const hasDigit = /\d/.test(v);
+          if (!(hasLen && hasLetter && hasDigit)){
+            messages.push("Şifren en az 8 karakter olmalı ve harf + rakam içermeli (demo).");
+            markError(passInput);
+          }
+        }
+        if (termsInput && !termsInput.checked){
+          messages.push("Devam etmek için kullanım şartlarını onaylaman gerekiyor (demo).");
+          markError(termsInput);
+        }
+
+        if (messages.length){
+          showToast(messages[0], "warning");
+          return false;
+        }
+        return true;
+      }
+
+      if (form){
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (!validateForm()) return;
+          showToast("Doğrulama kodun e-posta / telefonuna gönderildi (demo).", "success");
+
+          const params = new URLSearchParams();
+          if (emailInput && emailInput.value.trim()) {
+            params.set("mail", emailInput.value.trim());
+          }
+          if (phoneInput && phoneInput.value.trim()) {
+            params.set("phone", phoneInput.value.trim());
+          }
+          params.set("from", "register");
+
+          setTimeout(() => {
+            window.location.href = "otp-dogrulama.html?" + params.toString();
+          }, 900);
+        });
+      }
+
+      if (passInput && passStrengthFill && passStrengthText){
+        passInput.addEventListener("input", () => {
+          const v = passInput.value;
+          let score = 0;
+          if (v.length >= 6) score++;
+          if (v.length >= 8) score++;
+          if (/[A-Za-zÇĞİÖŞÜçğıöşü]/.test(v) && /\d/.test(v)) score++;
+          if (/[^A-Za-z0-9ÇĞİÖŞÜçğıöşü]/.test(v)) score++;
+
+          let width = 0;
+          let text = "Şifre gücü: -";
+          let gradient = "linear-gradient(90deg,#ef4444,#f97316)";
+
+          if (!v){
+            width = 0;
+          } else if (score <= 1){
+            width = 35;
+            text = "Şifre gücü: Zayıf";
+            gradient = "linear-gradient(90deg,#ef4444,#f97316)";
+          } else if (score === 2){
+            width = 65;
+            text = "Şifre gücü: Orta";
+            gradient = "linear-gradient(90deg,#f97316,#eab308)";
+          } else {
+            width = 100;
+            text = "Şifre gücü: Güçlü";
+            gradient = "linear-gradient(90deg,#22c55e,#a3e635)";
+          }
+
+          passStrengthFill.style.width = width + "%";
+          passStrengthFill.style.background = gradient;
+          passStrengthText.textContent = text;
+        });
+      }
+
+      if (googleBtn){
+        googleBtn.addEventListener("click", () => {
+          showToast("Google ile hızlı kayıt akışı canlı sistemde açılacak (demo).", "info");
+        });
+      }
+      if (appleBtn){
+        appleBtn.addEventListener("click", () => {
+          showToast("Apple ile giriş için yönlendirme ekranı yakında eklenecek (demo).", "info");
+        });
+      }
+
+      // Giriş yap ve ana sayfa linkleri
+      const loginLink = document.querySelector(".foot a[href='login.html']");
+      if (loginLink){
+        loginLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          showToast("Mevcut hesabınla giriş sayfasına yönlendiriliyorsun (demo).", "info");
+          setTimeout(() => { window.location.href = "login.html"; }, 700);
+        });
+      }
+
+      const termsInfoLink = document.getElementById("termsInfoLink");
+      if (termsInfoLink) {
+        termsInfoLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          showToast("Kullanım şartları ve KVKK metni canlı sistemde ayrı sayfalarda görüntülenecek (demo).", "info");
+        });
+      }
+
+      const backLink = document.querySelector(".back-link a[href='index.html']");
+      if (backLink){
+        backLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          showToast("Anasayfaya dönüyorsun, üyelik adımını daha sonra tamamlayabilirsin (demo).", "info");
+          setTimeout(() => { window.location.href = "index.html"; }, 700);
+        });
+      }
+
+
+      // Kayıt Asistanı davranışları
+      const assistantToggle = document.getElementById("assistantToggle");
+      const assistantPanel = document.getElementById("assistantPanel");
+      if (assistantToggle && assistantPanel) {
+        assistantToggle.addEventListener("click", () => {
+          assistantPanel.classList.toggle("open");
+        });
+
+        const actionButtons = assistantPanel.querySelectorAll(".assistant-action-btn");
+        actionButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const action = btn.getAttribute("data-action");
+            if (!action) return;
+
+            if (action === "login") {
+              showToast("Giriş sayfasına yönlendiriliyorsun (demo).", "info");
+              setTimeout(() => { window.location.href = "login.html"; }, 700);
+            } else if (action === "forgot") {
+              showToast("Şifremi unuttum ekranına gidiyorsun (demo).", "info");
+              setTimeout(() => { window.location.href = "sifremi-unuttum.html"; }, 700);
+            } else if (action === "kimlik") {
+              showToast("Kimlik doğrulama akışına dair bilgilendirme ekranına gidiyorsun (demo).", "info");
+              setTimeout(() => { window.location.href = "kimlik-uyari.html"; }, 750);
+            } else if (action === "alisveris") {
+              showToast("Alışverişe geri dönüyorsun, üyelik adımını daha sonra tamamlayabilirsin (demo).", "info");
+              setTimeout(() => { window.location.href = "ilanlar.html"; }, 750);
+            }
+          });
+        });
+      }
+
+
+      // İlk girişte küçük bilgilendirme
+      showToast("Birkaç adımda ücretsiz AlSatGo hesabı oluşturabilirsin (demo).", "info");
+    });
+  </script>
+</body>
+</html>

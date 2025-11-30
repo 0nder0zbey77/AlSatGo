@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<title>AlSatGo - Adreslerim</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:radial-gradient(circle at top,#020617 0,#020617 45%,#000 100%);
+      color:#e5e7eb;min-height:100vh;
+    }
+    a{text-decoration:none;color:inherit;}
+    .container{max-width:1200px;margin:0 auto;padding:0 16px 40px;}
+    .header{
+      position:sticky;top:0;z-index:40;
+      background:rgba(3,7,18,0.96);
+      border-bottom:1px solid rgba(148,163,184,0.35);
+      backdrop-filter:blur(18px);
+      box-shadow:0 18px 40px rgba(0,0,0,0.65);
+    }
+    .header-inner{
+      max-width:1200px;margin:0 auto;
+      padding:10px 16px;display:flex;align-items:center;
+      gap:12px;
+    }
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.32), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.28), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 35%, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 18px 40px rgba(0, 0, 0, 0.9);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-mark {
+      position: relative;
+      width: 26px;
+      height: 26px;
+      border-radius: 11px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.8), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.85);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 10px 22px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-mark::before,
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 5px;
+      border: 1px solid rgba(250, 204, 21, 0.9);
+    }
+    .logo-mark::before {
+      top: 4px;
+      left: 3px;
+      border-color: rgba(250, 204, 21, 0.95);
+      box-shadow: 0 0 12px rgba(250, 204, 21, 0.8);
+    }
+    .logo-mark::after {
+      bottom: 4px;
+      right: 3px;
+      border-color: rgba(56, 189, 248, 0.9);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+      transform: translate(1px, 1px);
+    }
+    .logo-text {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-text-main {
+      color: #e5e7eb;
+    }
+    .logo-text-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    .logo:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 0 0 1px rgba(250, 204, 21, 0.8),
+        0 22px 48px rgba(0, 0, 0, 0.95);
+      filter: brightness(1.05);
+    }
+    .search-wrapper{flex:1;}
+    .search-input{
+      width:100%;padding:8px 14px;border-radius:999px;
+      border:1px solid rgba(148,163,184,0.45);
+      background:rgba(15,23,42,0.85);
+      color:#e5e7eb;font-size:13px;
+    }
+    .search-input::placeholder{color:#9ca3af;}
+    .header-actions{display:flex;gap:8px;align-items:center;}
+    .header-link{
+      font-size:13px;padding:6px 10px;border-radius:999px;transition:.15s;
+    }
+    .header-link:hover{background:rgba(15,23,42,0.9);}
+    .header-btn{
+      font-size:13px;padding:7px 12px;border-radius:999px;border:none;
+      background:linear-gradient(135deg,#facc15,#eab308);
+      color:#111827;font-weight:600;
+      box-shadow:0 10px 25px rgba(250,204,21,0.55);
+      cursor:pointer;transition:.15s;
+    }
+    .header-btn:hover{transform:translateY(-1px);box-shadow:0 14px 30px rgba(250,204,21,0.7);}
+    main{padding-top:16px;}
+    .page-title{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:8px 0 4px;
+    }
+    .page-title h1{
+      font-size:18px;font-weight:600;
+      letter-spacing:.03em;
+    }
+    .page-sub{
+      font-size:12px;color:#9ca3af;
+    }
+    .page-sub span{
+      color:#e5e7eb;font-weight:500;
+    }
+    .badge-pill{
+      font-size:11px;padding:5px 9px;border-radius:999px;
+      border:1px solid rgba(148,163,184,0.5);
+      color:#9ca3af;background:rgba(15,23,42,0.9);
+    }
+    .breadcrumb{
+      font-size:12px;color:#9ca3af;
+      padding:14px 0 10px;
+    }
+    .breadcrumb span{color:#e5e7eb;}
+
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(0,0.9fr);
+      gap:18px;
+    }
+    .card{
+      border-radius:20px;
+      background:rgba(15,23,42,0.96);
+      border:1px solid rgba(148,163,184,0.45);
+      box-shadow:0 18px 50px rgba(15,23,42,0.98);
+      padding:14px 14px 14px;
+      font-size:13px;
+    }
+    .card-header{
+      display:flex;justify-content:space-between;align-items:center;
+      margin-bottom:10px;
+    }
+    .card-title{font-size:15px;font-weight:600;}
+    .card-tag{
+      font-size:11px;padding:3px 8px;border-radius:999px;
+      background:rgba(15,23,42,0.9);
+      border:1px solid rgba(148,163,184,0.6);
+      color:#9ca3af;
+    }
+
+    .address-list{
+      display:flex;flex-direction:column;gap:10px;margin-top:6px;
+    }
+    .address-card{
+      border-radius:16px;
+      background:rgba(15,23,42,0.9);
+      border:1px solid rgba(30,64,175,0.45);
+      padding:10px;
+      box-shadow:0 14px 36px rgba(15,23,42,1);
+      font-size:12px;
+    }
+    .address-head{
+      display:flex;justify-content:space-between;align-items:center;
+      margin-bottom:4px;
+    }
+    .address-name{font-weight:600;}
+    .badge{
+      font-size:11px;padding:3px 8px;border-radius:999px;
+      background:rgba(34,197,94,0.16);
+      border:1px solid rgba(22,163,74,0.7);
+      color:#bbf7d0;
+    }
+    .address-text{color:#cbd5e1;margin-bottom:4px;line-height:1.5;}
+    .address-meta{color:#9ca3af;font-size:11px;margin-bottom:6px}
+    .address-actions{display:flex;gap:6px;flex-wrap:wrap;}
+
+    .btn-xs{
+      padding:5px 10px;border-radius:999px;
+      border:1px solid rgba(148,163,184,0.7);
+      background:rgba(15,23,42,0.95);
+      color:#e5e7eb;font-size:11px;cursor:pointer;
+      transition:.15s;
+    }
+    .btn-xs:hover{
+      border-color:#facc15;
+      color:#facc15;
+    }
+    .btn-xs.primary{
+      border-color:#facc15;
+      background:rgba(250,204,21,0.08);
+      color:#facc15;
+    }
+
+    .field{
+      display:flex;flex-direction:column;gap:4px;
+      margin-bottom:8px;font-size:12px;
+    }
+    label{color:#cbd5e1;}
+    input,textarea,select{
+      border-radius:12px;
+      border:1px solid rgba(51,65,85,0.9);
+      background:rgba(15,23,42,0.96);
+      padding:8px 10px;
+      color:#e5e7eb;
+      font-size:13px;
+      outline:none;
+      transition:.15s;
+    }
+    input:focus,textarea:focus,select:focus{
+      border-color:#facc15;
+      box-shadow:0 0 0 1px rgba(250,204,21,0.5);
+    }
+    textarea{min-height:90px;resize:vertical;}
+    .hint{font-size:11px;color:#9ca3af;}
+
+    .actions-row{
+      display:flex;justify-content:flex-end;gap:8px;margin-top:10px;
+    }
+    .btn-main{
+      padding:8px 16px;border-radius:999px;
+      border:none;
+      background:linear-gradient(135deg,#facc15,#eab308);
+      color:#111827;font-size:13px;font-weight:600;
+      box-shadow:0 12px 30px rgba(250,204,21,0.55);
+      cursor:pointer;transition:.15s;
+    }
+    .btn-main:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(250,204,21,0.7);}
+    .btn-ghost{
+      padding:8px 14px;border-radius:999px;
+      border:1px solid rgba(148,163,184,0.6);
+      background:rgba(15,23,42,0.95);
+      color:#e5e7eb;font-size:13px;cursor:pointer;
+    }
+
+    .footer-mini{
+      margin-top:24px;padding-top:12px;
+      border-top:1px solid rgba(15,23,42,0.9);
+      font-size:11px;color:#6b7280;text-align:center;
+    }
+    @media(max-width:960px){
+      .layout{grid-template-columns:minmax(0,1fr);
+    }
+    }
+    @media(max-width:640px){
+      .header-inner{flex-wrap:wrap;}
+      .search-wrapper{order:3;width:100%;}
+    }
+    .badge-default{
+      box-shadow:0 0 0 1px rgba(250,204,21,0.9);
+      border-color:rgba(250,204,21,0.9) !important;
+      color:#facc15 !important;
+    }
+    .field-error{
+      border-color:#f97373 !important;
+      box-shadow:0 0 0 1px rgba(248,113,113,0.4) !important;
+    }
+    .address-empty{
+      margin-top:8px;
+      font-size:12px;
+      color:#9ca3af;
+      display:none;
+    }
+    .toast{
+      position:fixed;
+      inset-inline-end:16px;
+      inset-block-start:16px;
+      z-index:100;
+      pointer-events:none;
+      opacity:0;
+      transform:translateY(-8px);
+      transition:opacity .2s ease, transform .2s ease;
+    }
+    .toast-inner{
+      min-width:220px;
+      max-width:320px;
+      border-radius:999px;
+      padding:10px 14px;
+      background:rgba(15,23,42,0.98);
+      border:1px solid rgba(148,163,184,0.6);
+      box-shadow:0 18px 40px rgba(0,0,0,0.7);
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .toast-dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+    }
+    .toast-message{
+      font-size:12px;
+      color:#e5e7eb;
+    }
+    .toast-show{
+      opacity:1;
+      transform:translateY(0);
+    }
+    .toast-success .toast-inner{
+      border-color:rgba(34,197,94,0.85);
+    }
+    .toast-success .toast-dot{
+      background:#22c55e;
+    }
+    .toast-error .toast-inner{
+      border-color:rgba(248,113,113,0.9);
+    }
+    .toast-error .toast-dot{
+      background:#f97373;
+    }
+    .toast-info .toast-inner{
+      border-color:rgba(59,130,246,0.85);
+    }
+    .toast-info .toast-dot{
+      background:#3b82f6;
+    }
+
+/* Logo from index */
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    .logo:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 0 0 1px rgba(250, 204, 21, 0.85),
+        0 22px 48px rgba(0, 0, 0, 0.98);
+      filter: brightness(1.06);
+    }
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-inner">
+<a class="logo" href="index.html">
+<span class="logo-icon"></span>
+<span class="logo-word">
+<span class="logo-word-main">AlSat</span>
+<span class="logo-word-go">Go</span>
+</span>
+</a>
+<div class="search-wrapper">
+<input class="search-input" placeholder="Adresler içinde arama yapın (tasarım)" type="search"/>
+</div>
+<div class="header-actions">
+<a class="header-link" href="login.html">Giriş Yap</a>
+<a class="header-btn" href="register.html">Üye Ol</a>
+</div>
+</div>
+</header>
+<main class="container">
+<div class="breadcrumb">
+<a href="index.html">Ana Sayfa</a> › <span>Adreslerim</span>
+</div>
+<section class="layout">
+<div class="card">
+<div class="card-header">
+<div class="card-title">Kayıtlı Adresler</div>
+<div class="card-tag">Teslimat &amp; fatura</div>
+</div>
+<div class="address-list">
+<div class="address-card">
+<div class="address-head">
+<div class="address-name">Ev Adresi</div>
+<div class="badge badge-default" data-address-type="delivery">Varsayılan teslimat</div>
+</div>
+<div class="address-text">
+            Örnek Mah. AlSatGo Sk. No:10 Daire:5<br/>
+            Kadıköy / İstanbul
+          </div>
+<div class="address-meta">
+            İsim: Önder Yılmaz • Telefon: +90 5•• ••• •• ••
+          </div>
+<div class="address-actions">
+<button class="btn-xs primary" data-action="set-default">Varsayılan yap</button>
+<button class="btn-xs" data-action="edit">Düzenle</button>
+<button class="btn-xs" data-action="delete">Sil</button>
+</div>
+</div>
+<div class="address-card">
+<div class="address-head">
+<div class="address-name">İş Adresi</div>
+<div class="badge" data-address-type="invoice" style="background:rgba(37,99,235,0.18);border-color:rgba(37,99,235,0.8);color:#bfdbfe;">
+              Fatura adresi
+            </div>
+</div>
+<div class="address-text">
+            İş Merkezi Blok B Kat:7<br/>
+            Şişli / İstanbul
+          </div>
+<div class="address-meta">
+            Fatura: AlSatGo Bilişim A.Ş. • Vergi No: 1234567890
+          </div>
+<div class="address-actions">
+<button class="btn-xs" data-action="set-default">Varsayılan yap</button>
+<button class="btn-xs" data-action="edit">Düzenle</button>
+<button class="btn-xs" data-action="delete">Sil</button>
+</div>
+</div>
+<div class="address-empty">Aramanıza uygun adres bulunamadı (demo).</div>
+</div>
+</div>
+<div class="card card-new-address">
+<div class="card-header">
+<div class="card-title">Yeni Adres Ekle</div>
+<div class="card-tag">Form örneği</div>
+</div>
+<div class="field">
+<label>Adres başlığı</label>
+<input name="addressTitle" placeholder="Adres başlığı" type="text"/>
+</div>
+<div class="field">
+<label>Ad Soyad</label>
+<input name="fullName" placeholder="Teslim alacak kişi" type="text"/>
+</div>
+<div class="field">
+<label>Telefon</label>
+<input name="phone" placeholder="+90 5•• ••• •• ••" type="tel"/>
+</div>
+<div class="field">
+<label>İl / İlçe</label>
+<input name="cityDistrict" placeholder="Örnek: İstanbul / Kadıköy" type="text"/>
+</div>
+<div class="field">
+<label>Adres satırı</label>
+<textarea name="addressLine" placeholder="Mahalle, sokak, bina, daire bilgileri"></textarea>
+</div>
+<div class="field">
+<label>Adres tipi</label>
+<select name="addressType">
+<option value="">Seçiniz</option>
+<option value="home">Ev</option>
+<option value="work">İş</option>
+<option value="other">Diğer</option>
+</select>
+<div class="hint">İlan alım-satımlarında bu adresi kullanabileceksiniz.</div>
+</div>
+<div class="actions-row">
+<button class="btn-ghost" data-action="reset-form" type="button">Vazgeç</button>
+<button class="btn-main" data-action="submit-address" type="button">➕ Adres Ekle</button>
+</div>
+</div>
+</section>
+<div class="footer-mini">
+    Bu sayfa yalnızca <strong>tasarım amaçlı</strong> hazırlanmıştır. Gerçek adres kayıtları backend ile yönetilecektir.
+  </div>
+</main>
+<div class="toast toast-info" id="globalToast">
+<div class="toast-inner">
+<div class="toast-dot"></div>
+<div class="toast-message"></div>
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var toastEl = document.getElementById('globalToast');
+      var toastMessageEl = toastEl ? toastEl.querySelector('.toast-message') : null;
+
+      function showToast(message, type) {
+        if (!toastEl || !toastMessageEl) return;
+        type = type || 'info';
+
+        toastEl.classList.remove('toast-success', 'toast-error', 'toast-info');
+        toastEl.classList.add('toast-' + type);
+
+        toastMessageEl.textContent = message;
+        toastEl.classList.add('toast-show');
+
+        if (toastEl._hideTimeout) {
+          clearTimeout(toastEl._hideTimeout);
+        }
+        toastEl._hideTimeout = setTimeout(function () {
+          toastEl.classList.remove('toast-show');
+        }, 2800);
+      }
+
+      function escapeHtml(text) {
+        if (text == null) return '';
+        return String(text)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      var addressList = document.querySelector('.address-list');
+      var addressEmpty = document.querySelector('.address-empty');
+
+      function updateAddressEmptyState() {
+        if (!addressList || !addressEmpty) return;
+        var cards = addressList.querySelectorAll('.address-card');
+        addressEmpty.style.display = cards.length ? 'none' : 'block';
+      }
+
+      if (addressList) {
+        addressList.addEventListener('click', function (event) {
+          var button = event.target.closest('button');
+          if (!button) return;
+
+          var card = button.closest('.address-card');
+          if (!card) return;
+
+          var action = button.getAttribute('data-action');
+
+          if (action === 'set-default') {
+            var badge = card.querySelector('.badge');
+            if (!badge) return;
+
+            var type = badge.getAttribute('data-address-type') || 'custom';
+            var allBadges = document.querySelectorAll('.badge[data-address-type="' + type + '"]');
+            allBadges.forEach(function (b) {
+              b.classList.remove('badge-default');
+            });
+            badge.classList.add('badge-default');
+
+            var msg = 'Varsayılan adresiniz güncellendi.';
+            if (type === 'delivery') {
+              msg = 'Varsayılan teslimat adresiniz güncellendi.';
+            } else if (type === 'invoice') {
+              msg = 'Varsayılan fatura adresiniz güncellendi.';
+            }
+            showToast(msg, 'success');
+          }
+
+          if (action === 'edit') {
+            var titleEl = card.querySelector('.address-name');
+            var textEl = card.querySelector('.address-text');
+            var metaEl = card.querySelector('.address-meta');
+            var badgeEl = card.querySelector('.badge');
+
+            var titleInput = document.querySelector('[name="addressTitle"]');
+            var fullNameInput = document.querySelector('[name="fullName"]');
+            var phoneInput = document.querySelector('[name="phone"]');
+            var cityDistrictInput = document.querySelector('[name="cityDistrict"]');
+            var addressLineInput = document.querySelector('[name="addressLine"]');
+            var addressTypeSelect = document.querySelector('[name="addressType"]');
+
+            if (!titleInput || !fullNameInput || !phoneInput || !cityDistrictInput || !addressLineInput || !addressTypeSelect) {
+              showToast('Adres formu bulunamadı (demo).', 'error');
+              return;
+            }
+
+            titleInput.value = titleEl ? titleEl.textContent.trim() : '';
+
+            if (textEl) {
+              var lines = textEl.innerText.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+              addressLineInput.value = lines[0] || '';
+              cityDistrictInput.value = lines[1] || '';
+            } else {
+              addressLineInput.value = '';
+              cityDistrictInput.value = '';
+            }
+
+            if (metaEl) {
+              var metaText = metaEl.innerText;
+              var nameMatch = metaText.match(/İsim:\s*([^•]+)/i);
+              var phoneMatch = metaText.match(/Telefon:\s*([^\n]+)/i);
+              if (nameMatch) {
+                fullNameInput.value = nameMatch[1].trim();
+              } else {
+                fullNameInput.value = '';
+              }
+              if (phoneMatch) {
+                phoneInput.value = phoneMatch[1].trim();
+              } else {
+                phoneInput.value = '';
+              }
+            } else {
+              fullNameInput.value = '';
+              phoneInput.value = '';
+            }
+
+            if (badgeEl) {
+              var t = badgeEl.getAttribute('data-address-type') || '';
+              if (t === 'delivery') {
+                addressTypeSelect.value = 'home';
+              } else if (t === 'invoice') {
+                addressTypeSelect.value = 'work';
+              } else {
+                addressTypeSelect.value = 'other';
+              }
+            }
+
+            var newAddressCard = document.querySelector('.card-new-address');
+            if (newAddressCard && newAddressCard.scrollIntoView) {
+              newAddressCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            showToast('Adres bilgileri forma yüklendi (demo).', 'info');
+          }
+
+          if (action === 'delete') {
+            var nameEl = card.querySelector('.address-name');
+            var title = nameEl ? nameEl.textContent.trim() : 'Bu adresi';
+            var confirmed = window.confirm('"' + title + '" silmek istediğinize emin misiniz? (demo)');
+            if (confirmed) {
+              card.remove();
+              updateAddressEmptyState();
+              showToast('Adres silindi (demo).', 'success');
+            } else {
+              showToast('İşlem iptal edildi.', 'info');
+            }
+          }
+        });
+      }
+
+      var newAddressCard = document.querySelector('.card-new-address');
+      var titleInput = document.querySelector('[name="addressTitle"]');
+      var fullNameInput = document.querySelector('[name="fullName"]');
+      var phoneInput = document.querySelector('[name="phone"]');
+      var cityDistrictInput = document.querySelector('[name="cityDistrict"]');
+      var addressLineInput = document.querySelector('[name="addressLine"]');
+      var addressTypeSelect = document.querySelector('[name="addressType"]');
+      var submitButton = newAddressCard ? newAddressCard.querySelector('[data-action="submit-address"]') : null;
+      var resetButton = newAddressCard ? newAddressCard.querySelector('[data-action="reset-form"]') : null;
+
+      var requiredFields = [titleInput, fullNameInput, phoneInput, cityDistrictInput, addressLineInput];
+
+      function clearFieldErrors() {
+        requiredFields.forEach(function (field) {
+          if (field) {
+            field.classList.remove('field-error');
+          }
+        });
+      }
+
+      function clearForm() {
+        if (titleInput) titleInput.value = '';
+        if (fullNameInput) fullNameInput.value = '';
+        if (phoneInput) phoneInput.value = '';
+        if (cityDistrictInput) cityDistrictInput.value = '';
+        if (addressLineInput) addressLineInput.value = '';
+        if (addressTypeSelect) addressTypeSelect.value = '';
+        clearFieldErrors();
+      }
+
+      if (submitButton) {
+        submitButton.addEventListener('click', function () {
+          clearFieldErrors();
+          var invalid = requiredFields.filter(function (field) {
+            return !field || !field.value.trim();
+          });
+          if (invalid.length) {
+            invalid.forEach(function (field) {
+              if (field) {
+                field.classList.add('field-error');
+              }
+            });
+            showToast('Lütfen zorunlu alanları doldurun.', 'error');
+            return;
+          }
+
+          if (!addressList) return;
+
+          var card = document.createElement('div');
+          card.className = 'address-card';
+
+          var title = titleInput ? titleInput.value.trim() : '';
+          var addrLine = addressLineInput ? addressLineInput.value.trim() : '';
+          var cityLine = cityDistrictInput ? cityDistrictInput.value.trim() : '';
+          var fullName = fullNameInput ? fullNameInput.value.trim() : '';
+          var phone = phoneInput ? phoneInput.value.trim() : '';
+          var typeValue = addressTypeSelect ? addressTypeSelect.value : '';
+
+          var badgeLabel = 'Adres';
+          var badgeType = 'custom';
+          if (typeValue === 'home') {
+            badgeLabel = 'Ev adresi';
+            badgeType = 'delivery';
+          } else if (typeValue === 'work') {
+            badgeLabel = 'İş adresi';
+            badgeType = 'invoice';
+          } else if (typeValue === 'other') {
+            badgeLabel = 'Diğer adres';
+            badgeType = 'custom';
+          }
+
+          card.innerHTML =
+            '<div class="address-head">' +
+              '<div class="address-name">' + escapeHtml(title) + '</div>' +
+              '<div class="badge" data-address-type="' + badgeType + '">' + escapeHtml(badgeLabel) + '</div>' +
+            '</div>' +
+            '<div class="address-text">' +
+              escapeHtml(addrLine) + '<br/>' +
+              escapeHtml(cityLine) +
+            '</div>' +
+            '<div class="address-meta">' +
+              'İsim: ' + escapeHtml(fullName) + ' • Telefon: ' + escapeHtml(phone) +
+            '</div>' +
+            '<div class="address-actions">' +
+              '<button class="btn-xs" data-action="set-default">Varsayılan yap</button>' +
+              '<button class="btn-xs" data-action="edit">Düzenle</button>' +
+              '<button class="btn-xs" data-action="delete">Sil</button>' +
+            '</div>';
+
+          addressList.appendChild(card);
+          updateAddressEmptyState();
+          clearForm();
+          showToast('Yeni adresiniz eklendi (demo).', 'success');
+        });
+      }
+
+      if (resetButton) {
+        resetButton.addEventListener('click', function () {
+          clearForm();
+          showToast('Adres formu temizlendi.', 'info');
+        });
+      }
+
+      var searchInput = document.querySelector('.search-input');
+      function filterAddresses(term) {
+        if (!addressList) return;
+
+        var cards = Array.prototype.slice.call(addressList.querySelectorAll('.address-card'));
+        var normalizedTerm = term.toLowerCase();
+        var visibleCount = 0;
+
+        cards.forEach(function (card) {
+          var text = card.innerText.toLowerCase();
+          var match = !normalizedTerm || text.indexOf(normalizedTerm) !== -1;
+          card.style.display = match ? '' : 'none';
+          if (match) visibleCount++;
+        });
+
+        if (addressEmpty) {
+          addressEmpty.style.display = visibleCount ? 'none' : 'block';
+        }
+
+        if (normalizedTerm) {
+          var msg = visibleCount
+            ? '"' + term + '" için adresler filtrelendi (demo).'
+            : '"' + term + '" için adres bulunamadı (demo).';
+          showToast(msg, visibleCount ? 'info' : 'error');
+        } else {
+          showToast('Tüm adresler gösteriliyor.', 'info');
+        }
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            var term = searchInput.value.trim();
+            filterAddresses(term);
+          }
+        });
+      }
+
+      updateAddressEmptyState();
+      window.showToast = showToast;
+    });
+  </script>
+</body>
+</html>

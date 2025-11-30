@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AlSatGo - Kimlik Doğrulama</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.18), transparent 55%),
+        radial-gradient(circle at top right, rgba(244,114,182,.2), transparent 55%),
+        radial-gradient(circle at bottom, rgba(250,204,21,.22), transparent 60%),
+        #020617;
+      color:#e5e7eb;
+      padding: 18px 10px 24px;
+    }
+    .shell {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom: 16px;
+      gap:10px;
+    }
+    .logo {
+      font-weight:800;
+      font-size: 22px;
+      letter-spacing:.06em;
+    }
+    .logo span { color:#facc15; }
+    .stepper {
+      display:flex;
+      gap:8px;
+      font-size:11px;
+      color:#9ca3af;
+      flex-wrap:wrap;
+    }
+    .step {
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 10px;
+      border-radius:999px;
+      background: rgba(15,23,42,.85);
+      border:1px solid rgba(148,163,184,.6);
+    }
+    .step span.circle {
+      width:16px;
+      height:16px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:10px;
+      background:#020617;
+      color:#facc15;
+    }
+    .step.active {
+      border-color:#facc15;
+      box-shadow: 0 0 18px rgba(250,204,21,.55);
+    }
+    .card {
+      border-radius: 24px;
+      padding: 22px 20px 18px;
+      background: rgba(15,23,42,.96);
+      border: 1px solid rgba(148,163,184,.6);
+      box-shadow: 0 24px 65px rgba(15,23,42,1);
+      backdrop-filter: blur(20px);
+    }
+    h1 {
+      font-size:22px;
+      margin-bottom:6px;
+    }
+    .lead {
+      font-size:13px;
+      color:#cbd5f5;
+      margin-bottom:14px;
+    }
+    form {
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap:14px 18px;
+      margin-top: 6px;
+    }
+    .field {
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      font-size:12px;
+    }
+    .field label {
+      color:#cbd5f5;
+    }
+    .control {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      border-radius:14px;
+      border:1px solid rgba(148,163,184,.7);
+      background: rgba(15,23,42,.98);
+      padding: 8px 10px;
+    }
+    .control span.icon {
+      font-size:15px;
+      opacity:.85;
+    }
+    .control input,
+    .control select {
+      flex:1;
+      border:none;
+      outline:none;
+      background:transparent;
+      color:#e5e7eb;
+      font-size:13px;
+    }
+    .control input::placeholder { color:#6b7280; }
+    .radio-row {
+      display:flex;
+      gap:10px;
+      font-size:12px;
+      color:#e5e7eb;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .radio-row label {
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 8px;
+      border-radius:999px;
+      background: rgba(15,23,42,.9);
+      border:1px solid rgba(148,163,184,.6);
+      cursor:pointer;
+      font-size:11px;
+    }
+    .radio-row input[type="radio"] {
+      accent-color:#facc15;
+    }
+    .section-title {
+      grid-column: 1 / -1;
+      margin-top:8px;
+      font-size:13px;
+      color:#9ca3af;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    .section-title span {
+      color:#e5e7eb;
+    }
+    .actions {
+      grid-column: 1 / -1;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top: 8px;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .actions .left {
+      font-size:11px;
+      color:#9ca3af;
+    }
+    .btn-primary, .btn-ghost {
+      border-radius:999px;
+      padding:9px 18px;
+      font-size:13px;
+      cursor:pointer;
+      border:none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg,#facc15,#d97706);
+      color:#111827;
+      font-weight:600;
+      box-shadow: 0 12px 32px rgba(234,179,8,.8);
+    }
+    .btn-primary:hover { filter:brightness(1.05); transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color:#e5e7eb;
+      border:1px solid rgba(148,163,184,.7);
+      font-size:12px;
+    }
+    .btn-ghost:hover { border-color:#facc15; }
+    .hint {
+      font-size:11px;
+      color:#9ca3af;
+      margin-top:4px;
+    }
+    .hidden { display:none; }
+    @media (max-width:640px) {
+      .card { padding:18px 14px 14px; border-radius:20px; }
+    }
+  
+/* Alan durumları için görsel geri bildirim */
+.control input.input-error {
+  box-shadow: 0 0 0 1px rgba(248,113,113,.9);
+}
+.control input.input-ok {
+  box-shadow: 0 0 0 1px rgba(34,197,94,.85);
+}
+
+/* Kimlik sayfası toast sistemi */
+#toast-root{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  z-index:60;
+}
+.toast{
+  min-width:220px;
+  max-width:320px;
+  padding:10px 14px;
+  border-radius:12px;
+  background:rgba(15,23,42,.96);
+  border:1px solid rgba(148,163,184,.6);
+  font-size:13px;
+  color:#e5e7eb;
+  box-shadow:0 18px 40px rgba(0,0,0,.9);
+  animation:toast-in .18s ease-out;
+}
+.toast-info{border-color:rgba(59,130,246,.7);}
+.toast-success{border-color:rgba(34,197,94,.7);}
+.toast-warning{border-color:rgba(250,204,21,.8);}
+.toast-error{border-color:rgba(248,113,113,.9);}
+
+.toast-leave{
+  animation:toast-out .18s ease-in forwards;
+}
+
+@keyframes toast-in{
+  from{opacity:0;transform:translateY(8px) scale(.97);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+@keyframes toast-out{
+  from{opacity:1;transform:translateY(0) scale(1);}
+  to{opacity:0;transform:translateY(6px) scale(.96);}
+}
+
+/* Logo kapsülünü biraz daha premium göstermek için küçük dokunuş */
+.header .logo{
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.7);
+  background:radial-gradient(circle at 0 0,rgba(148,163,184,.25),transparent 60%);
+  box-shadow:0 12px 30px rgba(15,23,42,1);
+}
+
+/* Logo from index */
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+/* Inline link style for terms/privacy */
+
+.link-inline {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 0;
+  font-size: inherit;
+  color: #e5e7eb;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.link-inline:hover {
+  color: #facc15;
+}
+
+</style>
+<style>
+.step-active{box-shadow:0 0 10px rgba(250,204,21,0.6);}
+.step:hover{box-shadow:0 0 6px rgba(250,204,21,0.4);transition:0.2s;}
+.input-error{box-shadow:0 0 6px rgba(239,68,68,0.6)!important;}
+.input-ok{box-shadow:0 0 6px rgba(34,197,94,0.6)!important;}
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="header">
+<a class="logo" href="index.html">
+<span class="logo-icon"></span>
+<span class="logo-word">
+<span class="logo-word-main">AlSat</span>
+<span class="logo-word-go">Go</span>
+</span>
+</a>
+<div class="stepper">
+<div class="step active">
+<span class="circle">1</span>
+<span>Kimlik &amp; İletişim</span>
+</div>
+<div class="step">
+<span class="circle">2</span>
+<span>Adres Bilgileri</span>
+</div>
+<div class="step">
+<span class="circle">3</span>
+<span>Ödeme &amp; Satıcı Tipi</span>
+</div>
+</div>
+</div>
+<div class="card">
+<h1>Kimlik doğrulama bilgilerini doldur</h1>
+<p class="lead">
+        Aşağıdaki alanlar, dolandırıcılığı önlemek ve mevzuata uygun güvenli ödeme akışı sağlayabilmemiz için gereklidir.
+        Bilgilerin AlSatGo gizlilik politikası kapsamında korunur.
+      </p>
+<form action="ilan-ver.html" method="get">
+<div class="section-title"><span>1. Kimlik &amp; İletişim</span></div>
+<div class="field">
+<label for="tc">T.C. Kimlik Numarası</label>
+<div class="control">
+<span class="icon">🪪</span>
+<input id="tc" inputmode="numeric" placeholder="11 haneli T.C. kimlik numaranız" required="" type="text"/>
+</div>
+</div>
+<div class="field">
+<label for="name">Ad Soyad</label>
+<div class="control">
+<span class="icon">👤</span>
+<input id="name" placeholder="Kimlikte yer alan adınız soyadınız" required="" type="text"/>
+</div>
+</div>
+<div class="field">
+<label for="birth">Doğum Tarihi</label>
+<div class="control">
+<span class="icon">📅</span>
+<input id="birth" required="" type="date"/>
+</div>
+</div>
+<div class="field">
+<label for="phone">Telefon</label>
+<div class="control">
+<span class="icon">📱</span>
+<input id="phone" placeholder="05xx xxx xx xx" required="" type="tel"/>
+</div>
+</div>
+<div class="field">
+<label for="mail">E‑posta</label>
+<div class="control">
+<span class="icon">📧</span>
+<input id="mail" placeholder="ornek@eposta.com" required="" type="email"/>
+</div>
+</div>
+<div class="section-title"><span>2. Adres Bilgileri</span></div>
+<div class="field">
+<label for="il">İl</label>
+<div class="control">
+<span class="icon">📍</span>
+<input id="il" placeholder="İl" required="" type="text"/>
+</div>
+</div>
+<div class="field">
+<label for="ilce">İlçe</label>
+<div class="control">
+<span class="icon">🏙</span>
+<input id="ilce" placeholder="İlçe" required="" type="text"/>
+</div>
+</div>
+<div class="field">
+<label for="mahalle">Mahalle / Sokak</label>
+<div class="control">
+<span class="icon">🛣</span>
+<input id="mahalle" placeholder="Mahalle, sokak, bina" required="" type="text"/>
+</div>
+</div>
+<div class="field">
+<label for="posta">Posta Kodu</label>
+<div class="control">
+<span class="icon">🏷</span>
+<input id="posta" inputmode="numeric" placeholder="Posta kodu" required="" type="text"/>
+</div>
+</div>
+<div class="section-title"><span>3. Satıcı Tipi &amp; Ödeme Bilgileri</span></div>
+<div class="field">
+<label>Satıcı Tipi</label>
+<div class="radio-row">
+<label><input checked="" name="sellerType" onclick="toggleSeller(true)" type="radio" value="bireysel"/> Bireysel Satıcı</label>
+<label><input name="sellerType" onclick="toggleSeller(false)" type="radio" value="ticari"/> Ticari Satıcı / Şirket</label>
+</div>
+<div class="hint">Bireysel satıcılar için vergi numarası zorunlu değildir.</div>
+</div>
+<div class="field bireysel-only">
+<label for="iban_bireysel">IBAN (Bireysel)</label>
+<div class="control">
+<span class="icon">💳</span>
+<input id="iban_bireysel" placeholder="TR XX XXXX XXXX XXXX XXXX XXXX XX" type="text"/>
+</div>
+<div class="hint">Ödemeler yalnızca bu IBAN hesabına yönlendirilecektir.</div>
+</div>
+<div class="field ticari-only hidden">
+<label for="firma">Firma Adı</label>
+<div class="control">
+<span class="icon">🏢</span>
+<input id="firma" placeholder="Ticari unvan / firma adı" type="text"/>
+</div>
+</div>
+<div class="field ticari-only hidden">
+<label for="vergino">Vergi Numarası</label>
+<div class="control">
+<span class="icon">🧾</span>
+<input id="vergino" inputmode="numeric" placeholder="Vergi numaranız" type="text"/>
+</div>
+</div>
+<div class="field ticari-only hidden">
+<label for="iban_ticari">IBAN (Ticari)</label>
+<div class="control">
+<span class="icon">💳</span>
+<input id="iban_ticari" placeholder="TR XX XXXX XXXX XXXX XXXX XXXX XX" type="text"/>
+</div>
+</div>
+<div class="field">
+<label for="bank">Banka Adı</label>
+<div class="control">
+<span class="icon">🏦</span>
+<input id="bank" placeholder="Çalıştığınız banka" type="text"/>
+</div>
+</div>
+<div class="actions">
+<div class="left">Bilgilerini onaylayarak <button class="link-inline" id="termsLink" type="button">Kullanım Şartları</button> ve <button class="link-inline" id="privacyLink" type="button">Gizlilik Politikasını</button> kabul etmiş olursun.</div>
+<div class="right">
+<button class="btn-ghost" id="backButton" type="button">Geri</button>
+<button class="btn-primary" type="submit">Bilgilerimi Onayla ve İlan Ver</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+<script>
+function toggleSeller(isBireysel) {
+  const bireysel = document.querySelectorAll(".bireysel-only");
+  const ticari = document.querySelectorAll(".ticari-only");
+  bireysel.forEach(el => el.classList.toggle("hidden", !isBireysel));
+  ticari.forEach(el => el.classList.toggle("hidden", isBireysel));
+}
+
+const toastRoot = document.getElementById("toast-root");
+
+function showToast(message, type = "info") {
+  if (!toastRoot) return;
+  const el = document.createElement("div");
+  el.className = "toast toast-" + type;
+  el.textContent = message;
+  toastRoot.appendChild(el);
+  setTimeout(() => {
+    el.classList.add("toast-leave");
+    el.addEventListener("animationend", () => el.remove());
+  }, 2600);
+}
+
+function validateForm() {
+  let firstError = null;
+
+  function markError(input) {
+    if (!input) return;
+    input.classList.remove("input-ok");
+    input.classList.add("input-error");
+    if (!firstError) firstError = input;
+  }
+
+  function markOk(input) {
+    if (!input) return;
+    input.classList.remove("input-error");
+    input.classList.add("input-ok");
+  }
+
+  const tc = document.getElementById("tc");
+  if (tc) {
+    const digits = tc.value.replace(/\D/g, "");
+    if (digits.length !== 11) {
+      markError(tc);
+    } else {
+      markOk(tc);
+    }
+  }
+
+  const name = document.getElementById("name");
+  if (name) {
+    if (!name.value.trim()) markError(name); else markOk(name);
+  }
+
+  const birth = document.getElementById("birth");
+  if (birth) {
+    if (!birth.value.trim()) markError(birth); else markOk(birth);
+  }
+
+  const phone = document.getElementById("phone");
+  if (phone) {
+    const raw = phone.value.trim();
+    const digits = raw.replace(/\D/g, "");
+    if (digits.length < 10 || !raw.startsWith("05")) {
+      markError(phone);
+    } else {
+      markOk(phone);
+    }
+  }
+
+  const mail = document.getElementById("mail");
+  if (mail) {
+    const v = mail.value.trim();
+    const at = v.indexOf("@");
+    const dot = v.lastIndexOf(".");
+    if (!v || at < 1 || dot < at + 2) {
+      markError(mail);
+    } else {
+      markOk(mail);
+    }
+  }
+
+  const il = document.getElementById("il");
+  if (il) {
+    if (!il.value.trim()) markError(il); else markOk(il);
+  }
+  const ilce = document.getElementById("ilce");
+  if (ilce) {
+    if (!ilce.value.trim()) markError(ilce); else markOk(ilce);
+  }
+  const mahalle = document.getElementById("mahalle");
+  if (mahalle) {
+    if (!mahalle.value.trim()) markError(mahalle); else markOk(mahalle);
+  }
+  const posta = document.getElementById("posta");
+  if (posta) {
+    const digits = posta.value.replace(/\D/g, "");
+    if (!digits || digits.length < 4) {
+      markError(posta);
+    } else {
+      markOk(posta);
+    }
+  }
+
+  // Satıcı tipi kontrolleri
+  let sellerMode = "bireysel";
+  const sellerRadios = document.querySelectorAll('input[name="sellerType"]');
+  sellerRadios.forEach(r => {
+    if (r.checked) {
+      const labelText = (r.parentElement ? r.parentElement.textContent : "").toLowerCase();
+      if (labelText.includes("ticari") || labelText.includes("şirket")) {
+        sellerMode = "ticari";
+      } else {
+        sellerMode = "bireysel";
+      }
+    }
+  });
+
+  if (sellerMode === "bireysel") {
+    const ibanB = document.getElementById("iban_bireysel");
+    if (ibanB) {
+      if (ibanB.value.trim().length < 10) {
+        markError(ibanB);
+      } else {
+        markOk(ibanB);
+      }
+    }
+  } else if (sellerMode === "ticari") {
+    const firma = document.getElementById("firma");
+    const vergino = document.getElementById("vergino");
+    const ibanT = document.getElementById("iban_ticari");
+
+    if (firma) {
+      if (!firma.value.trim()) markError(firma); else markOk(firma);
+    }
+    if (vergino) {
+      if (!vergino.value.trim()) markError(vergino); else markOk(vergino);
+    }
+    if (ibanT) {
+      if (ibanT.value.trim().length < 10) {
+        markError(ibanT);
+      } else {
+        markOk(ibanT);
+      }
+    }
+  }
+
+  return firstError;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Başlangıçta bireysel alanlarını göster
+  toggleSeller(true);
+
+  // Satıcı tipi değişimi
+  const sellerRadios = document.querySelectorAll('input[name="sellerType"]');
+  sellerRadios.forEach(r => {
+    r.addEventListener("change", () => {
+      const labelText = (r.parentElement ? r.parentElement.textContent : "").toLowerCase();
+      const isBireysel = !(labelText.includes("ticari") || labelText.includes("şirket"));
+      toggleSeller(isBireysel);
+      if (isBireysel) {
+        showToast("Bireysel satıcı moduna geçtin, vergi numarası zorunlu değil (demo).", "info");
+      } else {
+        showToast("Ticari satıcı moduna geçtin, firma ve vergi bilgilerinle ilerleyeceğiz (demo).", "info");
+      }
+    });
+  });
+
+  // Blur'da temel required kontrolü
+  document.querySelectorAll("input").forEach(inp => {
+    inp.addEventListener("blur", () => {
+      if (!inp.required) return;
+      const v = inp.value.trim();
+      if (!v) {
+        inp.classList.remove("input-ok");
+        inp.classList.add("input-error");
+      } else {
+        inp.classList.remove("input-error");
+        inp.classList.add("input-ok");
+      }
+    });
+  });
+
+  // Geri butonu
+  const backBtn = document.getElementById("backButton");
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
+      showToast("Kimlik doğrulama akımından çıkıp uyarı ekranına dönüyorsun (demo).", "info");
+      setTimeout(() => {
+        window.location.href = "kimlik-uyari.html";
+      }, 700);
+    });
+  }
+
+  // Kullanım Şartları / Gizlilik linkleri
+  const termsLink = document.getElementById("termsLink");
+  const privacyLink = document.getElementById("privacyLink");
+  if (termsLink) {
+    termsLink.addEventListener("click", () => {
+      showToast("Kullanım şartları sayfası canlı sistemde detaylı olarak açılacak (demo).", "info");
+    });
+  }
+  if (privacyLink) {
+    privacyLink.addEventListener("click", () => {
+      showToast("Gizlilik politikası, verilerinin nasıl korunduğunu anlatan ayrı bir sayfada gösterilecek (demo).", "info");
+    });
+  }
+
+  // Form submit
+  const form = document.querySelector("form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const firstError = validateForm();
+      if (firstError) {
+        showToast("Lütfen kırmızı ile işaretlenen alanları kontrol et (demo).", "warning");
+        try {
+          firstError.focus();
+          firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+        } catch (err) {}
+        return;
+      }
+      showToast("Kimlik doğrulama bilgin demo ortamında onaylandı, ilan verme ekranına yönlendiriliyorsun.", "success");
+      setTimeout(() => {
+        window.location.href = "ilan-ver.html?verified=1";
+      }, 1100);
+    });
+  }
+
+  // Stepper adımlarına küçük demo davranışı
+  const steps = document.querySelectorAll(".stepper .step");
+  steps.forEach((step, index) => {
+    step.addEventListener("click", () => {
+      if (index === 0) {
+        showToast("Şu an kimlik & iletişim adımındasın (demo).", "info");
+      } else if (index === 1) {
+        showToast("Adres bilgileri adımı canlı sistemde ayrı kart olarak açılacak (demo).", "info");
+      } else if (index === 2) {
+        showToast("Ödeme & satıcı tipi adımı, bu karttan sonra gelecektir (demo).", "info");
+      }
+    });
+  });
+});
+</script>
+<div id="toast-root"></div></body>
+</html>

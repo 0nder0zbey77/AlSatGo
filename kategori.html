@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kategori - AlSatGo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:radial-gradient(circle at top,#020617 0%,#000 100%);
+  color:#f9fafb;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+header{
+  background:rgba(3,7,18,.96);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(148,163,184,.25);
+  padding:12px 20px;
+  position:sticky;top:0;z-index:40;
+}
+.header-inner{
+  max-width:1200px;margin:auto;display:flex;align-items:center;gap:14px;justify-content:space-between;
+}
+.logo{
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+}
+.logo-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 12px;
+  border-radius:999px;
+  background:
+    radial-gradient(circle at 0 0,rgba(250,250,250,.08),transparent 55%),
+    linear-gradient(135deg,rgba(15,23,42,1),rgba(30,64,175,1));
+  border:1px solid rgba(148,163,184,.6);
+  box-shadow:0 18px 40px rgba(0,0,0,.8);
+}
+.logo-icon{
+  width:22px;
+  height:22px;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:radial-gradient(circle at 30% 0%,#facc15,#f97316);
+  font-size:13px;
+}
+.logo-text{
+  font-size:17px;
+  font-weight:600;
+  letter-spacing:.02em;
+}
+.logo-main{color:#e5e7eb;}
+.logo-go{
+  background:linear-gradient(135deg,#facc15,#f97316);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.search{flex:1;margin:0 10px;}
+.search input{
+  width:100%;padding:10px 16px;border-radius:999px;
+  background:rgba(15,23,42,.95);border:1px solid rgba(148,163,184,.5);color:#e5e7eb;
+}
+.container{max-width:1200px;margin:auto;padding:24px 18px 40px;}
+.kat-label{font-size:13px;color:#9ca3af;margin-bottom:6px;}
+.title{font-size:30px;font-weight:700;margin-bottom:4px;}
+.desc{color:#cbd5e1;margin-bottom:22px;font-size:15px;}
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;
+}
+.card{
+  background:rgba(15,23,42,.96);
+  padding:16px;
+  border-radius:18px;
+  border:1px solid #1f2937;
+  box-shadow:0 18px 40px rgba(0,0,0,.7);
+  cursor:pointer;
+  transition:.22s ease;
+}
+.card:hover{
+  border-color:#facc15;
+  transform:translateY(-5px);
+}
+.thumb{
+  height:170px;
+  border-radius:14px;
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:42px;
+  background:radial-gradient(circle at 20% 0%,rgba(248,250,252,.10),transparent 55%),
+             linear-gradient(135deg,#020617 0%,#020617 40%,#111827 100%);
+  border:1px solid rgba(148,163,184,.40);
+}
+.name{font-size:16px;font-weight:600;margin-bottom:6px;}
+.price{color:#facc15;font-weight:700;margin-bottom:4px;}
+.meta{font-size:13px;color:#9ca3af;}
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:2px 9px;border-radius:999px;border:1px solid rgba(148,163,184,.6);
+  font-size:11px;margin-left:6px;color:#e5e7eb;
+}
+
+/* Ultra premium kategori grid sahnesi */
+.container{
+  position:relative;
+}
+.grid::before{
+  content:"";
+  position:absolute;
+  inset:-40px -24px;
+  background:
+    radial-gradient(circle at 0 0,rgba(129,140,248,.12),transparent 55%),
+    radial-gradient(circle at 100% 20%,rgba(248,250,252,.08),transparent 55%),
+    radial-gradient(circle at 50% 100%,rgba(56,189,248,.18),transparent 55%);
+  opacity:.7;
+  filter:blur(38px);
+  z-index:-2;
+}
+.grid::after{
+  content:"";
+  position:absolute;
+  inset:-30px -18px;
+  background-image:linear-gradient(rgba(148,163,184,.18) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(148,163,184,.18) 1px,transparent 1px);
+  background-size:26px 26px;
+  opacity:.13;
+  mask-image:radial-gradient(circle at 50% 0,rgba(0,0,0,.9),transparent 65%);
+  z-index:-1;
+}
+
+/* Kart sahne stil yükseltme */
+.card{
+  position:relative;
+  background:
+    radial-gradient(circle at 0 0,rgba(148,163,184,.20),transparent 60%),
+    radial-gradient(circle at 100% 100%,rgba(56,189,248,.24),transparent 55%),
+    linear-gradient(145deg,rgba(15,23,42,1),rgba(15,23,42,.94));
+  padding:16px 15px 14px;
+  border-radius:20px;
+  border:1px solid rgba(15,23,42,1);
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.85),
+    inset 0 0 0 1px rgba(148,163,184,.18);
+  cursor:pointer;
+  transition:transform .23s ease, box-shadow .23s ease, border-color .23s ease, background .23s ease;
+  overflow:hidden;
+}
+.card::before{
+  content:"";
+  position:absolute;
+  inset:38% -40px auto;
+  height:130%;
+  background:
+    radial-gradient(circle at 50% 0,rgba(248,250,252,.16),transparent 60%);
+  opacity:.16;
+  transform:translateY(18px);
+}
+.card::after{
+  content:"";
+  position:absolute;
+  inset:auto -30px -55px;
+  height:140px;
+  background:
+    radial-gradient(circle at 50% 0,rgba(56,189,248,.45),transparent 65%);
+  opacity:.22;
+  filter:blur(36px);
+  z-index:-1;
+}
+.card:hover{
+  transform:translateY(-6px) scale(1.018);
+  box-shadow:
+    0 26px 70px rgba(0,0,0,.95),
+    0 0 0 1px rgba(148,163,184,.4);
+  border-color:rgba(148,163,184,.65);
+}
+
+/* Emoji / ikon kapsülü ultra görünüm */
+.thumb{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:56px;
+  height:56px;
+  border-radius:999px;
+  background:
+    radial-gradient(circle at 30% 0,rgba(248,250,252,.85),rgba(248,250,252,.1)),
+    radial-gradient(circle at 50% 100%,rgba(59,130,246,.85),rgba(15,23,42,1));
+  box-shadow:
+    0 18px 40px rgba(15,23,42,1),
+    0 0 0 1px rgba(148,163,184,.6);
+  margin-bottom:12px;
+  overflow:hidden;
+}
+.thumb::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 30% 0,rgba(248,250,252,.82),transparent 55%);
+  opacity:.75;
+}
+.thumb::after{
+  content:"";
+  position:absolute;
+  inset:auto 12% -40%;
+  height:50%;
+  background:radial-gradient(circle at 50% 0,rgba(15,23,42,.9),transparent 70%);
+  opacity:.75;
+}
+.thumb span, .thumb emoji, .thumb svg{
+  position:relative;
+  z-index:1;
+}
+.card:hover .thumb{
+  transform:translateY(-1px) scale(1.03);
+}
+
+/* Fiyat tipografisi yükseltme */
+.price{
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:.02em;
+  display:flex;
+  align-items:baseline;
+  gap:4px;
+}
+.price::before{
+  content:"₺";
+  font-size:13px;
+  opacity:.85;
+  padding:2px 7px;
+  border-radius:999px;
+  background:linear-gradient(135deg,rgba(250,204,21,.2),rgba(245,158,11,.05));
+  border:1px solid rgba(250,204,21,.4);
+}
+.price span{
+  background-image:linear-gradient(135deg,#e5e7eb,#facc15);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* Meta ve rozet satırı */
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:6px;
+  justify-content:space-between;
+  margin-top:10px;
+}
+.meta-main{
+  font-size:12px;
+  color:#9ca3af;
+  max-width:60%;
+}
+.badge{
+  padding:3px 8px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.6);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.badge-featured{
+  border-color:rgba(250,204,21,.85);
+  background:radial-gradient(circle at 0 0,rgba(250,204,21,.35),transparent 60%);
+  box-shadow:0 0 18px rgba(250,204,21,.35);
+}
+.badge-seller{
+  border-style:dashed;
+  border-color:rgba(148,163,184,.7);
+  background:rgba(15,23,42,.9);
+}
+.badge-featured:hover,
+.badge-seller:hover{
+  box-shadow:0 0 0 1px rgba(148,163,184,.5);
+}
+
+/* Kart içi başlık & isim */
+.name{
+  font-size:14px;
+  font-weight:600;
+  color:#e5e7eb;
+  margin-bottom:4px;
+}
+
+/* Favori butonunu sahneye uyarlama */
+.fav-btn{
+  top:14px;
+  right:14px;
+  width:30px;
+  height:30px;
+}
+.fav-btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:radial-gradient(circle at 30% 0,rgba(248,250,252,.5),transparent 60%);
+  opacity:.35;
+}
+.fav-btn .fav-icon{
+  position:relative;
+  z-index:1;
+}
+
+/* İlk satır kartları hafif öne çıkarma */
+.grid > .card:nth-child(-n+3){
+  border-color:rgba(250,204,21,.6);
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.95),
+    0 0 0 1px rgba(250,204,21,.35);
+}
+.grid > .card:nth-child(-n+3)::after{
+  background:
+    radial-gradient(circle at 50% 0,rgba(250,204,21,.6),transparent 65%);
+  opacity:.3;
+}
+
+
+.logo{
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+}
+.logo-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 12px;
+  border-radius:999px;
+  background:
+    radial-gradient(circle at 0 0,rgba(250,250,250,.08),transparent 55%),
+    linear-gradient(135deg,rgba(15,23,42,1),rgba(30,64,175,1));
+  border:1px solid rgba(148,163,184,.6);
+  box-shadow:0 18px 40px rgba(0,0,0,.8);
+}
+.logo-icon{
+  width:22px;
+  height:22px;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:radial-gradient(circle at 30% 0%,#facc15,#f97316);
+  font-size:13px;
+}
+.logo-text{
+  font-size:17px;
+  font-weight:600;
+  letter-spacing:.02em;
+}
+.logo-main{color:#e5e7eb;}
+.logo-go{
+  background:linear-gradient(135deg,#facc15,#f97316);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.header-nav{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+}
+.nav-link{
+  color:#e5e7eb;
+  text-decoration:none;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid transparent;
+  opacity:.85;
+}
+.nav-link:hover{
+  border-color:rgba(148,163,184,.6);
+  background:rgba(15,23,42,.9);
+  opacity:1;
+}
+.nav-link.subtle{
+  opacity:.75;
+  font-size:13px;
+}
+.nav-ghost{
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px dashed rgba(250,204,21,.8);
+  background:rgba(15,23,42,.9);
+  color:#facc15;
+  font-weight:500;
+  cursor:pointer;
+}
+.nav-ghost:hover{
+  background:rgba(24,24,27,1);
+}
+.nav-cta{
+  padding:8px 16px;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  background:linear-gradient(135deg,#facc15,#f97316);
+  color:#111827;
+  font-weight:600;
+  box-shadow:0 18px 40px rgba(0,0,0,.85);
+  text-decoration:none;
+}
+.nav-cta:hover{
+  transform:translateY(-1px);
+}
+
+/* Logo & toast from index */
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+</style>
+</head>
+<body>
+<header>
+<div class="header-inner">
+<a class="logo" href="index.html">
+<span class="logo-icon"></span>
+<span class="logo-word">
+<span class="logo-word-main">AlSat</span>
+<span class="logo-word-go">Go</span>
+</span>
+</a>
+<div class="search">
+<input placeholder="Bu kategoride ara..." type="search"/>
+</div>
+<nav class="header-nav">
+<a class="nav-link" href="ilanlar.html">Tüm Ürünler</a>
+<button class="nav-ghost" id="headerFreeAd" type="button">Ücretsiz İlan Ver</button>
+<a class="nav-link subtle" href="login.html">Giriş Yap</a>
+<a class="nav-cta" href="register.html">Üye Ol</a>
+<a href="index.html">Ana Sayfa</a><a href="ikinciel.html">2. El Pazarı</a><a href="magazalar.html">Mağazalar</a><a href="hizmetler.html">Hizmetler</a><a href="profil.html">Profilim</a></nav>
+</div>
+</header>
+<div class="container">
+<div class="kat-label">Kategori</div>
+<div class="title" id="katTitle">Kategori</div>
+<div class="desc" id="katDesc">Seçili kategoriye ait ilanlar listeleniyor.</div>
+<div class="grid" id="urunler"></div>
+</div>
+<script>
+const params = new URLSearchParams(window.location.search);
+const kat = params.get("kat") || "telefon";
+
+const kategoriBilgi = {
+  telefon: { baslik: "Telefonlar", aciklama: "iOS ve Android akıllı telefonlar, uygun fiyatlı modeller ve üst seviye cihazlar." },
+  bilgisayar: { baslik: "Bilgisayar", aciklama: "Dizüstü, masaüstü ve oyuncu bilgisayarları bu kategoride listelenir." },
+  oyun: { baslik: "Oyun & Konsol", aciklama: "PlayStation, Xbox, Nintendo ve oyun aksesuarları." },
+  emlak: { baslik: "Emlak", aciklama: "Satılık ve kiralık daire, ofis ve müstakil ev ilanları." },
+  vasita: { baslik: "Vasıta", aciklama: "Otomobil, motosiklet ve ticari araç ilanları." },
+  moda: { baslik: "Moda", aciklama: "Giyim, ayakkabı ve aksesuar ürünleri." },
+  ev: { baslik: "Ev & Yaşam", aciklama: "Ev dekorasyonu, mobilya ve yaşam ürünleri." },
+  spor: { baslik: "Spor & Outdoor", aciklama: "Spor ekipmanları ve outdoor ürünleri." },
+  beyaz: { baslik: "Beyaz Eşya", aciklama: "Buzdolabı, çamaşır makinesi ve diğer beyaz eşyalar." },
+  tablet: { baslik: "Tablet", aciklama: "iPad ve Android tablet ilanları." },
+  foto: { baslik: "Fotoğraf & Kamera", aciklama: "Fotoğraf makinesi ve kamera ekipmanları." },
+  scooter: { baslik: "Scooter & E-Bisiklet", aciklama: "Elektrikli scooter ve bisiklet ilanları." },
+  gamingpc: { baslik: "Gaming PC", aciklama: "Yüksek performanslı oyuncu bilgisayarları." },
+  saat: { baslik: "Saat & Aksesuar", aciklama: "Akıllı saat ve şık aksesuarlar." },
+  muzik: { baslik: "Müzik Aletleri", aciklama: "Gitar, piyano ve diğer müzik aletleri." },
+  kitap: { baslik: "Kitap & Kırtasiye", aciklama: "Kitaplar, defterler ve kırtasiye ürünleri." },
+  anne: { baslik: "Anne & Bebek", aciklama: "Bebek arabası, bebek odası ve anne ürünleri." },
+  ofis: { baslik: "Ofis & İş Yeri", aciklama: "Ofis mobilyaları ve işyeri ekipmanları." },
+  hobi: { baslik: "Hobi & Eğlence", aciklama: "Koleksiyon, figür ve hobi ürünleri." },
+  antika: { baslik: "Koleksiyon & Antika", aciklama: "Antika eşyalar ve özel koleksiyon ürünleri." },
+};
+
+const kategoriVeri = {
+  telefon: [
+    {
+      name: `Telefonlar - Ürün 1`,
+      price: `26,476 TL`,
+      meta: `Adana • Bireysel satış`,
+      icon: `📱`
+    },
+    {
+      name: `Telefonlar - Ürün 2`,
+      price: `33,882 TL`,
+      meta: `İstanbul • Çok iyi`,
+      icon: `📱`
+    },
+    {
+      name: `Telefonlar - Ürün 3`,
+      price: `74,140 TL`,
+      meta: `Antalya • Çok iyi`,
+      icon: `📱`
+    },
+    {
+      name: `Telefonlar - Ürün 4`,
+      price: `62,312 TL`,
+      meta: `Kocaeli • Sıfır ürün`,
+      icon: `📱`
+    },
+    {
+      name: `Telefonlar - Ürün 5`,
+      price: `51,686 TL`,
+      meta: `Bursa • Bireysel satış`,
+      icon: `📱`
+    },
+    {
+      name: `Telefonlar - Ürün 6`,
+      price: `70,140 TL`,
+      meta: `Konya • Garantili`,
+      icon: `📱`
+    },
+    {
+      name: `Telefonlar - Ürün 7`,
+      price: `63,669 TL`,
+      meta: `İzmir • Bireysel satış`,
+      icon: `📱`
+    },
+    {
+      name: `Telefonlar - Ürün 8`,
+      price: `18,537 TL`,
+      meta: `Adana • Faturalı`,
+      icon: `📱`
+    },
+  ],
+  bilgisayar: [
+    {
+      name: `Bilgisayar - Ürün 1`,
+      price: `18,669 TL`,
+      meta: `Ankara • Sıfır ürün`,
+      icon: `💻`
+    },
+    {
+      name: `Bilgisayar - Ürün 2`,
+      price: `49,123 TL`,
+      meta: `Ankara • İkinci el`,
+      icon: `💻`
+    },
+    {
+      name: `Bilgisayar - Ürün 3`,
+      price: `27,480 TL`,
+      meta: `İzmir • Faturalı`,
+      icon: `💻`
+    },
+    {
+      name: `Bilgisayar - Ürün 4`,
+      price: `25,902 TL`,
+      meta: `Ankara • Garantili`,
+      icon: `💻`
+    },
+    {
+      name: `Bilgisayar - Ürün 5`,
+      price: `19,542 TL`,
+      meta: `İzmir • Faturalı`,
+      icon: `💻`
+    },
+    {
+      name: `Bilgisayar - Ürün 6`,
+      price: `49,616 TL`,
+      meta: `Konya • Faturalı`,
+      icon: `💻`
+    },
+    {
+      name: `Bilgisayar - Ürün 7`,
+      price: `25,777 TL`,
+      meta: `Konya • Bireysel satış`,
+      icon: `💻`
+    },
+    {
+      name: `Bilgisayar - Ürün 8`,
+      price: `15,657 TL`,
+      meta: `İzmir • Bireysel satış`,
+      icon: `💻`
+    },
+  ],
+  oyun: [
+    {
+      name: `Oyun & Konsol - Ürün 1`,
+      price: `35,251 TL`,
+      meta: `İstanbul • Faturalı`,
+      icon: `🎮`
+    },
+    {
+      name: `Oyun & Konsol - Ürün 2`,
+      price: `33,180 TL`,
+      meta: `İzmir • Mağaza ürünü`,
+      icon: `🎮`
+    },
+    {
+      name: `Oyun & Konsol - Ürün 3`,
+      price: `15,976 TL`,
+      meta: `Konya • Çok iyi`,
+      icon: `🎮`
+    },
+    {
+      name: `Oyun & Konsol - Ürün 4`,
+      price: `72,147 TL`,
+      meta: `İzmir • Çok iyi`,
+      icon: `🎮`
+    },
+    {
+      name: `Oyun & Konsol - Ürün 5`,
+      price: `24,124 TL`,
+      meta: `Ankara • Mağaza ürünü`,
+      icon: `🎮`
+    },
+    {
+      name: `Oyun & Konsol - Ürün 6`,
+      price: `57,590 TL`,
+      meta: `Konya • İkinci el`,
+      icon: `🎮`
+    },
+    {
+      name: `Oyun & Konsol - Ürün 7`,
+      price: `24,826 TL`,
+      meta: `İstanbul • Bireysel satış`,
+      icon: `🎮`
+    },
+    {
+      name: `Oyun & Konsol - Ürün 8`,
+      price: `71,184 TL`,
+      meta: `Bursa • Garantili`,
+      icon: `🎮`
+    },
+  ],
+  emlak: [
+    {
+      name: `Emlak - Ürün 1`,
+      price: `25,199 TL`,
+      meta: `Konya • Mağaza ürünü`,
+      icon: `🏠`
+    },
+    {
+      name: `Emlak - Ürün 2`,
+      price: `53,702 TL`,
+      meta: `Adana • Faturalı`,
+      icon: `🏠`
+    },
+    {
+      name: `Emlak - Ürün 3`,
+      price: `69,891 TL`,
+      meta: `İzmir • Faturalı`,
+      icon: `🏠`
+    },
+    {
+      name: `Emlak - Ürün 4`,
+      price: `57,892 TL`,
+      meta: `Antalya • Mağaza ürünü`,
+      icon: `🏠`
+    },
+    {
+      name: `Emlak - Ürün 5`,
+      price: `15,777 TL`,
+      meta: `Adana • Mağaza ürünü`,
+      icon: `🏠`
+    },
+    {
+      name: `Emlak - Ürün 6`,
+      price: `69,302 TL`,
+      meta: `Adana • İkinci el`,
+      icon: `🏠`
+    },
+    {
+      name: `Emlak - Ürün 7`,
+      price: `38,113 TL`,
+      meta: `İstanbul • Sıfır ürün`,
+      icon: `🏠`
+    },
+    {
+      name: `Emlak - Ürün 8`,
+      price: `72,881 TL`,
+      meta: `Konya • Sıfır ürün`,
+      icon: `🏠`
+    },
+  ],
+  vasita: [
+    {
+      name: `Vasıta - Ürün 1`,
+      price: `66,917 TL`,
+      meta: `Bursa • İkinci el`,
+      icon: `🚗`
+    },
+    {
+      name: `Vasıta - Ürün 2`,
+      price: `49,413 TL`,
+      meta: `Ankara • Mağaza ürünü`,
+      icon: `🚗`
+    },
+    {
+      name: `Vasıta - Ürün 3`,
+      price: `69,635 TL`,
+      meta: `Kocaeli • Garantili`,
+      icon: `🚗`
+    },
+    {
+      name: `Vasıta - Ürün 4`,
+      price: `45,137 TL`,
+      meta: `İzmir • Sıfır ürün`,
+      icon: `🚗`
+    },
+    {
+      name: `Vasıta - Ürün 5`,
+      price: `75,238 TL`,
+      meta: `İstanbul • Sıfır ürün`,
+      icon: `🚗`
+    },
+    {
+      name: `Vasıta - Ürün 6`,
+      price: `45,207 TL`,
+      meta: `Antalya • Çok iyi`,
+      icon: `🚗`
+    },
+    {
+      name: `Vasıta - Ürün 7`,
+      price: `46,278 TL`,
+      meta: `Konya • Mağaza ürünü`,
+      icon: `🚗`
+    },
+    {
+      name: `Vasıta - Ürün 8`,
+      price: `72,585 TL`,
+      meta: `Antalya • Çok iyi`,
+      icon: `🚗`
+    },
+  ],
+  moda: [
+    {
+      name: `Moda - Ürün 1`,
+      price: `21,488 TL`,
+      meta: `İstanbul • Faturalı`,
+      icon: `🧥`
+    },
+    {
+      name: `Moda - Ürün 2`,
+      price: `24,181 TL`,
+      meta: `Ankara • Bireysel satış`,
+      icon: `🧥`
+    },
+    {
+      name: `Moda - Ürün 3`,
+      price: `26,750 TL`,
+      meta: `İzmir • Çok iyi`,
+      icon: `🧥`
+    },
+    {
+      name: `Moda - Ürün 4`,
+      price: `44,434 TL`,
+      meta: `Antalya • İkinci el`,
+      icon: `🧥`
+    },
+    {
+      name: `Moda - Ürün 5`,
+      price: `75,185 TL`,
+      meta: `Kocaeli • Garantili`,
+      icon: `🧥`
+    },
+    {
+      name: `Moda - Ürün 6`,
+      price: `55,197 TL`,
+      meta: `İzmir • Bireysel satış`,
+      icon: `🧥`
+    },
+    {
+      name: `Moda - Ürün 7`,
+      price: `47,109 TL`,
+      meta: `İzmir • İkinci el`,
+      icon: `🧥`
+    },
+    {
+      name: `Moda - Ürün 8`,
+      price: `71,718 TL`,
+      meta: `Ankara • Garantili`,
+      icon: `🧥`
+    },
+  ],
+  ev: [
+    {
+      name: `Ev & Yaşam - Ürün 1`,
+      price: `30,568 TL`,
+      meta: `Adana • Bireysel satış`,
+      icon: `🛋️`
+    },
+    {
+      name: `Ev & Yaşam - Ürün 2`,
+      price: `60,738 TL`,
+      meta: `Kocaeli • Bireysel satış`,
+      icon: `🛋️`
+    },
+    {
+      name: `Ev & Yaşam - Ürün 3`,
+      price: `52,380 TL`,
+      meta: `İzmir • Mağaza ürünü`,
+      icon: `🛋️`
+    },
+    {
+      name: `Ev & Yaşam - Ürün 4`,
+      price: `72,514 TL`,
+      meta: `İstanbul • Faturalı`,
+      icon: `🛋️`
+    },
+    {
+      name: `Ev & Yaşam - Ürün 5`,
+      price: `23,609 TL`,
+      meta: `İstanbul • Mağaza ürünü`,
+      icon: `🛋️`
+    },
+    {
+      name: `Ev & Yaşam - Ürün 6`,
+      price: `63,866 TL`,
+      meta: `Bursa • İkinci el`,
+      icon: `🛋️`
+    },
+    {
+      name: `Ev & Yaşam - Ürün 7`,
+      price: `47,408 TL`,
+      meta: `Bursa • Bireysel satış`,
+      icon: `🛋️`
+    },
+    {
+      name: `Ev & Yaşam - Ürün 8`,
+      price: `45,486 TL`,
+      meta: `Antalya • Garantili`,
+      icon: `🛋️`
+    },
+  ],
+  spor: [
+    {
+      name: `Spor & Outdoor - Ürün 1`,
+      price: `30,583 TL`,
+      meta: `İzmir • İkinci el`,
+      icon: `🏕️`
+    },
+    {
+      name: `Spor & Outdoor - Ürün 2`,
+      price: `49,417 TL`,
+      meta: `Bursa • Garantili`,
+      icon: `🏕️`
+    },
+    {
+      name: `Spor & Outdoor - Ürün 3`,
+      price: `70,404 TL`,
+      meta: `Adana • Mağaza ürünü`,
+      icon: `🏕️`
+    },
+    {
+      name: `Spor & Outdoor - Ürün 4`,
+      price: `38,914 TL`,
+      meta: `Kocaeli • Garantili`,
+      icon: `🏕️`
+    },
+    {
+      name: `Spor & Outdoor - Ürün 5`,
+      price: `30,376 TL`,
+      meta: `İzmir • Mağaza ürünü`,
+      icon: `🏕️`
+    },
+    {
+      name: `Spor & Outdoor - Ürün 6`,
+      price: `68,429 TL`,
+      meta: `İzmir • Bireysel satış`,
+      icon: `🏕️`
+    },
+    {
+      name: `Spor & Outdoor - Ürün 7`,
+      price: `59,792 TL`,
+      meta: `Konya • Mağaza ürünü`,
+      icon: `🏕️`
+    },
+    {
+      name: `Spor & Outdoor - Ürün 8`,
+      price: `43,209 TL`,
+      meta: `Konya • Sıfır ürün`,
+      icon: `🏕️`
+    },
+  ],
+  beyaz: [
+    {
+      name: `Beyaz Eşya - Ürün 1`,
+      price: `61,882 TL`,
+      meta: `Antalya • Bireysel satış`,
+      icon: `🧊`
+    },
+    {
+      name: `Beyaz Eşya - Ürün 2`,
+      price: `26,543 TL`,
+      meta: `Bursa • Mağaza ürünü`,
+      icon: `🧊`
+    },
+    {
+      name: `Beyaz Eşya - Ürün 3`,
+      price: `72,604 TL`,
+      meta: `Ankara • Mağaza ürünü`,
+      icon: `🧊`
+    },
+    {
+      name: `Beyaz Eşya - Ürün 4`,
+      price: `40,879 TL`,
+      meta: `Adana • İkinci el`,
+      icon: `🧊`
+    },
+    {
+      name: `Beyaz Eşya - Ürün 5`,
+      price: `55,379 TL`,
+      meta: `İzmir • Faturalı`,
+      icon: `🧊`
+    },
+    {
+      name: `Beyaz Eşya - Ürün 6`,
+      price: `66,573 TL`,
+      meta: `İstanbul • İkinci el`,
+      icon: `🧊`
+    },
+    {
+      name: `Beyaz Eşya - Ürün 7`,
+      price: `56,813 TL`,
+      meta: `İstanbul • Garantili`,
+      icon: `🧊`
+    },
+    {
+      name: `Beyaz Eşya - Ürün 8`,
+      price: `15,332 TL`,
+      meta: `Adana • Mağaza ürünü`,
+      icon: `🧊`
+    },
+  ],
+  tablet: [
+    {
+      name: `Tablet - Ürün 1`,
+      price: `68,418 TL`,
+      meta: `İstanbul • Çok iyi`,
+      icon: `📟`
+    },
+    {
+      name: `Tablet - Ürün 2`,
+      price: `27,393 TL`,
+      meta: `Konya • Garantili`,
+      icon: `📟`
+    },
+    {
+      name: `Tablet - Ürün 3`,
+      price: `27,359 TL`,
+      meta: `Adana • Çok iyi`,
+      icon: `📟`
+    },
+    {
+      name: `Tablet - Ürün 4`,
+      price: `28,677 TL`,
+      meta: `İstanbul • Mağaza ürünü`,
+      icon: `📟`
+    },
+    {
+      name: `Tablet - Ürün 5`,
+      price: `22,250 TL`,
+      meta: `İstanbul • Çok iyi`,
+      icon: `📟`
+    },
+    {
+      name: `Tablet - Ürün 6`,
+      price: `15,657 TL`,
+      meta: `Kocaeli • İkinci el`,
+      icon: `📟`
+    },
+    {
+      name: `Tablet - Ürün 7`,
+      price: `16,609 TL`,
+      meta: `İzmir • Sıfır ürün`,
+      icon: `📟`
+    },
+    {
+      name: `Tablet - Ürün 8`,
+      price: `20,722 TL`,
+      meta: `Adana • Bireysel satış`,
+      icon: `📟`
+    },
+  ],
+  foto: [
+    {
+      name: `Fotoğraf & Kamera - Ürün 1`,
+      price: `65,851 TL`,
+      meta: `İzmir • Garantili`,
+      icon: `📸`
+    },
+    {
+      name: `Fotoğraf & Kamera - Ürün 2`,
+      price: `65,355 TL`,
+      meta: `Antalya • Faturalı`,
+      icon: `📸`
+    },
+    {
+      name: `Fotoğraf & Kamera - Ürün 3`,
+      price: `75,433 TL`,
+      meta: `Bursa • Çok iyi`,
+      icon: `📸`
+    },
+    {
+      name: `Fotoğraf & Kamera - Ürün 4`,
+      price: `66,261 TL`,
+      meta: `Kocaeli • İkinci el`,
+      icon: `📸`
+    },
+    {
+      name: `Fotoğraf & Kamera - Ürün 5`,
+      price: `18,661 TL`,
+      meta: `Adana • Bireysel satış`,
+      icon: `📸`
+    },
+    {
+      name: `Fotoğraf & Kamera - Ürün 6`,
+      price: `33,453 TL`,
+      meta: `Bursa • İkinci el`,
+      icon: `📸`
+    },
+    {
+      name: `Fotoğraf & Kamera - Ürün 7`,
+      price: `15,733 TL`,
+      meta: `Adana • Mağaza ürünü`,
+      icon: `📸`
+    },
+    {
+      name: `Fotoğraf & Kamera - Ürün 8`,
+      price: `30,209 TL`,
+      meta: `Bursa • Faturalı`,
+      icon: `📸`
+    },
+  ],
+  scooter: [
+    {
+      name: `Scooter & E-Bisiklet - Ürün 1`,
+      price: `42,297 TL`,
+      meta: `Bursa • Mağaza ürünü`,
+      icon: `🛴`
+    },
+    {
+      name: `Scooter & E-Bisiklet - Ürün 2`,
+      price: `58,362 TL`,
+      meta: `Antalya • Faturalı`,
+      icon: `🛴`
+    },
+    {
+      name: `Scooter & E-Bisiklet - Ürün 3`,
+      price: `74,528 TL`,
+      meta: `Adana • İkinci el`,
+      icon: `🛴`
+    },
+    {
+      name: `Scooter & E-Bisiklet - Ürün 4`,
+      price: `34,333 TL`,
+      meta: `İstanbul • Mağaza ürünü`,
+      icon: `🛴`
+    },
+    {
+      name: `Scooter & E-Bisiklet - Ürün 5`,
+      price: `35,624 TL`,
+      meta: `Konya • Çok iyi`,
+      icon: `🛴`
+    },
+    {
+      name: `Scooter & E-Bisiklet - Ürün 6`,
+      price: `66,138 TL`,
+      meta: `Ankara • İkinci el`,
+      icon: `🛴`
+    },
+    {
+      name: `Scooter & E-Bisiklet - Ürün 7`,
+      price: `24,624 TL`,
+      meta: `Antalya • Bireysel satış`,
+      icon: `🛴`
+    },
+    {
+      name: `Scooter & E-Bisiklet - Ürün 8`,
+      price: `29,461 TL`,
+      meta: `Konya • Sıfır ürün`,
+      icon: `🛴`
+    },
+  ],
+  gamingpc: [
+    {
+      name: `Gaming PC - Ürün 1`,
+      price: `69,588 TL`,
+      meta: `Ankara • Mağaza ürünü`,
+      icon: `🖥️`
+    },
+    {
+      name: `Gaming PC - Ürün 2`,
+      price: `52,330 TL`,
+      meta: `İzmir • Bireysel satış`,
+      icon: `🖥️`
+    },
+    {
+      name: `Gaming PC - Ürün 3`,
+      price: `66,692 TL`,
+      meta: `İzmir • Bireysel satış`,
+      icon: `🖥️`
+    },
+    {
+      name: `Gaming PC - Ürün 4`,
+      price: `22,325 TL`,
+      meta: `Kocaeli • Faturalı`,
+      icon: `🖥️`
+    },
+    {
+      name: `Gaming PC - Ürün 5`,
+      price: `28,132 TL`,
+      meta: `Kocaeli • Garantili`,
+      icon: `🖥️`
+    },
+    {
+      name: `Gaming PC - Ürün 6`,
+      price: `44,278 TL`,
+      meta: `Bursa • Garantili`,
+      icon: `🖥️`
+    },
+    {
+      name: `Gaming PC - Ürün 7`,
+      price: `15,555 TL`,
+      meta: `İstanbul • İkinci el`,
+      icon: `🖥️`
+    },
+    {
+      name: `Gaming PC - Ürün 8`,
+      price: `70,713 TL`,
+      meta: `Adana • Garantili`,
+      icon: `🖥️`
+    },
+  ],
+  saat: [
+    {
+      name: `Saat & Aksesuar - Ürün 1`,
+      price: `39,647 TL`,
+      meta: `Adana • Garantili`,
+      icon: `⌚`
+    },
+    {
+      name: `Saat & Aksesuar - Ürün 2`,
+      price: `59,540 TL`,
+      meta: `Adana • Bireysel satış`,
+      icon: `⌚`
+    },
+    {
+      name: `Saat & Aksesuar - Ürün 3`,
+      price: `70,939 TL`,
+      meta: `Bursa • Garantili`,
+      icon: `⌚`
+    },
+    {
+      name: `Saat & Aksesuar - Ürün 4`,
+      price: `66,786 TL`,
+      meta: `Adana • Mağaza ürünü`,
+      icon: `⌚`
+    },
+    {
+      name: `Saat & Aksesuar - Ürün 5`,
+      price: `22,897 TL`,
+      meta: `İzmir • Faturalı`,
+      icon: `⌚`
+    },
+    {
+      name: `Saat & Aksesuar - Ürün 6`,
+      price: `22,990 TL`,
+      meta: `Kocaeli • Faturalı`,
+      icon: `⌚`
+    },
+    {
+      name: `Saat & Aksesuar - Ürün 7`,
+      price: `43,775 TL`,
+      meta: `Antalya • Sıfır ürün`,
+      icon: `⌚`
+    },
+    {
+      name: `Saat & Aksesuar - Ürün 8`,
+      price: `26,766 TL`,
+      meta: `Konya • Çok iyi`,
+      icon: `⌚`
+    },
+  ],
+  muzik: [
+    {
+      name: `Müzik Aletleri - Ürün 1`,
+      price: `64,834 TL`,
+      meta: `Bursa • İkinci el`,
+      icon: `🎸`
+    },
+    {
+      name: `Müzik Aletleri - Ürün 2`,
+      price: `45,838 TL`,
+      meta: `İzmir • Faturalı`,
+      icon: `🎸`
+    },
+    {
+      name: `Müzik Aletleri - Ürün 3`,
+      price: `41,796 TL`,
+      meta: `Kocaeli • Sıfır ürün`,
+      icon: `🎸`
+    },
+    {
+      name: `Müzik Aletleri - Ürün 4`,
+      price: `54,629 TL`,
+      meta: `Ankara • Garantili`,
+      icon: `🎸`
+    },
+    {
+      name: `Müzik Aletleri - Ürün 5`,
+      price: `20,731 TL`,
+      meta: `Adana • Faturalı`,
+      icon: `🎸`
+    },
+    {
+      name: `Müzik Aletleri - Ürün 6`,
+      price: `74,180 TL`,
+      meta: `Ankara • İkinci el`,
+      icon: `🎸`
+    },
+    {
+      name: `Müzik Aletleri - Ürün 7`,
+      price: `64,936 TL`,
+      meta: `Kocaeli • İkinci el`,
+      icon: `🎸`
+    },
+    {
+      name: `Müzik Aletleri - Ürün 8`,
+      price: `25,882 TL`,
+      meta: `İstanbul • Sıfır ürün`,
+      icon: `🎸`
+    },
+  ],
+  kitap: [
+    {
+      name: `Kitap & Kırtasiye - Ürün 1`,
+      price: `61,135 TL`,
+      meta: `Kocaeli • İkinci el`,
+      icon: `📚`
+    },
+    {
+      name: `Kitap & Kırtasiye - Ürün 2`,
+      price: `59,466 TL`,
+      meta: `İstanbul • Bireysel satış`,
+      icon: `📚`
+    },
+    {
+      name: `Kitap & Kırtasiye - Ürün 3`,
+      price: `69,950 TL`,
+      meta: `Kocaeli • İkinci el`,
+      icon: `📚`
+    },
+    {
+      name: `Kitap & Kırtasiye - Ürün 4`,
+      price: `32,419 TL`,
+      meta: `Ankara • Faturalı`,
+      icon: `📚`
+    },
+    {
+      name: `Kitap & Kırtasiye - Ürün 5`,
+      price: `30,940 TL`,
+      meta: `İzmir • Garantili`,
+      icon: `📚`
+    },
+    {
+      name: `Kitap & Kırtasiye - Ürün 6`,
+      price: `44,124 TL`,
+      meta: `İzmir • Garantili`,
+      icon: `📚`
+    },
+    {
+      name: `Kitap & Kırtasiye - Ürün 7`,
+      price: `74,520 TL`,
+      meta: `İstanbul • Mağaza ürünü`,
+      icon: `📚`
+    },
+    {
+      name: `Kitap & Kırtasiye - Ürün 8`,
+      price: `33,694 TL`,
+      meta: `Adana • Garantili`,
+      icon: `📚`
+    },
+  ],
+  anne: [
+    {
+      name: `Anne & Bebek - Ürün 1`,
+      price: `63,528 TL`,
+      meta: `Ankara • Sıfır ürün`,
+      icon: `👶`
+    },
+    {
+      name: `Anne & Bebek - Ürün 2`,
+      price: `74,905 TL`,
+      meta: `Konya • Sıfır ürün`,
+      icon: `👶`
+    },
+    {
+      name: `Anne & Bebek - Ürün 3`,
+      price: `18,909 TL`,
+      meta: `Ankara • Bireysel satış`,
+      icon: `👶`
+    },
+    {
+      name: `Anne & Bebek - Ürün 4`,
+      price: `43,723 TL`,
+      meta: `Ankara • Garantili`,
+      icon: `👶`
+    },
+    {
+      name: `Anne & Bebek - Ürün 5`,
+      price: `71,616 TL`,
+      meta: `Adana • Mağaza ürünü`,
+      icon: `👶`
+    },
+    {
+      name: `Anne & Bebek - Ürün 6`,
+      price: `23,336 TL`,
+      meta: `Adana • İkinci el`,
+      icon: `👶`
+    },
+    {
+      name: `Anne & Bebek - Ürün 7`,
+      price: `30,562 TL`,
+      meta: `Ankara • Çok iyi`,
+      icon: `👶`
+    },
+    {
+      name: `Anne & Bebek - Ürün 8`,
+      price: `57,213 TL`,
+      meta: `İstanbul • Garantili`,
+      icon: `👶`
+    },
+  ],
+  ofis: [
+    {
+      name: `Ofis & İş Yeri - Ürün 1`,
+      price: `56,225 TL`,
+      meta: `Kocaeli • Bireysel satış`,
+      icon: `🏢`
+    },
+    {
+      name: `Ofis & İş Yeri - Ürün 2`,
+      price: `58,106 TL`,
+      meta: `Adana • Garantili`,
+      icon: `🏢`
+    },
+    {
+      name: `Ofis & İş Yeri - Ürün 3`,
+      price: `27,179 TL`,
+      meta: `İzmir • Bireysel satış`,
+      icon: `🏢`
+    },
+    {
+      name: `Ofis & İş Yeri - Ürün 4`,
+      price: `70,456 TL`,
+      meta: `Antalya • Sıfır ürün`,
+      icon: `🏢`
+    },
+    {
+      name: `Ofis & İş Yeri - Ürün 5`,
+      price: `56,948 TL`,
+      meta: `İzmir • Sıfır ürün`,
+      icon: `🏢`
+    },
+    {
+      name: `Ofis & İş Yeri - Ürün 6`,
+      price: `42,882 TL`,
+      meta: `İzmir • İkinci el`,
+      icon: `🏢`
+    },
+    {
+      name: `Ofis & İş Yeri - Ürün 7`,
+      price: `58,957 TL`,
+      meta: `Adana • İkinci el`,
+      icon: `🏢`
+    },
+    {
+      name: `Ofis & İş Yeri - Ürün 8`,
+      price: `47,251 TL`,
+      meta: `İstanbul • Mağaza ürünü`,
+      icon: `🏢`
+    },
+  ],
+  hobi: [
+    {
+      name: `Hobi & Eğlence - Ürün 1`,
+      price: `60,663 TL`,
+      meta: `İzmir • İkinci el`,
+      icon: `🧩`
+    },
+    {
+      name: `Hobi & Eğlence - Ürün 2`,
+      price: `72,112 TL`,
+      meta: `İstanbul • Garantili`,
+      icon: `🧩`
+    },
+    {
+      name: `Hobi & Eğlence - Ürün 3`,
+      price: `56,685 TL`,
+      meta: `İzmir • Garantili`,
+      icon: `🧩`
+    },
+    {
+      name: `Hobi & Eğlence - Ürün 4`,
+      price: `37,941 TL`,
+      meta: `Bursa • Mağaza ürünü`,
+      icon: `🧩`
+    },
+    {
+      name: `Hobi & Eğlence - Ürün 5`,
+      price: `58,607 TL`,
+      meta: `Kocaeli • Mağaza ürünü`,
+      icon: `🧩`
+    },
+    {
+      name: `Hobi & Eğlence - Ürün 6`,
+      price: `64,145 TL`,
+      meta: `İstanbul • Garantili`,
+      icon: `🧩`
+    },
+    {
+      name: `Hobi & Eğlence - Ürün 7`,
+      price: `60,249 TL`,
+      meta: `İzmir • Bireysel satış`,
+      icon: `🧩`
+    },
+    {
+      name: `Hobi & Eğlence - Ürün 8`,
+      price: `68,300 TL`,
+      meta: `İstanbul • Sıfır ürün`,
+      icon: `🧩`
+    },
+  ],
+  antika: [
+    {
+      name: `Koleksiyon & Antika - Ürün 1`,
+      price: `51,676 TL`,
+      meta: `Bursa • Sıfır ürün`,
+      icon: `🏺`
+    },
+    {
+      name: `Koleksiyon & Antika - Ürün 2`,
+      price: `74,271 TL`,
+      meta: `Kocaeli • Çok iyi`,
+      icon: `🏺`
+    },
+    {
+      name: `Koleksiyon & Antika - Ürün 3`,
+      price: `63,182 TL`,
+      meta: `Ankara • Mağaza ürünü`,
+      icon: `🏺`
+    },
+    {
+      name: `Koleksiyon & Antika - Ürün 4`,
+      price: `15,451 TL`,
+      meta: `Antalya • Mağaza ürünü`,
+      icon: `🏺`
+    },
+    {
+      name: `Koleksiyon & Antika - Ürün 5`,
+      price: `59,813 TL`,
+      meta: `Bursa • Bireysel satış`,
+      icon: `🏺`
+    },
+    {
+      name: `Koleksiyon & Antika - Ürün 6`,
+      price: `54,807 TL`,
+      meta: `Antalya • Sıfır ürün`,
+      icon: `🏺`
+    },
+    {
+      name: `Koleksiyon & Antika - Ürün 7`,
+      price: `62,831 TL`,
+      meta: `Kocaeli • Faturalı`,
+      icon: `🏺`
+    },
+    {
+      name: `Koleksiyon & Antika - Ürün 8`,
+      price: `60,559 TL`,
+      meta: `Ankara • İkinci el`,
+      icon: `🏺`
+    },
+  ],
+};
+
+const seciliBilgi = kategoriBilgi[kat] || { baslik: "Kategori", aciklama: "Seçili kategoriye ait ilanlar listeleniyor." };
+document.getElementById("katTitle").innerText = seciliBilgi.baslik;
+document.getElementById("katDesc").innerText = seciliBilgi.aciklama;
+
+const urunlerEl = document.getElementById("urunler");
+const liste = kategoriVeri[kat] || kategoriVeri["telefon"];
+
+liste.forEach(u => {
+  const c = document.createElement("div");
+  c.className = "card";
+  c.onclick = () => location.href = 'urun-detay.html';
+  c.innerHTML = `
+    <div class="thumb">${u.icon}</div>
+    <div class="name">${u.name}</div>
+    <div class="price"><span>${u.price}</span></div>
+    <div class="meta">${u.meta} <span class="badge">Öne çıkan</span></div>
+  `;
+  urunlerEl.appendChild(c);
+});
+
+const toastRoot = document.getElementById("toast-root");
+
+function showToast(message, type = "info") {
+  if (!toastRoot) return;
+  const el = document.createElement("div");
+  el.className = "toast toast-" + type;
+  el.textContent = message;
+  toastRoot.appendChild(el);
+  setTimeout(() => {
+    el.classList.add("toast-leave");
+    el.addEventListener("animationend", () => el.remove());
+  }, 2600);
+}
+
+const searchInput = document.querySelector(".search input");
+if (searchInput) {
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const value = searchInput.value.trim();
+      if (value.length < 2) {
+        showToast("Lütfen aramak için en az 2 karakter gir (demo).", "warning");
+        return;
+      }
+      showToast(`"${value}" için ilgili ilanlar listeleniyor (demo).`, "info");
+      setTimeout(() => {
+        window.location.href = "ilanlar.html?q=" + encodeURIComponent(value) + "&from=category";
+      }, 800);
+    }
+  });
+}
+
+const headerFreeAd = document.getElementById("headerFreeAd");
+if (headerFreeAd) {
+  headerFreeAd.addEventListener("click", () => {
+    showToast("Kimliğini doğrulayarak ilan vermeye geçiyorsun (demo).", "info");
+    setTimeout(() => {
+      window.location.href = "kimlik-uyari.html";
+    }, 800);
+  });
+}
+
+</script>
+<div class="toast-root" id="toast-root"></div></body>
+</html>

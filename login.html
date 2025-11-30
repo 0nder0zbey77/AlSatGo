@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AlSatGo - Giriş Yap</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      min-height: 100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.18), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(250,204,21,.18), transparent 60%),
+        #020617;
+      color:#e5e7eb;
+    }
+    .shell {
+      width:100%;
+      max-width: 420px;
+      padding: 28px 20px 26px;
+    }
+    .card {
+      border-radius: 22px;
+      padding: 26px 22px 22px;
+      background: rgba(15,23,42,.92);
+      border: 1px solid rgba(148,163,184,.45);
+      box-shadow: 0 18px 45px rgba(15,23,42,.9);
+      backdrop-filter: blur(16px);
+    }
+    .logo {
+      margin-bottom: 10px;
+      text-align:center;
+    }
+    .logo span { color:#facc15; }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      text-align:center;
+    }
+    .sub {
+      font-size: 13px;
+      color:#9ca3af;
+      text-align:center;
+      margin-bottom: 18px;
+    }
+    .social-group {
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom: 18px;
+    }
+    .social-btn {
+      width:100%;
+      border-radius: 999px;
+      border:1px solid rgba(148,163,184,.5);
+      padding: 9px 14px;
+      background: rgba(15,23,42,.9);
+      color:#e5e7eb;
+      font-size: 13px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      cursor:pointer;
+      transition:.18s;
+    }
+    .social-btn span.icon {
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:13px;
+      background:#fff;
+      color:#111827;
+    }
+    .social-btn.apple {
+      background: #020617;
+      border-color: rgba(148,163,184,.7);
+    }
+    .social-btn.apple span.icon {
+      background:#0f172a;
+      color:#f9fafb;
+      font-size:15px;
+    }
+    .social-btn:hover {
+      border-color:#facc15;
+      box-shadow: 0 0 18px rgba(250,204,21,.45);
+      transform: translateY(-1px);
+    }
+    .divider {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin: 12px 0;
+      font-size: 11px;
+      color:#6b7280;
+    }
+    .divider span.line {
+      flex:1;
+      height:1px;
+      background: radial-gradient(circle, rgba(148,163,184,.7), transparent);
+      opacity:.6;
+    }
+    form {
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    label {
+      font-size: 12px;
+      color:#cbd5f5;
+    }
+    .field {
+      border-radius: 14px;
+      border:1px solid rgba(148,163,184,.55);
+      background: rgba(15,23,42,.9);
+      display:flex;
+      align-items:center;
+      padding: 8px 10px;
+      gap:8px;
+    }
+    .field span.icon {
+      font-size: 15px;
+      opacity:.8;
+    }
+    .field input {
+      border:none;
+      outline:none;
+      background:transparent;
+      color:#e5e7eb;
+      font-size: 13px;
+      flex:1;
+    }
+    .field input::placeholder { color:#6b7280; }
+    .row {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:4px;
+    }
+    .row label.rem {
+      display:flex;
+      align-items:center;
+      gap:6px;
+      font-size:11px;
+      color:#9ca3af;
+      cursor:pointer;
+    }
+    .row input[type="checkbox"] {
+      width:13px;
+      height:13px;
+      border-radius:3px;
+      border:1px solid rgba(148,163,184,.6);
+      accent-color:#facc15;
+    }
+    .row a {
+      font-size:11px;
+      color:#e5e7eb;
+      text-decoration:none;
+      opacity:.8;
+    }
+    .row a:hover { opacity:1; text-decoration:underline; }
+    .btn-primary {
+      margin-top: 10px;
+      width:100%;
+      border-radius:999px;
+      border:none;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight:600;
+      cursor:pointer;
+      background: linear-gradient(135deg,#facc15,#d97706);
+      color:#111827;
+      box-shadow: 0 10px 30px rgba(234,179,8,.65);
+      transition:.2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter:brightness(1.05);
+    }
+    .foot {
+      margin-top: 14px;
+      font-size: 12px;
+      color:#9ca3af;
+      text-align:center;
+    }
+    .foot a {
+      color:#facc15;
+      text-decoration:none;
+      font-weight:500;
+    }
+    .foot a:hover { text-decoration:underline; }
+    .back-link {
+      margin-top: 18px;
+      text-align:center;
+      font-size:11px;
+      color:#6b7280;
+    }
+    .back-link a {
+      color:#9ca3af;
+      text-decoration:none;
+    }
+    .back-link a:hover { text-decoration:underline; }
+  
+    .logo-pill {
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:11px 24px;
+      border-radius:999px;
+      border:1px solid rgba(250,204,21,.65);
+      background:
+        radial-gradient(circle at 0 0, rgba(148,163,184,.35), transparent 60%),
+        rgba(15,23,42,.96);
+      color:#e5e7eb;
+      font-size:14px;
+      cursor:pointer;
+      box-shadow:
+        0 18px 45px rgba(15,23,42,1),
+        0 0 32px rgba(250,204,21,.2);
+      animation:logo-pulse 5.5s ease-in-out infinite;
+      overflow:visible;
+    }
+    .logo-pill::before {
+      content:"";
+      position:absolute;
+      inset:-8px;
+      border-radius:inherit;
+      background:radial-gradient(circle at 50% 0,rgba(250,204,21,.38),transparent 65%);
+      opacity:.9;
+      filter:blur(18px);
+      z-index:-1;
+    }
+    .logo-pill:hover {
+      border-color:rgba(250,204,21,.95);
+      box-shadow:
+        0 22px 55px rgba(15,23,42,1),
+        0 0 40px rgba(250,204,21,.28);
+      transform:translateY(-1px) scale(1.02);
+    }
+    .logo-icon {
+      width:24px;
+      height:24px;
+      border-radius:999px;
+      background:radial-gradient(circle at 30% 0,rgba(248,250,252,.95),rgba(59,130,246,.95));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+      box-shadow:0 8px 20px rgba(15,23,42,1);
+    }
+    .logo-text {
+      display:flex;
+      align-items:center;
+      gap:4px;
+      font-weight:700;
+      letter-spacing:.04em;
+    }
+    .logo-main { }
+    .logo-go {
+      background:linear-gradient(135deg,#facc15,#f97316);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .logo-tagline {
+      font-size: 12px;
+      color:#9ca3af;
+      text-align:center;
+      margin-bottom: 12px;
+    }
+    .welcome-text {
+      font-size: 13px;
+      color:#e5e7eb;
+      text-align:center;
+      margin-bottom: 6px;
+    }
+
+    .field input.field-error {
+      box-shadow:0 0 0 1px rgba(248,113,113,.9);
+    }
+    .field input.field-ok {
+      box-shadow:0 0 0 1px rgba(34,197,94,.85);
+    }
+
+    #toast-root{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      z-index:60;
+    }
+    .toast{
+      min-width:220px;
+      max-width:320px;
+      padding:10px 14px;
+      border-radius:12px;
+      background:rgba(15,23,42,.96);
+      border:1px solid rgba(148,163,184,.6);
+      font-size:13px;
+      color:#e5e7eb;
+      box-shadow:0 18px 40px rgba(0,0,0,.9);
+      animation:toast-in .18s ease-out;
+    }
+    .toast-info{border-color:rgba(59,130,246,.7);}
+    .toast-success{border-color:rgba(34,197,94,.7);}
+    .toast-warning{border-color:rgba(250,204,21,.8);}
+    .toast-error{border-color:rgba(248,113,113,.9);}
+    .toast-leave{
+      animation:toast-out .18s ease-in forwards;
+    }
+    
+    @keyframes logo-pulse{
+      0%{
+        transform:translateY(0) scale(1);
+        box-shadow:
+          0 18px 45px rgba(15,23,42,1),
+          0 0 32px rgba(250,204,21,.2);
+      }
+      50%{
+        transform:translateY(-1px) scale(1.02);
+        box-shadow:
+          0 24px 60px rgba(15,23,42,1),
+          0 0 44px rgba(250,204,21,.32);
+      }
+      100%{
+        transform:translateY(0) scale(1);
+        box-shadow:
+          0 18px 45px rgba(15,23,42,1),
+          0 0 32px rgba(250,204,21,.2);
+      }
+    }
+
+    @keyframes toast-in{
+      from{opacity:0;transform:translateY(8px) scale(.97);}
+      to{opacity:1;transform:translateY(0) scale(1);}
+    }
+    @keyframes toast-out{
+      from{opacity:1;transform:translateY(0) scale(1);}
+      to{opacity:0;transform:translateY(6px) scale(.96);}
+    }
+
+/* Logo from index */
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="card">
+<div class="logo"><a class="logo" href="index.html">
+<span class="logo-icon"></span>
+<span class="logo-word">
+<span class="logo-word-main">AlSat</span>
+<span class="logo-word-go">Go</span>
+</span>
+</a></div>
+<p class="logo-tagline">Komisyonsuz ve güvenli ikinci el pazarı</p>
+<h1>AlSatGo’ya hoş geldin</h1>
+<p class="sub">İlanlarını yönetmek ve güvenle alışverişe devam etmek için hesabına giriş yap.</p>
+<div class="social-group">
+<button class="social-btn google">
+<span class="icon">G</span>
+<span>Google ile devam et</span>
+</button>
+<button class="social-btn apple">
+<span class="icon"></span>
+<span>Apple ile devam et</span>
+</button>
+</div>
+<div class="divider">
+<span class="line"></span>
+<span>veya e‑posta ile giriş yap</span>
+<span class="line"></span>
+</div>
+<form action="otp-dogrulama.html" method="get">
+<div>
+<label for="email">E‑posta</label>
+<div class="field">
+<span class="icon">📧</span>
+<input id="email" placeholder="ornek@eposta.com" required="" type="email"/>
+</div>
+</div>
+<div>
+<label for="pass">Şifre</label>
+<div class="field">
+<span class="icon">🔒</span>
+<input id="pass" placeholder="Şifreniz" required="" type="password"/>
+</div>
+</div>
+<div class="row">
+<label class="rem">
+<input type="checkbox"/>
+<span>Beni hatırla</span>
+</label>
+<a href="sifremi-unuttum.html">Şifremi unuttum</a>
+</div>
+<button class="btn-primary" type="submit">Giriş Yap</button>
+</form>
+<div class="foot">
+        Hesabın yok mu?
+        <a href="register.html">Hemen üye ol</a>
+</div>
+</div>
+<div class="back-link">
+<a href="index.html">← Ana sayfaya dön</a>
+</div>
+<div id="toast-root"></div>
+</div>
+<script>
+const toastRoot = document.getElementById("toast-root");
+
+function showToast(message, type = "info") {
+  if (!toastRoot) return;
+  const el = document.createElement("div");
+  el.className = "toast toast-" + type;
+  el.textContent = message;
+  toastRoot.appendChild(el);
+  setTimeout(() => {
+    el.classList.add("toast-leave");
+    el.addEventListener("animationend", () => el.remove());
+  }, 2600);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form");
+  const emailInput = document.getElementById("email");
+  const passInput = document.getElementById("pass");
+  const rememberCheckbox = document.querySelector(".row input[type='checkbox']");
+  const forgotLink = document.querySelector(".row a[href='sifremi-unuttum.html']");
+  const registerLink = document.querySelector(".foot a[href='register.html']");
+  const backLink = document.querySelector(".back-link a[href='index.html']");
+  const googleBtn = document.querySelector(".social-btn.google");
+  const appleBtn = document.querySelector(".social-btn.apple");
+
+  function markField(input, ok) {
+    if (!input) return;
+    input.classList.remove("field-error", "field-ok");
+    if (ok === true) {
+      input.classList.add("field-ok");
+    } else if (ok === false) {
+      input.classList.add("field-error");
+    }
+  }
+
+  if (emailInput) {
+    emailInput.addEventListener("blur", () => {
+      const value = (emailInput.value || "").trim();
+      if (!value || !value.includes("@") || !value.includes(".")) {
+        markField(emailInput, false);
+      } else {
+        markField(emailInput, true);
+      }
+    });
+  }
+
+  if (passInput) {
+    passInput.addEventListener("blur", () => {
+      const value = (passInput.value || "").trim();
+      if (!value || value.length < 6) {
+        markField(passInput, false);
+      } else {
+        markField(passInput, true);
+      }
+    });
+  }
+
+  if (googleBtn) {
+    googleBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      showToast("Google ile giriş entegrasyonu canlı sistemde açılacak, şu an demo arayüzünü görüyorsun.", "info");
+    });
+  }
+
+  if (appleBtn) {
+    appleBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      showToast("Apple ile giriş henüz demo aşamasında, sonraki sürümde aktif olacak (demo).", "info");
+    });
+  }
+
+  if (rememberCheckbox) {
+    rememberCheckbox.addEventListener("change", () => {
+      if (rememberCheckbox.checked) {
+        showToast("Bu cihazda oturumun daha uzun süre açık kalacak şekilde hatırlanacak (demo).", "info");
+      } else {
+        showToast("Bu cihazda seni hatırlamama seçeneğini tercih ettin (demo).", "info");
+      }
+    });
+  }
+
+  if (forgotLink) {
+    forgotLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      showToast("Mail adresine şifre sıfırlama adımlarını göndereceğimiz ekran açılacak (demo).", "info");
+      setTimeout(() => {
+        window.location.href = "sifremi-unuttum.html";
+      }, 800);
+    });
+  }
+
+  if (registerLink) {
+    registerLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      showToast("Yeni hesap oluşturma adımına geçiyorsun (demo).", "info");
+      setTimeout(() => {
+        window.location.href = "register.html";
+      }, 800);
+    });
+  }
+
+  if (backLink) {
+    backLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      showToast("Giriş yapmadan ana sayfaya dönüyorsun (demo).", "info");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 800);
+    });
+  }
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const emailVal = (emailInput && emailInput.value || "").trim();
+      const passVal = (passInput && passInput.value || "").trim();
+
+      if (!emailVal || !emailVal.includes("@") || !emailVal.includes(".")) {
+        markField(emailInput, false);
+        if (emailInput) emailInput.focus();
+        showToast("Lütfen geçerli bir e-posta gir (demo).", "warning");
+        return;
+      }
+
+      if (!passVal || passVal.length < 6) {
+        markField(passInput, false);
+        if (passInput) passInput.focus();
+        showToast("Şifren en az 6 karakter olmalı (demo).", "warning");
+        return;
+      }
+
+      showToast("Giriş bilgilerin alındı, şimdi seni demo OTP adımına yönlendiriyoruz.", "success");
+      const qp = encodeURIComponent(emailVal);
+      setTimeout(() => {
+        window.location.href = "otp-dogrulama.html?mail=" + qp;
+      }, 900);
+    });
+  }
+});
+</script>
+</body>
+</html>

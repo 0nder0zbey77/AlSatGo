@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AlSatGo - Kod Doğrulama</title>
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, #0f172a 0, #020617 55%, #020617 100%),
+        linear-gradient(135deg, #020617, #020617);
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .otp-wrapper {
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 18px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 14px;
+      color: #9ca3af;
+    }
+    .brand span {
+      color: #fbbf24;
+    }
+
+    .otp-card {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 60%),
+                  radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.16), transparent 60%),
+                  #020617;
+      border-radius: 26px;
+      padding: 32px 28px 26px;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .otp-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(251,191,36,0.12), transparent 60%);
+      opacity: 0.7;
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+    }
+
+    .otp-header {
+      position: relative;
+      text-align: center;
+      margin-bottom: 22px;
+      z-index: 1;
+    }
+
+    .otp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.85);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 11px;
+      color: #9ca3af;
+      margin-bottom: 12px;
+    }
+
+    .otp-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.25);
+    }
+
+    .otp-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .otp-sub {
+      font-size: 13px;
+      color: #9ca3af;
+      max-width: 260px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .otp-input-row {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 8px 0 18px;
+      z-index: 1;
+    }
+
+    .otp-input-wrapper {
+      position: relative;
+    }
+
+    .otp-input {
+      width: 54px;
+      height: 62px;
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.98), #020617);
+      color: #f9fafb;
+      font-size: 26px;
+      text-align: center;
+      outline: none;
+      box-shadow: 0 10px 26px rgba(15,23,42,0.85);
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.16s ease, background 0.18s ease;
+      caret-color: transparent;
+    }
+
+    .otp-input:focus {
+      border-color: #fbbf24;
+      background: radial-gradient(circle at top, rgba(251,191,36,0.18), #020617);
+      box-shadow:
+        0 0 0 1px rgba(251,191,36,0.4),
+        0 18px 45px rgba(251,191,36,0.35);
+      transform: translateY(-1px);
+    }
+
+    .otp-input.filled {
+      border-color: rgba(96,165,250,0.9);
+      box-shadow:
+        0 0 0 1px rgba(96,165,250,0.35),
+        0 16px 40px rgba(37,99,235,0.35);
+    }
+
+    .otp-input-glow {
+      position: absolute;
+      inset: -6px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top, rgba(251,191,36,0.28), transparent 60%);
+      opacity: 0;
+      filter: blur(6px);
+      transition: opacity 0.18s ease;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .otp-input-wrapper.active .otp-input-glow {
+      opacity: 1;
+    }
+
+    .otp-meta {
+      position: relative;
+      text-align: center;
+      font-size: 11px;
+      color: #9ca3af;
+      margin-bottom: 18px;
+      z-index: 1;
+    }
+
+    .otp-meta span {
+      color: #fbbf24;
+      font-weight: 500;
+    }
+
+    .otp-actions {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1;
+    }
+
+    .btn-primary {
+      border: none;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      background: radial-gradient(circle at top left, #fef9c3, #fbbf24);
+      color: #111827;
+      cursor: pointer;
+      box-shadow:
+        0 14px 40px rgba(251,191,36,0.55),
+        0 0 0 1px rgba(251,191,36,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.16s ease, box-shadow 0.18s ease, filter 0.16s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow:
+        0 18px 55px rgba(251,191,36,0.65),
+        0 0 0 1px rgba(251,191,36,0.55);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow:
+        0 10px 26px rgba(251,191,36,0.48),
+        0 0 0 1px rgba(251,191,36,0.5);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: default;
+      transform: none;
+      box-shadow: 0 10px 26px rgba(15,23,42,0.85);
+      filter: grayscale(0.2);
+    }
+
+    .btn-ghost {
+      border: none;
+      background: none;
+      color: #9ca3af;
+      font-size: 12px;
+      cursor: pointer;
+      align-self: center;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      transition: color 0.16s ease, background 0.16s ease;
+    }
+
+    .btn-ghost span.icon {
+      font-size: 12px;
+      transform: translateY(0.5px);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15,23,42,0.9);
+      color: #e5e7eb;
+    }
+
+    .otp-resend {
+      font-size: 12px;
+      text-align: center;
+      color: #9ca3af;
+      margin-top: 6px;
+    }
+
+    .otp-resend button {
+      background: none;
+      border: none;
+      color: #facc15;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .otp-resend button:hover {
+      text-decoration: underline;
+    }
+
+    .otp-error {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #f97373;
+      text-align: center;
+      min-height: 16px;
+    }
+    .otp-status {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #e5e7eb;
+      text-align: center;
+      min-height: 16px;
+      opacity: 0.9;
+      transition: opacity 0.35s ease;
+    }
+
+    .otp-status.hidden {
+      opacity: 0;
+    }
+
+    .otp-timer {
+      margin-left: 6px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+
+    .otp-card.shake {
+      animation: shake 0.35s ease;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(5px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(3px); }
+      100% { transform: translateX(0); }
+    }
+
+    
+    @keyframes breathe {
+      0% { box-shadow: 0 10px 26px rgba(15,23,42,0.85); }
+      50% { box-shadow: 0 18px 45px rgba(251,191,36,0.4); }
+      100% { box-shadow: 0 10px 26px rgba(15,23,42,0.85); }
+    }
+
+    @keyframes pulseInput {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-1px) scale(1.03); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    .otp-input.pulse {
+      animation: pulseInput 0.16s ease-out;
+    }
+
+9s ease-in-out infinite;
+    }
+
+    @media (max-width: 480px) {
+      .otp-card {
+        padding: 26px 20px 22px;
+        border-radius: 22px;
+      }
+      .otp-input {
+        width: 48px;
+        height: 56px;
+        font-size: 22px;
+      }
+    }
+  
+    .logo-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.75);
+      background:
+        radial-gradient(circle at 0 0, rgba(148,163,184,.35), transparent 60%),
+        rgba(15,23,42,.96);
+      color: #e5e7eb;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(15,23,42,1);
+    }
+    .logo-pill:hover {
+      border-color: rgba(250,204,21,.9);
+      box-shadow: 0 18px 40px rgba(15,23,42,1);
+    }
+    .logo-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, rgba(248,250,252,.9), rgba(59,130,246,.9));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      box-shadow: 0 6px 16px rgba(15,23,42,1);
+    }
+    .logo-text {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-weight: 600;
+      letter-spacing: .03em;
+    }
+    .logo-main { }
+    .logo-go {
+      background: linear-gradient(135deg,#facc15,#f97316);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    #toast-root{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      z-index:60;
+    }
+    .toast{
+      min-width:220px;
+      max-width:320px;
+      padding:10px 14px;
+      border-radius:12px;
+      background:rgba(15,23,42,.96);
+      border:1px solid rgba(148,163,184,.6);
+      font-size:13px;
+      color:#e5e7eb;
+      box-shadow:0 18px 40px rgba(0,0,0,.9);
+      animation:toast-in .18s ease-out;
+    }
+    .toast-info{border-color:rgba(59,130,246,.7);}
+    .toast-success{border-color:rgba(34,197,94,.7);}
+    .toast-warning{border-color:rgba(250,204,21,.8);}
+    .toast-error{border-color:rgba(248,113,113,.9);}
+    .toast-leave{
+      animation:toast-out .18s ease-in forwards;
+    }
+    @keyframes toast-in{
+      from{opacity:0;transform:translateY(8px) scale(.97);}
+      to{opacity:1;transform:translateY(0) scale(1);}
+    }
+    @keyframes toast-out{
+      from{opacity:1;transform:translateY(0) scale(1);}
+      to{opacity:0;transform:translateY(6px) scale(.96);}
+    }
+
+/* Logo from index */
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+</style>
+</head>
+<body>
+<div class="otp-wrapper">
+<div class="brand"><a class="logo" href="index.html">
+<span class="logo-icon"></span>
+<span class="logo-word">
+<span class="logo-word-main">AlSat</span>
+<span class="logo-word-go">Go</span>
+</span>
+</a></div>
+<div class="otp-card" id="otp-card">
+<div class="otp-header">
+<div class="otp-badge">
+<span class="otp-badge-dot"></span>
+          Güvenli giriş
+        </div>
+<h1 class="otp-title">Kodu Doğrula</h1>
+<p class="otp-sub">
+          Telefonuna gönderilen <strong>4 haneli</strong> doğrulama kodunu gir.
+        </p>
+</div>
+<form autocomplete="off" id="otp-form">
+<div class="otp-input-row">
+<div class="otp-input-wrapper">
+<div class="otp-input-glow"></div>
+<input class="otp-input breathe" inputmode="numeric" maxlength="1" type="text"/>
+</div>
+<div class="otp-input-wrapper">
+<div class="otp-input-glow"></div>
+<input class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
+</div>
+<div class="otp-input-wrapper">
+<div class="otp-input-glow"></div>
+<input class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
+</div>
+<div class="otp-input-wrapper">
+<div class="otp-input-glow"></div>
+<input class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
+</div>
+</div>
+<div class="otp-meta">
+          Güvenliğin için bu kod kısa süre sonra <span>geçersiz</span> olacaktır.
+        </div>
+<div class="otp-status" id="otp-status">🔄 Kod otomatik olarak algılanıyor…</div>
+<div class="otp-actions">
+<button class="btn-primary" disabled="" id="otp-submit" type="submit">
+            Devam Et
+          </button>
+<button class="btn-ghost" id="back-to-login" type="button">
+<span class="icon">←</span>
+            Giriş ekranına dön
+          </button>
+</div>
+<div class="otp-resend">
+          Kod gelmedi mi?
+          <button id="resend-btn" type="button">Tekrar gönder</button>
+<span class="otp-timer" id="otp-timer"></span>
+</div>
+<div class="otp-error" id="otp-error"></div>
+</form>
+</div>
+</div>
+<script>
+
+const toastRoot = document.getElementById("toast-root");
+
+function showToast(message, type = "info") {
+  if (!toastRoot) return;
+  const el = document.createElement("div");
+  el.className = "toast toast-" + type;
+  el.textContent = message;
+  toastRoot.appendChild(el);
+  setTimeout(() => {
+    el.classList.add("toast-leave");
+    el.addEventListener("animationend", () => el.remove());
+  }, 2600);
+}
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const inputs = Array.from(document.querySelectorAll(".otp-input"));
+      const card = document.getElementById("otp-card");
+      const errorBox = document.getElementById("otp-error");
+      const submitBtn = document.getElementById("otp-submit");
+      const resendBtn = document.getElementById("resend-btn");
+      const backBtn = document.getElementById("back-to-login");
+      const statusEl = document.getElementById("otp-status");
+      const timerEl = document.getElementById("otp-timer");
+      const form = document.getElementById("otp-form");
+
+      let timerValue = 0;
+      let timerInterval = null;
+
+      function setStatus(message, autoHideMs) {
+        if (!statusEl) return;
+        statusEl.textContent = message || "";
+        statusEl.classList.remove("hidden");
+        if (autoHideMs) {
+          setTimeout(() => {
+            statusEl.classList.add("hidden");
+          }, autoHideMs);
+        }
+      }
+
+      function updateTimerText() {
+        if (!timerEl) return;
+        if (timerValue > 0) {
+          timerEl.textContent = " • " + timerValue + " sn içinde tekrar gönderebilirsin.";
+        } else {
+          timerEl.textContent = " • Tekrar gönderebilirsin.";
+        }
+      }
+
+      function startTimer(seconds) {
+        if (!timerEl) return;
+        if (timerInterval) {
+          clearInterval(timerInterval);
+        }
+        timerValue = seconds;
+        updateTimerText();
+        timerInterval = setInterval(() => {
+          if (timerValue > 0) {
+            timerValue -= 1;
+            updateTimerText();
+          } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            updateTimerText();
+            if (typeof showToast === "function") {
+              showToast("Süren doldu, istersen yeniden kod isteyebilirsin (demo).", "info");
+            }
+          }
+        }, 1000);
+      }
+
+      function updateState() {
+        let allFilled = true;
+        inputs.forEach((input) => {
+          const wrapper = input.parentElement;
+          if (input.value.trim() !== "") {
+            input.classList.add("filled");
+            wrapper.classList.add("active");
+          } else {
+            input.classList.remove("filled");
+            wrapper.classList.remove("active");
+            allFilled = false;
+          }
+        });
+        submitBtn.disabled = !allFilled;
+        if (!allFilled && errorBox) {
+          errorBox.textContent = "";
+        }
+      }
+
+      inputs.forEach((input, index) => {
+        input.addEventListener("input", (e) => {
+          let value = e.target.value.replace(/\D/g, "");
+          if (value.length > 1) {
+            value = value.charAt(0);
+          }
+          e.target.value = value;
+
+          if (value && index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          }
+
+          // küçük bir pulse animasyonu
+          if (value) {
+            input.classList.add("pulse");
+            setTimeout(() => {
+              input.classList.remove("pulse");
+            }, 180);
+          }
+
+          updateState();
+        });
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace") {
+            if (e.target.value === "" && index > 0) {
+              inputs[index - 1].focus();
+              inputs[index - 1].value = "";
+              updateState();
+              e.preventDefault();
+            }
+          } else if (e.key === "ArrowLeft" && index > 0) {
+            inputs[index - 1].focus();
+            e.preventDefault();
+          } else if (e.key === "ArrowRight" && index < inputs.length - 1) {
+            inputs[index + 1].focus();
+            e.preventDefault();
+          } else if (e.key === "Enter" && form) {
+            form.dispatchEvent(new Event("submit", { cancelable: true }));
+            e.preventDefault();
+          }
+        });
+      });
+
+      // Paste desteği: 4 haneli kodu tek seferde doldur
+      if (inputs[0]) {
+        inputs[0].addEventListener("paste", (e) => {
+          const pasted = (e.clipboardData || window.clipboardData).getData("text");
+          const digits = pasted.replace(/\D/g, "").slice(0, inputs.length).split("");
+          if (!digits.length) return;
+          e.preventDefault();
+          inputs.forEach((input, i) => {
+            input.value = digits[i] || "";
+          });
+          if (digits.length === inputs.length) {
+            inputs[inputs.length - 1].focus();
+          } else {
+            inputs[digits.length].focus();
+          }
+          updateState();
+        });
+      }
+
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const code = inputs.map((i) => i.value).join("");
+
+          if (code.length < inputs.length) {
+            if (errorBox) {
+              errorBox.textContent = "Lütfen 4 haneli kodu eksiksiz gir.";
+            }
+            card.classList.remove("shake");
+            void card.offsetWidth;
+            card.classList.add("shake");
+            return;
+          }
+
+          // Burada gerçek doğrulama backend ile yapılacak.
+          if (code === "1234") {
+            if (typeof showToast === "function") {
+              showToast("Kodun doğrulandı, demo olarak profil ekranına yönlendiriliyorsun.", "success");
+            }
+            setTimeout(() => {
+              window.location.href = "profil.html";
+            }, 900);
+            return;
+          }
+          if (errorBox) {
+            errorBox.textContent = "Kod hatalı görünüyor. Lütfen tekrar dene.";
+          }
+          if (typeof showToast === "function") {
+            showToast("Kod hatalı görünüyor. Birazdan tekrar deneyebilirsin (demo).", "warning");
+          }
+          card.classList.remove("shake");
+          void card.offsetWidth;
+          card.classList.add("shake");
+        });
+      }
+
+      if (resendBtn) {
+        resendBtn.addEventListener("click", () => {
+          if (errorBox) {
+            errorBox.textContent = "";
+          }
+          setStatus("Yeni doğrulama kodu gönderildi.", 3000);
+          startTimer(30);
+          if (typeof showToast === "function") {
+            showToast("Yeni doğrulama kodu demo olarak oluşturuldu, SMS canlı sistemde gönderilecek (demo).", "info");
+          }
+        });
+      }
+
+      if (backBtn) {
+        backBtn.addEventListener("click", () => {
+          if (typeof showToast === "function") {
+            showToast("Giriş ekranına dönüyorsun, doğrulama adımını daha sonra tekrar başlatabilirsin (demo).", "info");
+          }
+          setTimeout(() => {
+            window.location.href = "login.html";
+          }, 800);
+        });
+      }
+
+      // İlk durum: otomatik algılama hissi + sayaç başlat
+      setStatus("🔄 Kod otomatik olarak algılanıyor…", 3500);
+      startTimer(30);
+      if (typeof showToast === "function") {
+        showToast("Güvenli giriş için doğrulama ekranındasın, kodunu girdiğinde devam edeceğiz (demo).", "info");
+      }
+
+      // İlk inputa odak
+      if (inputs[0]) {
+        inputs[0].focus();
+      }
+    });
+  
+  </script>
+<div id="toast-root"></div></body>
+</html>

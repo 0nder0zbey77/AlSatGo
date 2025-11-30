@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<title>AlSatGo – Tüm Kategoriler</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<style>
+    :root{
+      --bg-main:#020617;
+      --bg-elevated:rgba(15,23,42,.96);
+      --bg-soft:rgba(15,23,42,.88);
+      --border-soft:rgba(148,163,184,.55);
+      --text-main:#e5e7eb;
+      --text-sub:#9ca3af;
+      --gold:#facc15;
+      --gold-soft:rgba(250,204,21,.28);
+      --danger:#f97373;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      min-height:100vh;
+      font-family:system-ui,-apple-system, BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 0 0,rgba(56,189,248,.18),transparent 60%),
+        radial-gradient(circle at 100% 100%,rgba(250,204,21,.16),transparent 60%),
+        #020617;
+      color:var(--text-main);
+      -webkit-font-smoothing:antialiased;
+    }
+    a{text-decoration:none;color:inherit;}
+
+    .page-shell{
+      max-width:1200px;
+      margin:0 auto;
+      padding:18px 18px 32px;
+    }
+
+    /* HEADER */
+    .header{
+      position:sticky;
+      top:0;
+      z-index:40;
+      backdrop-filter:blur(18px);
+      background:linear-gradient(to bottom,rgba(15,23,42,.9),rgba(15,23,42,.65),transparent);
+    }
+    .header-inner{
+      max-width:1200px;
+      margin:0 auto;
+      padding:12px 18px 10px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+
+    .logo{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:4px 14px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.7);
+      background:
+        radial-gradient(circle at 0 0,rgba(148,163,184,.24),transparent 60%),
+        rgba(15,23,42,.98);
+      color:var(--text-main);
+      white-space:nowrap;
+      box-shadow:0 12px 32px rgba(15,23,42,1);
+    }
+    .logo-icon{
+      width:20px;
+      height:20px;
+      border-radius:999px;
+      background:radial-gradient(circle at 30% 0,rgba(248,250,252,.96),rgba(59,130,246,.88));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      box-shadow:0 6px 14px rgba(15,23,42,1);
+    }
+    .logo-word{
+      display:inline-flex;
+      align-items:baseline;
+      gap:4px;
+      letter-spacing:.09em;
+      text-transform:uppercase;
+      font-weight:700;
+      font-size:15px;
+    }
+    .logo-word-main{color:var(--text-main);}
+    .logo-word-go{
+      background:linear-gradient(135deg,#facc15,#fde68a);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:900;
+    }
+    .logo:hover{opacity:.95;}
+
+    .header-search-wrap{
+      flex:1;
+      display:flex;
+      justify-content:center;
+    }
+    .header-search{
+      position:relative;
+      width:100%;
+      max-width:420px;
+    }
+    .header-search input{
+      width:100%;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.55);
+      padding:9px 34px 9px 32px;
+      background:radial-gradient(circle at 0 0,rgba(148,163,184,.28),transparent 60%),rgba(15,23,42,.96);
+      color:var(--text-main);
+      font-size:13px;
+      outline:none;
+    }
+    .header-search input::placeholder{color:#64748b;}
+    .search-icon{
+      position:absolute;
+      left:11px;
+      top:50%;
+      transform:translateY(-50%);
+      font-size:12px;
+      opacity:.7;
+    }
+    .search-kbd{
+      position:absolute;
+      right:10px;
+      top:50%;
+      transform:translateY(-50%);
+      font-size:10px;
+      padding:1px 6px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.6);
+      color:#cbd5e1;
+    }
+
+    .header-nav{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:13px;
+    }
+    .header-link{
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid transparent;
+      color:#cbd5e1;
+      cursor:pointer;
+      background:transparent;
+    }
+    .header-link:hover{
+      border-color:rgba(148,163,184,.6);
+      background:rgba(15,23,42,.9);
+    }
+    .header-cta{
+      padding:7px 14px;
+      border-radius:999px;
+      border:none;
+      background:linear-gradient(135deg,#facc15,#f97316);
+      color:#111827;
+      font-size:13px;
+      font-weight:600;
+      box-shadow:0 10px 26px rgba(15,23,42,1);
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .header-cta span.icon{font-size:13px;}
+    .header-cta:hover{transform:translateY(-1px);}
+    .header-cta:active{transform:translateY(0);}
+
+    .header-divider{
+      height:1px;
+      width:100%;
+      max-width:1200px;
+      margin:0 auto;
+      background:linear-gradient(to right,transparent,rgba(148,163,184,.5),transparent);
+      opacity:.7;
+    }
+
+    /* HERO */
+    .hero{
+      padding:26px 0 16px;
+      display:flex;
+      gap:18px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .hero-left{
+      flex:1;
+      min-width:240px;
+    }
+    .eyebrow{
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--text-sub);
+      margin-bottom:6px;
+    }
+    .hero-title{
+      font-size:30px;
+      font-weight:700;
+      margin-bottom:4px;
+      display:flex;
+      align-items:baseline;
+      gap:8px;
+    }
+    .hero-title-main{
+      color:var(--text-main);
+    }
+    .hero-title-accent{
+      background:linear-gradient(135deg,#38bdf8,#facc15);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .hero-title-underline{
+      width:120px;
+      height:2px;
+      border-radius:999px;
+      margin:4px 0 8px;
+      background:linear-gradient(90deg,rgba(56,189,248,.0),rgba(56,189,248,.7),rgba(250,204,21,.8),rgba(250,204,21,0));
+    }
+    .hero-desc{
+      font-size:14px;
+      color:#cbd5e1;
+      max-width:520px;
+    }
+    .hero-right{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      justify-content:flex-start;
+      gap:8px;
+      min-width:200px;
+    }
+    .hero-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .hero-pill{
+      padding:5px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.7);
+      background:rgba(15,23,42,.94);
+      font-size:11px;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .hero-pill .dot{
+      width:6px;
+      height:6px;
+      border-radius:999px;
+      background:radial-gradient(circle at 30% 0,#22c55e,#16a34a);
+      box-shadow:0 0 8px rgba(34,197,94,.8);
+    }
+    .hero-pill.gold{
+      border-color:rgba(250,204,21,.8);
+      background:radial-gradient(circle at 0 0,rgba(250,204,21,.2),transparent 60%),rgba(15,23,42,.96);
+      cursor:pointer;
+    }
+    .hero-note{
+      font-size:12px;
+      color:#cbd5e1;
+      text-align:right;
+      max-width:260px;
+      line-height:1.4;
+    }
+
+    /* TOOLBAR */
+    .toolbar{
+      margin-top:10px;
+      margin-bottom:20px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .toolbar-chip{
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.6);
+      background:rgba(15,23,42,.96);
+      color:var(--text-main);
+      font-size:12px;
+      padding:6px 12px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition:.2s ease;
+    }
+    .toolbar-chip span.dot{
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:rgba(148,163,184,.8);
+    }
+    .toolbar-chip.active{
+      border-color:rgba(250,204,21,.85);
+      box-shadow:
+        0 0 0 1px rgba(250,204,21,.2),
+        0 12px 30px rgba(15,23,42,1);
+      background:
+        radial-gradient(circle at 0 0,rgba(250,204,21,.28),transparent 60%),
+        rgba(15,23,42,.98);
+    }
+    .toolbar-chip.active span.dot{
+      background:radial-gradient(circle at 30% 0,#facc15,#f97316);
+      box-shadow:0 0 10px rgba(250,204,21,.9);
+    }
+
+        .grid-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      margin-bottom:10px;
+      font-size:11px;
+      color:var(--text-sub);
+    }
+    .grid-label{
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    .grid-meta{
+      opacity:.9;
+    }
+
+/* GRID */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:16px;
+    }
+    .card-link{display:block;position:relative;}
+    .card{
+      position:relative;
+      padding:16px 14px;
+      border-radius:18px;
+      background:
+        radial-gradient(circle at 0 0,rgba(148,163,184,.26),transparent 60%),
+        radial-gradient(circle at 100% 100%,rgba(30,64,175,.26),transparent 60%),
+        rgba(15,23,42,.96);
+      border:1px solid rgba(148,163,184,.5);
+      box-shadow:0 16px 40px rgba(15,23,42,1);
+      overflow:hidden;
+      cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        radial-gradient(circle at 0 0,rgba(148,163,184,.22),transparent 60%),
+        radial-gradient(circle at 100% 100%,rgba(15,23,42,.9),transparent 60%);
+      mix-blend-mode:soft-light;
+      opacity:.65;
+      pointer-events:none;
+    }
+    .card-inner{
+      position:relative;
+      z-index:1;
+    }
+    .card-icon{
+      width:38px;
+      height:38px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+      background:radial-gradient(circle at 30% 0,rgba(248,250,252,.96),rgba(148,163,184,.75));
+      box-shadow:0 10px 26px rgba(15,23,42,1);
+      margin-bottom:10px;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .card-name{
+      font-weight:600;
+      font-size:15px;
+      margin-bottom:3px;
+    }
+    .card-sub{
+      font-size:11px;
+      color:var(--text-sub);
+      margin-bottom:8px;
+    }
+    .card-meta-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:11px;
+      color:#cbd5e1;
+    }
+    .meta-count{opacity:.9;}
+    .meta-pill{
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.7);
+      background:rgba(15,23,42,.96);
+    }
+
+    .card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 24px 55px rgba(15,23,42,1);
+      border-color:rgba(250,204,21,.85);
+    }
+    .card:hover .card-icon{
+      transform:translateY(-2px) scale(1.05);
+      box-shadow:0 16px 36px rgba(15,23,42,1);
+    }
+
+    .card.popular{
+      border-color:rgba(250,204,21,.75);
+    }
+    .card.popular .meta-pill{
+      border-color:rgba(250,204,21,.85);
+      background:radial-gradient(circle at 0 0,rgba(250,204,21,.22),transparent 60%),rgba(15,23,42,.98);
+    }
+
+    /* FOOT NOTE */
+    .foot-note{
+      margin-top:20px;
+      font-size:11px;
+      color:var(--text-sub);
+      text-align:left;
+    }
+
+    /* TOAST */
+    #toast-root{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      z-index:60;
+      pointer-events:none;
+    }
+    .toast{
+      min-width:260px;
+      max-width:320px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(15,23,42,.96);
+      border:1px solid rgba(148,163,184,.7);
+      box-shadow:0 18px 46px rgba(15,23,42,1);
+      font-size:12px;
+      display:flex;
+      align-items:flex-start;
+      gap:8px;
+      color:var(--text-main);
+      animation:toast-in .18s ease-out forwards;
+      pointer-events:auto;
+    }
+    .toast-icon{font-size:14px;line-height:1;margin-top:1px;}
+    .toast-text{flex:1;}
+    .toast-close{
+      border:none;
+      background:transparent;
+      color:#9ca3af;
+      font-size:14px;
+      cursor:pointer;
+    }
+    .toast-info{border-color:rgba(56,189,248,.8);}
+    .toast-error{border-color:rgba(248,113,113,.9);}
+    .toast-success{border-color:rgba(34,197,94,.9);}
+
+    @keyframes toast-in{
+      from{opacity:0;transform:translate(-50%,8px);}
+      to{opacity:1;transform:translate(-50%,0);}
+    }
+    @keyframes toast-out{
+      from{opacity:1;transform:translate(-50%,0);}
+      to{opacity:0;transform:translate(-50%,6px);}
+    }
+
+    @media(max-width:768px){
+      .header-inner{flex-wrap:wrap;gap:10px;}
+      .header-search-wrap{order:3;width:100%;}
+      .hero{flex-direction:column;}
+      .hero-right{align-items:flex-start;}
+      .grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}
+    }
+
+/* Logo from index */
+    .logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 50%, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+    .logo-icon {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0, rgba(250, 204, 21, 0.9), transparent 60%),
+        linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        0 10px 24px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+    .logo-icon::before,
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      border-radius: 4px;
+    }
+    .logo-icon::before {
+      inset: 6px 12px 12px 5px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(250, 204, 21, 0.5));
+    }
+    .logo-icon::after {
+      inset: 12px 5px 6px 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.4));
+    }
+    .logo-word {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 4px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-word-main {
+      color: #e5e7eb;
+    }
+    .logo-word-go {
+      background: linear-gradient(135deg, #facc15, #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+    @keyframes glowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-inner">
+<a class="logo" href="index.html">
+<span class="logo-icon">⚡</span>
+<span class="logo-word">
+<span class="logo-word-main">AlSat</span>
+<span class="logo-word-go">Go</span>
+</span>
+</a>
+<div class="header-search-wrap">
+<div class="header-search">
+<span class="search-icon">🔍</span>
+<input id="globalSearch" placeholder="Aradığın ürün veya kategoriyi yaz…" type="text"/>
+<span class="search-kbd">Enter</span>
+</div>
+</div>
+<nav class="header-nav">
+<button class="header-link" data-nav="ilanlar" type="button">Tüm Ürünler</button>
+<button class="header-link" data-nav="giris" type="button">Giriş Yap</button>
+<button class="header-cta" data-nav="uye-ol" type="button">
+<span class="icon">★</span>
+<span>Üye Ol</span>
+</button>
+</nav>
+</div>
+<div class="header-divider"></div>
+</header>
+<main class="page-shell">
+<section class="hero">
+<div class="hero-left">
+<div class="eyebrow">KEŞFET</div>
+<h1 class="hero-title">
+<span class="hero-title-main">Tüm</span>
+<span class="hero-title-accent">Kategoriler</span>
+</h1>
+<div class="hero-title-underline"></div>
+<p class="hero-desc">
+          AlSatGo’da tüm ikinci el dünyasına buradan açılıyorsun. Her kategori kendi sayfasında mini vitrin
+          gibi açılır ve ilgili ilanlara yönlendirir (demo).
+        </p>
+</div>
+<div class="hero-right">
+<div class="hero-badges">
+<div class="hero-pill">
+<span class="dot"></span>
+<span><strong>20+</strong> kategori (demo)</span>
+</div>
+<button class="hero-pill gold" id="popularInfo" type="button">
+<span class="dot"></span>
+<span>Popüler alanlar</span>
+</button>
+</div>
+<p class="hero-note">
+          Popüler kategoriler AlSatGo’da en çok ziyaret edilen alanları simgeler (demo).
+        </p>
+</div>
+</section>
+<section aria-label="Kategori filtreleri" class="toolbar">
+<button class="toolbar-chip" data-filter="all" type="button">
+<span class="dot"></span>
+<span>Tümü</span>
+</button>
+<button class="toolbar-chip" data-filter="popular" type="button">
+<span class="dot"></span>
+<span>Popüler kategoriler</span>
+</button>
+<button class="toolbar-chip" data-filter="tech" type="button">
+<span class="dot"></span>
+<span>Teknoloji</span>
+</button>
+<button class="toolbar-chip" data-filter="home" type="button">
+<span class="dot"></span>
+<span>Ev &amp; Yaşam</span>
+</button>
+</section>
+<section aria-hidden="true" class="grid-header">
+<div class="grid-label">Kategori haritası</div>
+<div class="grid-meta">Toplam <strong>20</strong> kategori (demo)</div>
+</section>
+<section class="grid" id="categoryGrid">
+<!-- Telefonlar -->
+<a class="card-link" data-group="tech popular" href="kategori.html?kat=telefon">
+<article class="card popular">
+<div class="card-inner">
+<div class="card-icon">📱</div>
+<div class="card-name">Telefonlar</div>
+<div class="card-sub">iOS, Android, aksesuarlar ve daha fazlası.</div>
+<div class="card-meta-row">
+<span class="meta-count">~320 ilan (demo)</span>
+<span class="meta-pill">Popüler</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Bilgisayar -->
+<a class="card-link" data-group="tech popular" href="kategori.html?kat=bilgisayar">
+<article class="card popular">
+<div class="card-inner">
+<div class="card-icon">💻</div>
+<div class="card-name">Bilgisayar</div>
+<div class="card-sub">Gaming, iş, ikinci el laptop ve masaüstü.</div>
+<div class="card-meta-row">
+<span class="meta-count">~180 ilan (demo)</span>
+<span class="meta-pill">Popüler</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Oyun & Konsol -->
+<a class="card-link" data-group="tech popular" href="kategori.html?kat=oyun-konsol">
+<article class="card popular">
+<div class="card-inner">
+<div class="card-icon">🎮</div>
+<div class="card-name">Oyun &amp; Konsol</div>
+<div class="card-sub">PlayStation, Xbox, Nintendo ve yüzlerce oyun.</div>
+<div class="card-meta-row">
+<span class="meta-count">~140 ilan (demo)</span>
+<span class="meta-pill">Popüler</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Tablet -->
+<a class="card-link" data-group="tech" href="kategori.html?kat=tablet">
+<article class="card">
+<div class="card-inner">
+<div class="card-icon">📲</div>
+<div class="card-name">Tablet</div>
+<div class="card-sub">Çizim, oyun ve günlük kullanım için tabletler.</div>
+<div class="card-meta-row">
+<span class="meta-count">~60 ilan (demo)</span>
+<span class="meta-pill">Teknoloji</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Gaming PC -->
+<a class="card-link" data-group="tech popular" href="kategori.html?kat=gaming-pc">
+<article class="card popular">
+<div class="card-inner">
+<div class="card-icon">🖥️</div>
+<div class="card-name">Gaming PC</div>
+<div class="card-sub">Yüksek performanslı hazır ve toplama sistemler.</div>
+<div class="card-meta-row">
+<span class="meta-count">~90 ilan (demo)</span>
+<span class="meta-pill">Popüler</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Aksesuar & Çevre Birimleri -->
+<a class="card-link" data-group="tech" href="kategori.html?kat=aksesuar">
+<article class="card">
+<div class="card-inner">
+<div class="card-icon">🎧</div>
+<div class="card-name">Aksesuar &amp; Çevre Birimleri</div>
+<div class="card-sub">Kulaklık, klavye, mouse ve daha fazlası.</div>
+<div class="card-meta-row">
+<span class="meta-count">~110 ilan (demo)</span>
+<span class="meta-pill">Teknoloji</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Emlak -->
+<a class="card-link" data-group="home popular" href="kategori.html?kat=emlak">
+<article class="card popular">
+<div class="card-inner">
+<div class="card-icon">🏠</div>
+<div class="card-name">Emlak</div>
+<div class="card-sub">Satılık, kiralık ve günlük kiralık ilanlar.</div>
+<div class="card-meta-row">
+<span class="meta-count">~210 ilan (demo)</span>
+<span class="meta-pill">Popüler</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Vasıta -->
+<a class="card-link" data-group="popular" href="kategori.html?kat=vasita">
+<article class="card popular">
+<div class="card-inner">
+<div class="card-icon">🚗</div>
+<div class="card-name">Vasıta</div>
+<div class="card-sub">Otomobil, motosiklet ve ticari araçlar.</div>
+<div class="card-meta-row">
+<span class="meta-count">~150 ilan (demo)</span>
+<span class="meta-pill">Popüler</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Ev & Yaşam -->
+<a class="card-link" data-group="home popular" href="kategori.html?kat=ev-yasam">
+<article class="card popular">
+<div class="card-inner">
+<div class="card-icon">🛋️</div>
+<div class="card-name">Ev &amp; Yaşam</div>
+<div class="card-sub">Mobilya, dekorasyon ve ev tekstili ürünleri.</div>
+<div class="card-meta-row">
+<span class="meta-count">~175 ilan (demo)</span>
+<span class="meta-pill">Popüler</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Beyaz Eşya -->
+<a class="card-link" data-group="home" href="kategori.html?kat=beyaz-esya">
+<article class="card">
+<div class="card-inner">
+<div class="card-icon">🧺</div>
+<div class="card-name">Beyaz Eşya</div>
+<div class="card-sub">Buzdolabı, çamaşır makinesi, bulaşık makinesi.</div>
+<div class="card-meta-row">
+<span class="meta-count">~70 ilan (demo)</span>
+<span class="meta-pill">Ev &amp; Yaşam</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Hobi & Spor -->
+<a class="card-link" data-group="home" href="kategori.html?kat=hobi-spor">
+<article class="card">
+<div class="card-inner">
+<div class="card-icon">🏀</div>
+<div class="card-name">Hobi &amp; Spor</div>
+<div class="card-sub">Spor ekipmanları, müzik aletleri ve hobi ürünleri.</div>
+<div class="card-meta-row">
+<span class="meta-count">~55 ilan (demo)</span>
+<span class="meta-pill">Hobi</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Bebek & Çocuk -->
+<a class="card-link" data-group="home" href="kategori.html?kat=bebek-cocuk">
+<article class="card">
+<div class="card-inner">
+<div class="card-icon">🧸</div>
+<div class="card-name">Bebek &amp; Çocuk</div>
+<div class="card-sub">Bebek arabaları, oyuncaklar, çocuk mobilyaları.</div>
+<div class="card-meta-row">
+<span class="meta-count">~40 ilan (demo)</span>
+<span class="meta-pill">Ev &amp; Yaşam</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Moda -->
+<a class="card-link" data-group="home" href="kategori.html?kat=moda">
+<article class="card">
+<div class="card-inner">
+<div class="card-icon">👗</div>
+<div class="card-name">Moda</div>
+<div class="card-sub">Giyim, ayakkabı, çanta ve aksesuarlar.</div>
+<div class="card-meta-row">
+<span class="meta-count">~95 ilan (demo)</span>
+<span class="meta-pill">Moda</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Ofis & İş -->
+<a class="card-link" data-group="home" href="kategori.html?kat=ofis-is">
+<article class="card">
+<div class="card-inner">
+<div class="card-icon">📎</div>
+<div class="card-name">Ofis &amp; İş</div>
+<div class="card-sub">Ofis mobilyaları, ekipman ve iş makineleri.</div>
+<div class="card-meta-row">
+<span class="meta-count">~30 ilan (demo)</span>
+<span class="meta-pill">İş</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Koleksiyon -->
+<a class="card-link" data-group="home" href="kategori.html?kat=koleksiyon">
+<article class="card">
+<div class="card-inner">
+<div class="card-icon">📚</div>
+<div class="card-name">Koleksiyon</div>
+<div class="card-sub">Nadir kitaplar, figürler, antika parçalar.</div>
+<div class="card-meta-row">
+<span class="meta-count">~25 ilan (demo)</span>
+<span class="meta-pill">Koleksiyon</span>
+</div>
+</div>
+</article>
+</a>
+<!-- Diğer -->
+<a class="card-link" data-group="home" href="kategori.html?kat=diger">
+<article class="card">
+<div class="card-inner">
+<div class="card-icon">✨</div>
+<div class="card-name">Diğer</div>
+<div class="card-sub">Diğer tüm ilanlar için genel kategori.</div>
+<div class="card-meta-row">
+<span class="meta-count">~15 ilan (demo)</span>
+<span class="meta-pill">Genel</span>
+</div>
+</div>
+</article>
+</a>
+</section>
+<p class="foot-note">
+      Kategoriler ve ilan sayıları demo ortamındadır; canlıda gerçek ilan verileri ve popülerlik sıralaması
+      gösterilecektir (demo).
+    </p>
+</main>
+<div id="toast-root"></div>
+<script>
+    const toastRoot = document.getElementById("toast-root");
+    let toastTimeout;
+
+    function showToast(message, type="info"){
+      if (!toastRoot) return;
+      toastRoot.innerHTML = "";
+      const el = document.createElement("div");
+      el.className = "toast toast-" + type;
+      const icon = document.createElement("div");
+      icon.className = "toast-icon";
+      icon.textContent = type === "error" ? "⚠" : (type === "success" ? "✓" : "ℹ");
+      const text = document.createElement("div");
+      text.className = "toast-text";
+      text.textContent = message;
+      const close = document.createElement("button");
+      close.className = "toast-close";
+      close.type = "button";
+      close.textContent = "×";
+      close.addEventListener("click", () => dismissToast(el));
+      el.appendChild(icon);
+      el.appendChild(text);
+      el.appendChild(close);
+      toastRoot.appendChild(el);
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => dismissToast(el), 2600);
+    }
+
+    function dismissToast(el){
+      if (!el) return;
+      el.style.animation = "toast-out .18s ease-in forwards";
+      setTimeout(() => {
+        if (el.parentNode) el.parentNode.removeChild(el);
+      }, 180);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchInput = document.getElementById("globalSearch");
+      const navButtons = document.querySelectorAll(".header-nav [data-nav]");
+      const chips = document.querySelectorAll(".toolbar-chip");
+      const gridLinks = document.querySelectorAll(".card-link");
+      const popularInfo = document.getElementById("popularInfo");
+
+      // Header nav
+      navButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const target = btn.getAttribute("data-nav");
+          if (target === "ilanlar"){
+            showToast("Tüm ilanlar sayfasına yönlendiriliyorsun (demo).","info");
+            setTimeout(() => window.location.href="ilanlar.html", 800);
+          } else if (target === "giris"){
+            showToast("Giriş ekranına yönlendiriliyorsun (demo).","info");
+            setTimeout(() => window.location.href="login.html", 800);
+          } else if (target === "uye-ol"){
+            showToast("Üyelik adımına yönlendiriliyorsun (demo).","info");
+            setTimeout(() => window.location.href="register.html", 800);
+          }
+        });
+      });
+
+      // Search
+      if (searchInput){
+        searchInput.addEventListener("keydown", (e) => {
+          if (e.key !== "Enter") return;
+          const val = searchInput.value.trim();
+          if (!val || val.length < 2){
+            showToast("Arama yapmak için en az 2 karakter girmen yeterli (demo).","error");
+            return;
+          }
+          showToast(`"${val}" için uygun kategorilere ve ilanlara bakıyoruz (demo).`,"info");
+          setTimeout(() => {
+            const q = encodeURIComponent(val);
+            window.location.href = `ilanlar.html?q=${q}&from=kategoriler`;
+          }, 900);
+        });
+      }
+
+      // Popular info pill
+      if (popularInfo){
+        popularInfo.addEventListener("click", () => {
+          showToast("Bu rozet, AlSatGo’da en çok ziyaret edilen kategorileri temsil eder (demo).","info");
+        });
+      }
+
+      // Chips - sadece görsel / toast, gerçek filtre yok (demo)
+      const chipMessages = {
+        all: "Tüm kategoriler zaten gösteriliyor (demo).",
+        popular: "Popüler kategoriler canlı sistemde öne çıkarılacak (demo).",
+        tech: "Teknoloji kategorileri için özel filtreler canlı olduğunda burada (demo).",
+        home: "Ev & yaşam kategorileri için önerileri burada göreceksin (demo)."
+      };
+
+      chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+          const filter = chip.getAttribute("data-filter");
+          chips.forEach(c => c.classList.remove("active"));
+          chip.classList.add("active");
+          const msg = chipMessages[filter] || "Filtreleme özelliği yakında aktif olacak (demo).";
+          showToast(msg, "info");
+        });
+      });
+      // default active
+      const firstChip = document.querySelector(".toolbar-chip[data-filter='all']");
+      if (firstChip) firstChip.classList.add("active");
+
+      // Card click -> kategori sayfası
+      gridLinks.forEach(link => {
+        link.addEventListener("click", (ev) => {
+          ev.preventDefault();
+          const href = link.getAttribute("href") || "kategori.html";
+          const nameEl = link.querySelector(".card-name");
+          const name = nameEl ? nameEl.textContent : "seçili kategori";
+          showToast(`${name} kategorisindeki ilanlara demo olarak yönlendiriliyorsun (demo).`,"info");
+          setTimeout(() => {
+            window.location.href = href;
+          }, 850);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
